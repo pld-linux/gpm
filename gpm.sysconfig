@@ -1,0 +1,4 @@
+# Customized setings for gpm
+
+# Nice level for gpm
+SERVICE_RUN_NICE_LEVEL="+5"

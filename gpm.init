@@ -14,6 +14,11 @@
 
 MOUSECFG=/etc/sysconfig/mouse
 
+# Get service nice level ..
+if [ -f /etc/sysconfig/gpm ]; then
+    . /etc/sysconfig/gpm
+fi    
+
 case "$1" in
   start)
 	show Starting gpm mouse services
@@ -28,9 +33,9 @@ case "$1" in
 	fi
 
 	if [ -n "$MOUSETYPE" ]; then
-		daemon +5 gpm -t $MOUSETYPE
+		daemon gpm -t $MOUSETYPE
 	else
-		daemon +5 gpm
+		daemon gpm
 	fi
 	touch /var/lock/subsys/gpm
 	;;
