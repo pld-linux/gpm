@@ -1,0 +1,19 @@
+--- gpm-1.19.3/doc/Makefile.in~	Fri Aug  4 21:39:46 2000
++++ gpm-1.19.3/doc/Makefile.in	Fri Aug  4 21:43:12 2000
+@@ -89,14 +89,14 @@
+ 
+ 
+ %doc.txt: %.info
+-	gawk -f $(srcdir)/mktxt $< > $@
++	mawk -f $(srcdir)/mktxt $< > $@
+ 
+ # Main portion
+ 
+ all: gpm.info gpmdoc.txt $(MANPAGES)
+ 
+ $(MANPAGES): $(srcdir)/doc.gpm $(srcdir)/manpager
+-	cd $(srcdir) && gawk -f ./manpager doc.gpm
++	cd $(srcdir) && mawk -f ./manpager doc.gpm
+ 
+ 
+ $(srcdir)/gpmdoc.ps:	gpm.ps
