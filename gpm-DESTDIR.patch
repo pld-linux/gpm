@@ -1,7 +1,7 @@
-diff -Nru gpm-1.18.1/Makefile.in gpm-1.18.1.new/Makefile.in
---- gpm-1.18.1/Makefile.in	Tue Nov 16 19:33:50 1999
-+++ gpm-1.18.1.new/Makefile.in	Tue Nov 16 19:33:11 1999
-@@ -121,36 +121,36 @@
+diff -Nru gpm-1.19.0/Makefile.in gpm-1.19.0.new/Makefile.in
+--- gpm-1.19.0/Makefile.in	Fri Apr  7 14:16:56 2000
++++ gpm-1.19.0.new/Makefile.in	Fri Apr  7 14:16:28 2000
+@@ -124,36 +124,36 @@
  
  installdirs:	do-installdirs
  	$(SHELL) $(srcdir)/mkinstalldirs \
@@ -53,39 +53,29 @@ diff -Nru gpm-1.18.1/Makefile.in gpm-1.18.1.new/Makefile.in
  	fi		
  
  install-strip:
-diff -Nru gpm-1.18.1/doc/Makefile.in gpm-1.18.1.new/doc/Makefile.in
---- gpm-1.18.1/doc/Makefile.in	Tue Nov 16 19:33:50 1999
-+++ gpm-1.18.1.new/doc/Makefile.in	Tue Nov 16 19:30:51 1999
-@@ -107,24 +107,19 @@
+diff -Nru gpm-1.19.0/doc/Makefile.in gpm-1.19.0.new/doc/Makefile.in
+--- gpm-1.19.0/doc/Makefile.in	Fri Apr  7 14:16:56 2000
++++ gpm-1.19.0.new/doc/Makefile.in	Fri Apr  7 14:14:48 2000
+@@ -113,15 +113,15 @@
  
  installdirs:	
  	$(SHELL) $(top_srcdir)/mkinstalldirs \
--	$(man1dir) \
--	$(man8dir) \
--	$(infodir)	
-+	$(DESTDIR)$(man1dir) \
-+	$(DESTDIR)$(man8dir) \
-+	$(DESTDIR)$(infodir)	
+-		$(man1dir) $(man7dir) $(man8dir) $(infodir)	
++		$(DESTDIR)$(man1dir) $(DESTDIR)$(man7dir) $(DESTDIR)$(man8dir) $(DESTDIR)$(infodir)
  
  install:	all installdirs
--	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.8 $(man8dir)/gpm.8
--	$(INSTALL_DATA) -m 644 $(srcdir)/mev.1 $(man1dir)/mev.1
--	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info $(infodir)/gpm.info
-+	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.8 $(DESTDIR)$(man8dir)/gpm.8
-+	$(INSTALL_DATA) -m 644 $(srcdir)/mev.1 $(DESTDIR)$(man1dir)/mev.1
-+	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info $(DESTDIR)$(infodir)/gpm.info
+-	$(INSTALL_DATA) -m 644 $(srcdir)/mev.1          $(man1dir)
+-	$(INSTALL_DATA) -m 644 $(srcdir)/mouse-test.1   $(man1dir)
+-	$(INSTALL_DATA) -m 644 $(srcdir)/gpm-root.1     $(man1dir)
+-	$(INSTALL_DATA) -m 644 $(srcdir)/gpm-types.7    $(man7dir)
+-	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.8          $(man8dir)
+-	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info       $(infodir)
++	$(INSTALL_DATA) -m 644 $(srcdir)/mev.1          $(DESTDIR)$(man1dir)
++	$(INSTALL_DATA) -m 644 $(srcdir)/mouse-test.1   $(DESTDIR)$(man1dir)
++	$(INSTALL_DATA) -m 644 $(srcdir)/gpm-root.1     $(DESTDIR)$(man1dir)
++	$(INSTALL_DATA) -m 644 $(srcdir)/gpm-types.7    $(DESTDIR)$(man7dir)
++	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.8          $(DESTDIR)$(man8dir)
++	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info       $(DESTDIR)$(infodir)
+ 	# Use install-info if available
  	-if $(SHELL) -c 'install-info --version' >/dev/null 2>&1; then \
--	  if [ -f $(infodir)/dir ] ; then \
--		install-info --dir-file=$(infodir)/dir $(infodir)/gpm.info; \
-+	  if [ -f $(DESTDIR)$(infodir)/dir ] ; then \
-+		install-info --dir-file=$(infodir)/dir $(DESTDIR)$(infodir)/gpm.info; \
- 	  else true; fi; \
- 	else true; fi
--	#itz Sat Dec 26 23:21:05 PST 1998
--	#i keep all my infopages compressed and i'm tired to do it by
--	#hand, so check if there are any compressed pages and do this
--	#one too
--	-ls $(infodir)/*[-.]info.gz >/dev/null 2>&1 && gzip -f $(infodir)/gpm.info
- 
- # This potentially leaves around cached manpages,
- # e.g. /var/cache/man/cat1/mev.1.gz.  Deleting these is not our job,
+ 	  if [ -f $(infodir)/dir ] ; then \
