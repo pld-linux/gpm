@@ -10,3 +10,12 @@ diff -Nru gpm-1.17.3/Makefile.in gpm-1.17.3.new/Makefile.in
  	# POSIX requires the range of a for loop be nonempty and Bash
  	# 2.x goes along; unfortunately that means an additional
  	# headache in cases like this
+@@ -150,7 +150,7 @@
+ 	if test "x@SHLIB@" != "x" ; then \
+ 		$(INSTALL_DATA) -m 644 libgpm.so.@abi_full@ $(libdir)/libgpm.so.@abi_full@ ;\
+ 		cd $(libdir) && $(LN_S) -f libgpm.so.@abi_full@ libgpm.so ;\
+-		ldconfig -n -l $(libdir)/libgpm.so.@abi_full@ ;\
++		/sbin/ldconfig -n -l $(libdir)/libgpm.so.@abi_full@ ;\
+ 	fi		
+ 
+ install-strip:
