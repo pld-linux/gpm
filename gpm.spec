@@ -6,13 +6,13 @@ Summary(tr):	Genel amaГlЩ fare desteПi
 Summary(ru):	Сервер работы с мышью для консоли Linux
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
-Version:	1.19.3
-Release:	21
+Version:	1.19.4
+Release:	1
 License:	GPL
 Group:		Daemons
 Group(de):	Server
 Group(pl):	Serwery
-Source0:	ftp://animal.unipv.it/pub/gpm/%{name}-%{version}.tar.gz
+Source0:	ftp://arcana.linux.it/pub/gpm/%{name}-%{version}.tar.bz2
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Patch0:		%{name}-info.patch
@@ -25,7 +25,6 @@ Patch6:		%{name}-mawk.patch
 Patch7:		%{name}-OPEN_MAX.patch
 Patch8:		%{name}-limits.patch
 Patch10:	%{name}-serialconsole.patch
-Patch11:	%{name}-tempfilesecurity.patch
 Requires:	%{name}-libs = %{version}
 Prereq:		rc-scripts >= 0.2.0
 BuildRequires:	ncurses-devel >= 5.0
@@ -177,9 +176,9 @@ Biblioteki statyczne gpm.
 %patch7 -p1
 %patch8 -p1
 %patch10 -p1
-%patch11 -p1
 
 %build
+aclocal
 autoconf
 %configure \
 	--disable-debug \
