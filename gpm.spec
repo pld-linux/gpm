@@ -100,7 +100,7 @@ Biblioteki statyczne gpm.
 %build
 autoconf
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" SOLDFLAGS="-s" \
-./configure \
+./configure %{_target} \
 	--sysconfdir=/etc \
 	--disable-debug \
 	--with-curses
