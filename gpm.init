@@ -16,7 +16,7 @@
 . /etc/rc.d/init.d/functions
 
 # Get service config
-[ -f /etc/sysconfig/gpm ] && . /etc/sysconfig/gpm
+[ -f /etc/sysconfig/gpm ] && . /etc/sysconfig/mouse
 
 
 # See how we were called.
