@@ -7,7 +7,7 @@ Summary(ru):	Сервер работы с мышью для консоли Linux
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
 Version:	1.19.6
-Release:	3
+Release:	4
 License:	GPL
 Group:		Daemons
 Group(de):	Server
@@ -97,6 +97,7 @@ Group(pt_BR):	Bibliotecas
 Group(ru):	Библиотеки
 Group(uk):	Б╕бл╕отеки
 Conflicts:	gpm < 1.19.3-7
+Obsoletes:	libgpm1
 
 %description libs
 This package contains library files neccessary to run most of
@@ -118,6 +119,7 @@ Group(pt_BR):	Desenvolvimento/Bibliotecas
 Group(ru):	Разработка/Библиотеки
 Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-libs = %{version}
+Obsoletes:	libgpm1-devel
 
 %description devel
 This package allows you to develop your own text-mode programs that
