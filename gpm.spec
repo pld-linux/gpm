@@ -4,8 +4,8 @@ Summary(fr):	Gestion générale de la souris pour Linux
 Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
-Version:	1.19.2
-Release:	5
+Version:	1.19.3
+Release:	1
 License:	GPL
 Group:		Daemons
 Group(pl):	Serwery
