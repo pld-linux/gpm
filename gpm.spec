@@ -88,6 +88,9 @@ Group(de):	Libraries
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	Библиотеки
+Group(uk):	Б╕бл╕отеки
 
 %description libs
 This package contains library files neccessary to run most of
@@ -102,8 +105,12 @@ Summary:	Header files and documentation for writing mouse driven programs
 Summary(pl):	Pliki nagЁСwkowe i dokumentacja do gpm
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-libs = %{version}
 
 %description devel
@@ -146,8 +153,12 @@ Summary(ru):	Статическая библиотека для разработки программ, использующих мышь С
 Summary(uk):	Статична б╕бл╕отека для розробки програм, що використовують мишу
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Разработка/Библиотеки
+Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
