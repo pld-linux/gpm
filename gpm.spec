@@ -1,3 +1,6 @@
+# TODO:
+# - make modprobe of kernel mouse modules for 2.5
+
 Summary:	General Purpose Mouse support for Linux
 Summary(de):	Allgemeine Mausunterstützung für Linux
 Summary(es):	Soporte para ratón en terminales modo texto
