@@ -18,6 +18,7 @@ Patch2:		gpm-non-root.patch
 Patch3:		gpm-DESTDIR.patch
 Prereq:		/sbin/chkconfig
 Prereq:		/sbin/install-info
+Requires:	rc-scripts
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %define		_sysconfdir	/etc
