@@ -156,7 +156,7 @@ rm -rf $RPM_BUILD_ROOT
 - changed dependencies to "Requires: %%{name} = %%{version}" in devel
   subpackage,
 - added using $RPM_OPT_FLAGS during compile,
-- added striping shared libraries,
+- added stripping shared libraries,
 - added full %attr description in %files,
 - libgpm is now linked with libslang (so.1) as a term library
   (gpm-1.13-with_slang.patch).
