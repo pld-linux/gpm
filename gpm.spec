@@ -5,7 +5,7 @@ Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
 Version:	1.19.1
-Release:	2
+Release:	3
 License:	GPL
 Group:		Daemons
 Group(pl):	Serwery
@@ -120,7 +120,7 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/{rc.d/init.d,sysconfig}
+install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig}
 
 make install-strip DESTDIR=$RPM_BUILD_ROOT
 
@@ -129,8 +129,8 @@ install mouse-test hltest $RPM_BUILD_ROOT%{_bindir}
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/gpm
-install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/mouse
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
 
 gzip -9nf $RPM_BUILD_ROOT%{_datadir}/{info/gpm.info*,man/man{1,8}/*} \
 	README* *.conf
@@ -142,7 +142,7 @@ gzip -9nf $RPM_BUILD_ROOT%{_datadir}/{info/gpm.info*,man/man{1,8}/*} \
 /sbin/chkconfig --add gpm
 
 if [ -f /var/lock/subsys/gpm ]; then
-	%{_sysconfdir}/rc.d/init.d/gpm restart >&2
+	/etc/rc.d/init.d/gpm restart >&2
 fi
 
 %preun
@@ -164,8 +164,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README*gz *.conf*
 %config(noreplace) %{_sysconfdir}/gpm-root.conf
-%attr(754,root,root) %{_sysconfdir}/rc.d/init.d/gpm
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/sysconfig/mouse
+%attr(754,root,root) /etc/rc.d/init.d/gpm
+%config(noreplace) %verify(not size mtime md5) /etc/sysconfig/mouse
 
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
