@@ -29,35 +29,36 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 GPM adds mouse support to text-based Linux applications such as emacs,
 Midnight Commander, and more. It also provides console cut-and-paste
-operations using the mouse. Includes a program to allow pop-up menus to
-appear at the click of a mouse button.
+operations using the mouse. Includes a program to allow pop-up menus
+to appear at the click of a mouse button.
 
 %description -l de
-GPM ermöglicht Maus-Unterstützung für zeichenorientierte Linux- Anwendungen
-wie z.B. emacs und Midnight Commander. Außerdem sind Ausschneiden und
-Einfügen mit der Maus auf der Konsole möglich. Enthält ein Programm, daß
-bei Mausklick ein Pop-up-Menü aufruft.
+GPM ermöglicht Maus-Unterstützung für zeichenorientierte Linux-
+Anwendungen wie z.B. emacs und Midnight Commander. Außerdem sind
+Ausschneiden und Einfügen mit der Maus auf der Konsole möglich.
+Enthält ein Programm, daß bei Mausklick ein Pop-up-Menü aufruft.
 
 %description -l fr
-GPM ajoute un support souris au applications en mode texte de Linux comme
-emacs, Midnight Commander, et bien d'autres. Cela fournit aussi des
-opérations de copier/coller avec la souris sur les consoles. Comprend un
-programme pour permettre l'apparition de menus déroulants grace à un clic
-droit avec la souris.
+GPM ajoute un support souris au applications en mode texte de Linux
+comme emacs, Midnight Commander, et bien d'autres. Cela fournit aussi
+des opérations de copier/coller avec la souris sur les consoles.
+Comprend un programme pour permettre l'apparition de menus déroulants
+grace à un clic droit avec la souris.
 
 %description -l pl
-GPM zapewnia wsparcie dla myszki dla systemu Linux na konsoli systemowej.
-Dziêki niemu mo¿na zaznaczaæ fragmenty tekstu na konsoli i wklejaæ je w
-edytowany plik tekstowy. Operacje te s± najczê¶ciej dokonywane przez
-wci¶niêcie prawego klawisza myszki (operacja zaznaczania fragmentu tekstu)
-i nastêpnie wci¶niêcie klawisza <Shift>+¶rodkowego klawisza myszki
-(operacja wklejania tekstu).
+GPM zapewnia wsparcie dla myszki dla systemu Linux na konsoli
+systemowej. Dziêki niemu mo¿na zaznaczaæ fragmenty tekstu na konsoli i
+wklejaæ je w edytowany plik tekstowy. Operacje te s± najczê¶ciej
+dokonywane przez wci¶niêcie prawego klawisza myszki (operacja
+zaznaczania fragmentu tekstu) i nastêpnie wci¶niêcie klawisza
+<Shift>+¶rodkowego klawisza myszki (operacja wklejania tekstu).
 
 %description -l tr
-GPM metin ekranda çalýþan Linux uygulamalarýna (emacs, Midnight Commander
-ve diðerleri gibi) fare desteði saðlar. Ayrýca fare yardýmýyla konsollar
-arasýnda kopyalama ve yapýþtýrma olanaðý sunar. Fare týklamasýyla pop-up
-menülerin çýkmasýný saðlayan bir program da içerir.
+GPM metin ekranda çalýþan Linux uygulamalarýna (emacs, Midnight
+Commander ve diðerleri gibi) fare desteði saðlar. Ayrýca fare
+yardýmýyla konsollar arasýnda kopyalama ve yapýþtýrma olanaðý sunar.
+Fare týklamasýyla pop-up menülerin çýkmasýný saðlayan bir program da
+içerir.
 
 %package devel
 Summary:	Header files and documentation for writing mouse driven programs
@@ -68,20 +69,20 @@ Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
 
 %description devel
-This package allows you to develop your own text-mode programs that take
-advantage of the mouse.
+This package allows you to develop your own text-mode programs that
+take advantage of the mouse.
 
 %description -l de devel
-Mit diesem Paket können Sie Ihre eigenen text-orientierten Programme mit
-Mausunterstützung entwickeln.
+Mit diesem Paket können Sie Ihre eigenen text-orientierten Programme
+mit Mausunterstützung entwickeln.
 
 %description -l fr devel
 Ce paquetage permet de développer des programmes en mode texte tirant
 avantage de la souris.
 
 %description -l pl devel
-Pliki nag³ówkowe i dokumentacja dla gpm. Dziêki nim bêdziesz móg³ pisaæ
-w³asne programy z wykorzystaniem myszki.
+Pliki nag³ówkowe i dokumentacja dla gpm. Dziêki nim bêdziesz móg³
+pisaæ w³asne programy z wykorzystaniem myszki.
 
 %description -l tr devel
 Bu paket, fare kullanan yazýlýmlar geliþtirmenizi saðlayan dosyalarý
@@ -119,7 +120,7 @@ make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig}
+install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,/etc/sysconfig}
 
 make install-strip DESTDIR=$RPM_BUILD_ROOT
 
