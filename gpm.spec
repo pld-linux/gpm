@@ -5,7 +5,7 @@ Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
 Version:	1.17.6
-Release:	1
+Release:	2
 Release:	1
 Group:		Daemons
 Group(pl):	Serwery
@@ -127,6 +127,8 @@ strip $RPM_BUILD_ROOT/usr/{bin/*,lib/lib*.so.*.*}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
 
+gzip -9nf $RPM_BUILD_ROOT/usr/{info/gpm.info*,man/man{1,8}/*}
+
 install doc/gpm-root.1 $RPM_BUILD_ROOT/usr/man/man1/
 
 %post
@@ -180,6 +182,10 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/lib*.a
 
 %changelog
+* Mon Apr 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.17.7-2]
+* Fri Apr  9 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.17.5-2]
 - added installing gpm-root(1) man page.
   [1.17.5-1]
 - changed base Source url to ftp://animal.unipv.it/pub/gpm/,
