@@ -4,17 +4,17 @@ Summary(fr):	Gestion générale de la souris pour Linux
 Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
-Version:	1.17.3
-Release:	1d
+Version:	1.17.5
+Release:	1
 Release:	1
 Group:		Daemons
 Group(pl):	Serwery
-Source:		ftp://iride.unipv.it/pub/gpm/%{name}-%{version}.tar.gz
+Source:		ftp://animal.unipv.it/pub/gpm/%{name}-%{version}.tar.gz
 Source1:	gpm.init
-Patch0:		gpm-nops.patch
-Patch1:		gpm-with_slang.patch
+Patch0:		gpm-info.patch
+Patch1:		gpm-nops.patch
 Patch2:		gpm-non-root.patch
-Patch3:		gpm-info.patch
+Patch3:		gpm-makedev.patch
 Prereq:		/sbin/chkconfig
 Prereq:		/sbin/install-info
 Buildroot:	/tmp/%{name}-%{version}-root
@@ -104,8 +104,7 @@ autoconf
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" SOLDFLAGS="-s" \
 	--sysconfdir=/etc \
 	--disable-debug \
-	--with-slang \
-	--without-curses
+	--with-curses
 make
 
 %install
@@ -168,7 +167,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /usr/sbin/*
 
 /usr/info/gpm.info*
-%attr(644,root, man) /usr/man/man[18]/*
+/usr/man/man[18]/*
 %attr(755,root,root) /usr/lib/lib*.so.*.*
 
 /usr/share/emacs/site-lisp/*
@@ -181,6 +180,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root,root) /usr/lib/lib*.a
 
 %changelog
+- added installing gpm-root(1) man page.
+  [1.17.5-1]
+- changed base Source url to ftp://animal.unipv.it/pub/gpm/,
+- now libgpm is linked with ncurses as a term library,
+- removed man group from man pages.
+
 * Sun Jan 31 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.17.3-1d]
 - added LDFLAGS="-s" to ./configure enviroment,
