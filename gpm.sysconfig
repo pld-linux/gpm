@@ -17,10 +17,10 @@ BAUD_RATE=
 # Needed by some strange serial mice (for example A4Tech NWW-9)
 CLEAR_LINES=
 
-# Acceleration
+# Acceleration (default 2) - delta multiplying factor:
 ACCEL=
 
-# Delta :)
+# Delta (must be 2 or more):
 DELTA=
 
 # Multiple click max interval (in miliseconds)
