@@ -117,7 +117,6 @@ Biblioteki statyczne gpm.
 %patch7 -p1
 
 %build
-LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--disable-debug \
 	--with-curses
@@ -127,18 +126,16 @@ LDFLAGS="-s"; export LDFLAGS
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,/etc/sysconfig}
 
-%{__make} install-strip DESTDIR=$RPM_BUILD_ROOT
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install gpm-root.conf $RPM_BUILD_ROOT%{_sysconfdir}
 install mouse-test hltest $RPM_BUILD_ROOT%{_bindir}
 
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
-
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
 
-gzip -9nf $RPM_BUILD_ROOT%{_datadir}/{info/gpm.info*,man/man{1,8}/*} \
-	README* *.conf
+gzip -9nf README* *.conf
 
 %post
 /sbin/ldconfig
