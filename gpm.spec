@@ -30,6 +30,8 @@ Prereq:		rc-scripts >= 0.2.0
 Prereq:		/sbin/chkconfig
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gawk
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc
