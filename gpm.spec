@@ -1,19 +1,23 @@
-Summary:     General Purpose Mouse support for Linux
-Summary(de): Allgemeine Mausunterstützung für Linux
-Summary(fr): Gestion générale de la souris pour Linux
-Summary(tr): Genel amaçlý fare desteði
-Name:        gpm
-Version:     1.13
-Release:     9
-Copyright:   GPL
-Group:       Daemons
-Source:      ftp://iride.unipv.it/pub/gpm/%{name}-%{version}.tar.gz
-Source1:     gpm.init
-Patch0:      gpm-1.12-emacs.patch
-Patch1:      gpm-1.12-make.patch
-Patch2:      gpm-1.13-with_slang.patch
-Prereq:      /sbin/chkconfig /sbin/ldconfig /sbin/install-info
-Buildroot:   /tmp/%{name}-%{version}-root
+Summary:	General Purpose Mouse support for Linux
+Summary(de):	Allgemeine Mausunterstützung für Linux
+Summary(fr):	Gestion générale de la souris pour Linux
+Summary(pl):	Wsparcie dla myszki w systemie Linux
+Summary(tr):	Genel amaçlý fare desteði
+Name:		gpm
+Version:	1.17.3
+Release:	1d
+Release:	1
+Group:		Daemons
+Group(pl):	Serwery
+Source:		ftp://iride.unipv.it/pub/gpm/%{name}-%{version}.tar.gz
+Source1:	gpm.init
+Patch0:		gpm-nops.patch
+Patch1:		gpm-with_slang.patch
+Patch2:		gpm-non-root.patch
+Patch3:		gpm-info.patch
+Prereq:		/sbin/chkconfig
+Prereq:		/sbin/install-info
+Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
 GPM adds mouse support to text-based Linux applications such as emacs,
@@ -34,6 +38,14 @@ de copier/coller avec la souris sur les consoles. Comprend un programme
 pour permettre l'apparition de menus déroulants grace à un clic droit avec
 la souris.
 
+%description -l pl
+GPM zapewnia wsparcie dla myszki dla systemu Linux na konsoli systemowej.
+Dziêki niemu mo¿na zaznaczaæ fragmenty tekstu na konsoli i wklejaæ
+je w edytowany plik tekstowy. Operacje te s± najczê¶ciej dokonywane przez
+wci¶niêcie prawego klawisza myszki (operacja zaznaczania fragmentu tekstu)
+i nastêpnie wci¶niêcie klawisza <Shift>+¶rodkowego klawisza myszki
+(operacja wklejania tekstu).
+
 %description -l tr
 GPM metin ekranda çalýþan Linux uygulamalarýna (emacs, Midnight Commander ve
 diðerleri gibi) fare desteði saðlar. Ayrýca fare yardýmýyla konsollar
@@ -41,9 +53,11 @@ arasýnda kopyalama ve yapýþtýrma olanaðý sunar. Fare týklamasýyla pop-up
 menülerin çýkmasýný saðlayan bir program da içerir.
 
 %package devel
-Summary:     Header files and documentation for writing mouse driven programs
-Group:       Development/Libraries
-Requires:    %{name} = %{version}
+Summary:	Header files and documentation for writing mouse driven programs
+Summary(pl):	Pliki nag³ówkowe i dokumentacja do gpm
+Group:		Development/Libraries
+Group(pl):	Programowanie/Biblioteki
+Requires:	%{name} = %{version}
 
 %description devel
 This package allows you to develop your own text-mode programs that take
@@ -57,97 +71,135 @@ mit Mausunterstützung entwickeln.
 Ce paquetage permet de développer des programmes en mode texte tirant
 avantage de la souris.
 
+%description -l pl devel
+Pliki nag³ówkowe i dokumentacja dla gpm. Dziêki nim bêdziesz móg³
+pisaæ w³asne programy z wykorzystaniem myszki.
+
 %description -l tr devel
 Bu paket, fare kullanan yazýlýmlar geliþtirmenizi saðlayan dosyalarý içerir.
 
 %package static
-Summary:     Static gpm library
-Group:       Development/Libraries
-Requires:    %{name}-devel = %{version}
+Summary:	Static gpm library
+Summary(pl):	Biblioteki statyczne gpm
+Group:		Development/Libraries
+Group(pl):	Programowanie/Biblioteki
+Requires:	%{name}-devel = %{version}
 
 %description static
-Static gpm library
+Static gpm library.
+
+%description -l pl static
+Biblioteki statyczne gpm.
 
 %prep
 %setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-
-autoconf
+%patch3 -p1
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" \
-./configure --disable-debug --with-slang --without-curses
+autoconf
+autoconf
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" SOLDFLAGS="-s" \
+	--sysconfdir=/etc \
+	--disable-debug \
+	--with-slang \
+	--without-curses
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/rc.d/{init.d,rc{0,1,2,3,5,6}.d}
+install -d $RPM_BUILD_ROOT/etc/rc.d/init.d
 
 %ifarch sparc
 (echo MOUSETYPE=\"sun\"; echo XEMU3=no) > /etc/sysconfig/mouse
 %endif
 
-make install prefix=$RPM_BUILD_ROOT/usr
-gzip -9nf $RPM_BUILD_ROOT/usr/info/gpm.info*
+make install-strip \
+	prefix=$RPM_BUILD_ROOT/usr \
+	sysconfdir=$RPM_BUILD_ROOT/etc \
+	lispdir=$RPM_BUILD_ROOT/usr/share/emacs/site-lisp
+
 install gpm-root.conf $RPM_BUILD_ROOT/etc
 install mouse-test hltest $RPM_BUILD_ROOT/usr/bin
 
-strip $RPM_BUILD_ROOT/usr/bin/{gpm,mev,gpm-root}
+strip $RPM_BUILD_ROOT/usr/{bin/*,lib/lib*.so.*.*}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
-ln -sf ../init.d/gpm $RPM_BUILD_ROOT/etc/rc.d/rc2.d/S85gpm
-ln -sf ../init.d/gpm $RPM_BUILD_ROOT/etc/rc.d/rc3.d/S85gpm
-ln -sf ../init.d/gpm $RPM_BUILD_ROOT/etc/rc.d/rc5.d/S85gpm
-ln -sf ../init.d/gpm $RPM_BUILD_ROOT/etc/rc.d/rc0.d/K15gpm
-ln -sf ../init.d/gpm $RPM_BUILD_ROOT/etc/rc.d/rc1.d/K15gpm
-ln -sf ../init.d/gpm $RPM_BUILD_ROOT/etc/rc.d/rc6.d/K15gpm
+
+install doc/gpm-root.1 $RPM_BUILD_ROOT/usr/man/man1/
 
 %post
-/sbin/chkconfig --add gpm
 /sbin/ldconfig
-/sbin/install-info /usr/info/gpm.info.gz /usr/info/dir --entry="* gpm: (gpm).                   Text-mode mouse library."
+/sbin/install-info /usr/info/gpm.info.gz /etc/info-dir
+
+/sbin/chkconfig --add gpm
+if test -r /var/run/gpm.pid; then
+	/etc/rc.d/init.d/gpm stop >&2
+	/etc/rc.d/init.d/gpm start >&2
+else
+	echo "Run \"/etc/rc.d/init.d/gpm start\" to start gpm daemon."
+fi
 
 %preun
 if [ "$1" = "0" ]; then
-    /sbin/install-info /usr/info/gpm.info.gz --delete /usr/info/dir --entry="* gpm: (gpm).                   Text-mode mouse library."
+	/sbin/install-info /usr/info/gpm.info.gz --delete /etc/info-dir
+if [ $1 = 0 ]; then
+	/sbin/chkconfig --del gpm
+	/etc/rc.d/init.d/gpm stop >&2
 fi
 
-%postun
-/sbin/ldconfig
-if [ $1 = 0 ]; then
-    /sbin/chkconfig --del gpm
-fi
+%postun -p /sbin/ldconfig
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(644, root, root, 755)
-%config /etc/gpm-root.conf
+%defattr(644,root,root,755)
 
+%config /etc/gpm-root.conf
 %ifarch sparc
 %config /etc/sysconfig/mouse
 %endif
 
-%attr(755, root, root) /usr/bin/*
-/usr/share/emacs/site-lisp/*
+%attr(754,root,root) /etc/rc.d/init.d/gpm
+%attr(755,root,root) /usr/bin/*
+%attr(755,root,root) /usr/sbin/*
+
 /usr/info/gpm.info*
-%attr(644, root,  man) /usr/man/man1/*
-/usr/lib/lib*.so.*.*
-%attr(755, root, root) %config /etc/rc.d/init.d/gpm
-%attr(755, root, root) %config(missingok) /etc/rc.d/rc[01236].d/*gpm
+%attr(644,root, man) /usr/man/man[18]/*
+%attr(755,root,root) /usr/lib/lib*.so.*.*
+
+/usr/share/emacs/site-lisp/*
 
 %files devel
-%defattr(644, root, root, 755)
-/usr/lib/lib*.so
-/usr/include/gpm.h
+%attr(755,root,root) /usr/lib/lib*.so
+%attr(644,root,root) /usr/include/gpm.h
 
 %files static
-%attr(644, root, root) /usr/lib/lib*.a
+%attr(644,root,root) /usr/lib/lib*.a
 
 %changelog
+* Sun Jan 31 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.17.3-1d]
+- added LDFLAGS="-s" to ./configure enviroment,
+- added --sysconfdir=/etc to ./configure parameters,
+- standarized %post, %preun restarting, stoping service on
+  upgrade and uninstall,
+- added Group(pl),
+- changed perm on lib*.so* to 755,
+- removed %config from /etc/rc.d/init.d/gpm and changed perm to 754,
+- added striping shared libraries,
+- removed /etc/rc.d/rc[01236].d/*gpm symlink (/etc/rc.d/init.d/gpm 
+  have chkconfig support),
+- standarized {un}registering info pages (added gpm-info.patch),
+- added gzipping man pages.
+
+* Wed Sep 30 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
+  [1.13-9d]
+- added pl translation.
+
 * Wed Aug 26 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.13-9]
 - changed Buildroot to /tmp/%%{name}-%%{version}-root,
@@ -159,7 +211,7 @@ rm -rf $RPM_BUILD_ROOT
 - added stripping shared libraries,
 - added full %attr description in %files,
 - libgpm is now linked with libslang (so.1) as a term library
-  (gpm-1.13-with_slang.patch).
+  (gpm-with_slang.patch).
 
 * Tue Aug 11 1998 Jeff Johnson <jbj@redhat.com>
 - build root
