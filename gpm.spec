@@ -5,8 +5,8 @@ Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
 Version:	1.17.7
+Release:	2
 Copyright:	GPL
-Release:	1
 Group:		Daemons
 Group(pl):	Serwery
 Source:		ftp://animal.unipv.it/pub/gpm/%{name}-%{version}.tar.gz
@@ -99,6 +99,7 @@ Biblioteki statyczne gpm.
 %build
 autoconf
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" SOLDFLAGS="-s" \
+./configure \
 	--sysconfdir=/etc \
 	--disable-debug \
 	--with-curses
@@ -128,8 +129,6 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
 
 gzip -9nf $RPM_BUILD_ROOT/usr/{info/gpm.info*,man/man{1,8}/*}
 
-install doc/gpm-root.1 $RPM_BUILD_ROOT/usr/man/man1/
-
 %post
 /sbin/ldconfig
 /sbin/install-info /usr/info/gpm.info.gz /etc/info-dir
@@ -145,7 +144,7 @@ fi
 %preun
 if [ "$1" = "0" ]; then
 	/sbin/install-info /usr/info/gpm.info.gz --delete /etc/info-dir
-if [ $1 = 0 ]; then
+
 	/sbin/chkconfig --del gpm
 	/etc/rc.d/init.d/gpm stop >&2
 fi
@@ -183,9 +182,9 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Mon Apr 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.17.7-2]
-* Fri Apr  9 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [1.17.5-2]
-- added installing gpm-root(1) man page.
+- recompiles on new rpm.
+
+* Sat Feb 27 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.17.5-1]
 - changed base Source url to ftp://animal.unipv.it/pub/gpm/,
 - now libgpm is linked with ncurses as a term library,
