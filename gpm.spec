@@ -4,8 +4,8 @@ Summary(fr):	Gestion générale de la souris pour Linux
 Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
-Version:	1.18.1
-Release:	8
+Version:	1.19.0
+Release:	1
 License:	GPL
 Group:		Daemons
 Group(pl):	Serwery
@@ -16,10 +16,11 @@ Patch0:		gpm-info.patch
 Patch1:		gpm-nops.patch
 Patch2:		gpm-non-root.patch
 Patch3:		gpm-DESTDIR.patch
+Patch4:		gpm-info_fixes.patch
 Prereq:		/sbin/chkconfig
 Prereq:		/usr/sbin/fix-info-dir
 Prereq:		/sbin/ldconfig
-Requires:	rc-scripts
+Requires:	rc-scripts >= 0.2.0
 BuildRequires:	ncurses-devel >= 5.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -106,6 +107,7 @@ Biblioteki statyczne gpm.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 LDFLAGS="-s"; export LDFLAGS
@@ -150,9 +152,9 @@ fi
 %preun
 if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/gpm ]; then
-		/sbin/chkconfig --del gpm
+		/etc/rc.d/init.d/gpm stop >&2
 	fi
-	/etc/rc.d/init.d/gpm stop >&2
+	/sbin/chkconfig --del gpm
 fi
 
 %postun
@@ -171,7 +173,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so.*
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %{_infodir}/gpm.info*
 %{_mandir}/man[18]/*
@@ -179,7 +181,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so
-%{_includedir}/gpm.h
+%{_includedir}/*
 
 %files static
 %defattr(644,root,root,755)
