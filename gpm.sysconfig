@@ -53,5 +53,8 @@ REPEATER=no
 # word-constituent. This is necessary as gpm does not support locales.
 CHARSET=
 
+# other gpm options, for example when you need multiple devices support
+GPM_OPTIONS=
+
 # Nice level for gpm
 SERVICE_RUN_NICE_LEVEL="-1"
