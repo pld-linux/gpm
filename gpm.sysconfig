@@ -4,7 +4,7 @@
 # Mouse device (for example /dev/mouse, /dev/ttyS0, /dev/psaux)
 DEVICE=/dev/mouse
 
-# Mouse type (ms, msc, ps/2, ...) Use "gpm -t help" for detailed list
+# Mouse type (ms, msc, ps2, ...) Use "gpm -t help" for detailed list
 MOUSETYPE=
 
 # Force specified button count (2/3)
