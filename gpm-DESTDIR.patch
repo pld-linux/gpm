@@ -1,0 +1,91 @@
+diff -Nru gpm-1.17.8/Makefile.in gpm-1.17.8.new/Makefile.in
+--- gpm-1.17.8/Makefile.in	Tue Jun 29 11:32:45 1999
++++ gpm-1.17.8.new/Makefile.in	Tue Jun 29 11:32:29 1999
+@@ -121,36 +121,36 @@
+ 
+ installdirs:	do-installdirs
+ 	$(SHELL) $(srcdir)/mkinstalldirs \
+-	$(libdir) \
+-	$(bindir) \
+-	$(sbindir) \
+-	$(includedir) \
+-	$(sysconfdir) 
++	$(DESTDIR)$(libdir) \
++	$(DESTDIR)$(bindir) \
++	$(DESTDIR)$(sbindir) \
++	$(DESTDIR)$(includedir) \
++	$(DESTDIR)$(sysconfdir) 
+ 	if test "x@ELISP@" != "x" ; then \
+-		$(SHELL) $(srcdir)/mkinstalldirs $(lispdir) ;\
++		$(SHELL) $(srcdir)/mkinstalldirs $(DESTDIR)$(lispdir) ;\
+ 	fi
+ 	
+ STRIP = -s
+ 
+ install:	check installdirs do-install
+-	$(INSTALL_PROGRAM) gpm $(sbindir)/gpm
+-	$(INSTALL_DATA) -m 644 libgpm.a $(libdir)/libgpm.a
+-	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.h $(includedir)/gpm.h
++	$(INSTALL_PROGRAM) gpm $(DESTDIR)$(sbindir)/gpm
++	$(INSTALL_DATA) -m 644 libgpm.a $(DESTDIR)$(libdir)/libgpm.a
++	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.h $(DESTDIR)$(includedir)/gpm.h
+ 	for i in mev gpm-root; do \
+-		$(INSTALL_PROGRAM) $$i $(bindir)/$$i ;\
++		$(INSTALL_PROGRAM) $$i $(DESTDIR)$(bindir)/$$i ;\
+ 	done
+-	$(INSTALL_PROGRAM) disable-paste $(bindir)/disable-paste
++	$(INSTALL_PROGRAM) disable-paste $(DESTDIR)$(bindir)/disable-paste
+ 	# POSIX requires the range of a for loop be nonempty and Bash
+ 	# 2.x goes along; unfortunately that means an additional
+ 	# headache in cases like this
+ 	if test "x@ELISP@" != "x" ; then \
+ 	cd $(srcdir) && for i in `echo @ELISP@`; do \
+-		$(INSTALL_DATA) -m 644 $$i $(lispdir)/$$i ;\
++		$(INSTALL_DATA) -m 644 $$i $(DESTDIR)$(lispdir)/$$i ;\
+ 	done ; fi
+ 	if test "x@SHLIB@" != "x" ; then \
+-		$(INSTALL_DATA) -m 644 libgpm.so.@abi_full@ $(libdir)/libgpm.so.@abi_full@ ;\
+-		cd $(libdir) && $(LN_S) -f libgpm.so.@abi_full@ libgpm.so ;\
+-		/sbin/ldconfig -n -l $(libdir)/libgpm.so.@abi_full@ ;\
++		$(INSTALL_DATA) -m 644 libgpm.so.@abi_full@ $(DESTDIR)$(libdir)/libgpm.so.@abi_full@ ;\
++		cd $(DESTDIR)$(libdir) && $(LN_S) -f libgpm.so.@abi_full@ libgpm.so ;\
++		/sbin/ldconfig -n -l $(DESTDIR)$(libdir)/libgpm.so.@abi_full@ ;\
+ 	fi		
+ 
+ install-strip:
+diff -Nru gpm-1.17.8/doc/Makefile.in gpm-1.17.8.new/doc/Makefile.in
+--- gpm-1.17.8/doc/Makefile.in	Tue Jun 29 11:32:45 1999
++++ gpm-1.17.8.new/doc/Makefile.in	Tue Jun 29 11:27:23 1999
+@@ -107,24 +107,19 @@
+ 
+ installdirs:	
+ 	$(SHELL) $(top_srcdir)/mkinstalldirs \
+-	$(man1dir) \
+-	$(man8dir) \
+-	$(infodir)	
++	$(DESTDIR)$(man1dir) \
++	$(DESTDIR)$(man8dir) \
++	$(DESTDIR)$(infodir)	
+ 
+ install:	all installdirs
+-	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.8 $(man8dir)/gpm.8
+-	$(INSTALL_DATA) -m 644 $(srcdir)/mev.1 $(man1dir)/mev.1
+-	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info $(infodir)/gpm.info
++	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.8 $(DESTDIR)$(man8dir)/gpm.8
++	$(INSTALL_DATA) -m 644 $(srcdir)/mev.1 $(DESTDIR)$(man1dir)/mev.1
++	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info $(DESTDIR)$(infodir)/gpm.info
+ 	-if $(SHELL) -c 'install-info --version' >/dev/null 2>&1; then \
+-	  if [ -f $(infodir)/dir ] ; then \
+-		install-info --dir-file=$(infodir)/dir $(infodir)/gpm.info; \
++	  if [ -f $(DESTDIR)$(infodir)/dir ] ; then \
++		install-info --dir-file=$(infodir)/dir $(DESTDIR)$(infodir)/gpm.info; \
+ 	  else true; fi; \
+ 	else true; fi
+-	#itz Sat Dec 26 23:21:05 PST 1998
+-	#i keep all my infopages compressed and i'm tired to do it by
+-	#hand, so check if there are any compressed pages and do this
+-	#one too
+-	-ls $(infodir)/*[-.]info.gz >/dev/null 2>&1 && gzip -f $(infodir)/gpm.info
+ 
+ # This potentially leaves around cached manpages,
+ # e.g. /var/cache/man/cat1/mev.1.gz.  Deleting these is not our job,
