@@ -1,0 +1,56 @@
+- added using CVS keywords in %changelog (for automating them).
+
+* Mon Jun 07 1999 Jan R瘯orajski <baggins@pld.org.pl>
+  [1.17.8-2]
+- prefix=/usr
+
+* Sun May  9 1999 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
+  [1.17.8-1]
+- now package is FHS 2.0 compliant.
+
+* Wed Apr 28 1999 Artur Frysiak <wiget@pld.org.pl>
+  [1.17-7-3]
+- added BuildPrereq: ncurses-devel.
+
+* Mon Apr 19 1999 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
+  [1.17.7-2]
+- added noreplace parameter to %config files,
+- recompiles on new rpm.
+
+* Sat Feb 27 1999 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
+  [1.17.5-1]
+- changed base Source url to ftp://animal.unipv.it/pub/gpm/,
+- now libgpm is linked with ncurses as a term library,
+- removed man group from man pages.
+
+* Sun Jan 31 1999 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
+  [1.17.3-1d]
+- added LDFLAGS="-s" to ./configure enviroment,
+- added --sysconfdir=/etc to ./configure parameters,
+- standarized %post, %preun restarting, stoping service on
+  upgrade and uninstall,
+- added Group(pl),
+- changed perm on lib*.so* to 755,
+- removed %config from /etc/rc.d/init.d/gpm and changed perm to 754,
+- added striping shared libraries,
+- removed /etc/rc.d/rc[01236].d/*gpm symlink (/etc/rc.d/init.d/gpm 
+  have chkconfig support),
+- standarized {un}registering info pages (added gpm-info.patch),
+- added gzipping man pages.
+
+* Wed Sep 30 1998 Wojtek 奸usarczyk <wojtek@shadow.eu.org>
+  [1.13-9d]
+- added pl translation.
+
+* Wed Aug 26 1998 Tomasz K這czko <kloczek@rudy.mif.pg.gda.pl>
+  [1.13-9]
+- changed Buildroot to /tmp/%%{name}-%%{version}-root,
+- added using %%{name} and %%{version} in Source,
+- added static subpackage,
+- changed dependencies to "Requires: %%{name} = %%{version}" in devel
+  subpackage,
+- added using $RPM_OPT_FLAGS during compile,
+- added stripping shared libraries,
+- added full %attr description in %files,
+- libgpm is now linked with libslang (so.1) as a term library
+  (gpm-with_slang.patch).
