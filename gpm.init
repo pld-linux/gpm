@@ -24,6 +24,12 @@ case "$1" in
 		exit 0
 	fi
 
+	if [ "$MOUSETYPE" = "none" ]; then
+		echo "(no mouse is configured)"
+		exit 0
+	fi
+
+
 	if [ "$MOUSETYPE" = "Microsoft" ]; then
 		MOUSETYPE=ms
 	fi
