@@ -10,15 +10,15 @@ License:	GPL
 Group:		Daemons
 Group(pl):	Serwery
 Source0:	ftp://animal.unipv.it/pub/gpm/%{name}-%{version}.tar.gz
-Source1:	gpm.init
-Source2:	gpm.sysconfig
-Patch0:		gpm-info.patch
-Patch1:		gpm-nops.patch
-Patch2:		gpm-non-root.patch
-Patch3:		gpm-DESTDIR.patch
-Patch4:		gpm-info_fixes.patch
-Patch5:		gpm-root.patch
-Patch6:		gpm-mawk.patch
+Source1:	%{name}.init
+Source2:	%{name}.sysconfig
+Patch0:		%{name}-info.patch
+Patch1:		%{name}-nops.patch
+Patch2:		%{name}-non-root.patch
+Patch3:		%{name}-DESTDIR.patch
+Patch4:		%{name}-info_fixes.patch
+Patch5:		%{name}-root.patch
+Patch6:		%{name}-mawk.patch
 Prereq:		/sbin/chkconfig
 Prereq:		/sbin/ldconfig
 Requires:	rc-scripts >= 0.2.0
@@ -94,8 +94,8 @@ içerir.
 Summary:	Static gpm library
 Summary(pl):	Biblioteki statyczne gpm
 Group:		Development/Libraries
-Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(fr):	Development/Librairies
 Requires:	%{name}-devel = %{version}
 
 %description static
