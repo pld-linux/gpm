@@ -4,8 +4,8 @@ Summary(fr):	Gestion générale de la souris pour Linux
 Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
-Version:	1.19.0
-Release:	1
+Version:	1.19.1
+Release:	2
 License:	GPL
 Group:		Daemons
 Group(pl):	Serwery
@@ -17,6 +17,7 @@ Patch1:		gpm-nops.patch
 Patch2:		gpm-non-root.patch
 Patch3:		gpm-DESTDIR.patch
 Patch4:		gpm-info_fixes.patch
+Patch5:		gpm-root.patch
 Prereq:		/sbin/chkconfig
 Prereq:		/usr/sbin/fix-info-dir
 Prereq:		/sbin/ldconfig
@@ -108,6 +109,7 @@ Biblioteki statyczne gpm.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 LDFLAGS="-s"; export LDFLAGS
