@@ -5,7 +5,7 @@ Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
 Version:	1.19.3
-Release:	6
+Release:	7
 License:	GPL
 Group:		Daemons
 Group(pl):	Serwery
@@ -65,13 +65,26 @@ yardýmýyla konsollar arasýnda kopyalama ve yapýþtýrma olanaðý sunar.
 Fare týklamasýyla pop-up menülerin çýkmasýný saðlayan bir program da
 içerir.
 
+%package libs
+Summary:	GPM libraries
+Summary(pl):	Biblioteki GPM
+Group:		Libraries
+
+%description libs
+This package contains library files neccessary to run most of mouse-aware
+applications.
+
+%description -l pl libs
+Ten pakiet zawiera biblioteki potrzebne do uruchomienia wiêkszo¶ci
+programów ze wsparciem do obs³ugi myszki.
+
 %package devel
 Summary:	Header files and documentation for writing mouse driven programs
 Summary(pl):	Pliki nag³ówkowe i dokumentacja do gpm
 Group:		Development/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
-Requires:	%{name} = %{version}
+Requires:	%{name}-libs = %{version}
 
 %description devel
 This package allows you to develop your own text-mode programs that
@@ -175,10 +188,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %{_infodir}/gpm.info*
 %{_mandir}/man[18]/*
+
+%files libs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
