@@ -1,0 +1,11 @@
+--- gpm-1.20.0/src/liblow.c.orig	Sat Feb 23 16:42:23 2002
++++ gpm-1.20.0/src/liblow.c	Wed May 15 22:08:34 2002
+@@ -262,7 +262,7 @@
+             goto err;
+          }   
+           
+-         conn->vc=atoi(&tty[strlen(consolename)]);
++         conn->vc=atoi(&tty[strlen(consolename)-1]);
+       }
+ 
+       if (gpm_consolefd == -1)
