@@ -122,7 +122,7 @@ make install-strip \
 	lispdir=$RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp
 
 install gpm-root.conf $RPM_BUILD_ROOT/etc
-install mouse-test hltest $RPM_BUILD_ROOT/usr/bin
+install mouse-test hltest $RPM_BUILD_ROOT%{_bindir}
 
 strip $RPM_BUILD_ROOT/usr/{bin/*,lib/lib*.so.*.*}
 
@@ -162,7 +162,7 @@ rm -rf $RPM_BUILD_ROOT
 %config(noreplace) /etc/sysconfig/mouse
 
 %attr(754,root,root) /etc/rc.d/init.d/gpm
-%attr(755,root,root) /usr/bin/*
+%attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) /usr/sbin/*
 
 %{_infodir}/gpm.info*
