@@ -42,8 +42,8 @@ Patch7:		%{name}-limits.patch
 Patch8:		%{name}-serialconsole.patch
 Patch9:		%{name}-gawk.patch
 Requires:	%{name}-libs = %{version}
-Prereq:		rc-scripts >= 0.2.0
-Prereq:		/sbin/chkconfig
+PreReq:		rc-scripts >= 0.2.0
+PreReq:		/sbin/chkconfig
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gawk
 BuildRequires:	bison
@@ -194,14 +194,14 @@ usam mouse.
 Bu paket, fare kullanan yazЩlЩmlar geliЧtirmenizi saПlayan dosyalarЩ
 iГerir.
 
-%description -l ru
+%description devel -l ru
 GPM обеспечивает поддержку мыши в текстовых приложениях Linux, таких
 как emacs, Midnight Commander и других. Также обеспечивает операции
 вырезки и вставки на консоли с использованием мыши. Включает
 программу, позволяющую вызывать всплывающие меню по нажатию кнопки
 мыши.
 
-%description -l uk
+%description devel -l uk
 GPM забезпечу╓ п╕дтримку миш╕ в текстових програмах Linux, таких як
 emacs, Midnight Commander та ╕нших. Також забезпечу╓ операц╕╖ вир╕зки
 та вставки на консол╕ з використанням миш╕. М╕стить програму, що
@@ -257,7 +257,7 @@ linkar a biblioteca gpm estaticamente.
 мишу.
 
 %prep
-%setup 	-q
+%setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -317,7 +317,7 @@ fi
 %postun
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
-%post   libs -p /sbin/ldconfig
+%post libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
 
 %files
