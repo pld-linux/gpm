@@ -54,5 +54,5 @@ REPEATER=no
 CHARSET=
 
 # Nice level for gpm
-SERVICE_RUN_NICE_LEVEL="+5"
+SERVICE_RUN_NICE_LEVEL="-1"
 
