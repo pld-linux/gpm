@@ -4,7 +4,7 @@ Summary(fr):	Gestion générale de la souris pour Linux
 Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
-Version:	1.18.0
+Version:	1.18.1
 Release:	1
 Copyright:	GPL
 Group:		Daemons
@@ -20,6 +20,7 @@ Prereq:		/sbin/chkconfig
 Prereq:		/usr/sbin/fix-info-dir
 Prereq:		/sbin/ldconfig
 Requires:	rc-scripts
+BuildRequires:	ncurses-devel >= 5.0
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %define		_sysconfdir	/etc
