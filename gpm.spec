@@ -9,7 +9,7 @@ Summary(ru):	Сервер работы с мышью для консоли Linux
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
 Version:	1.20.0
-Release:	0.1
+Release:	0.2
 License:	GPL
 Group:		Daemons
 Source0:	ftp://arcana.linux.it/pub/gpm/%{name}-%{version}.tar.bz2
@@ -17,15 +17,13 @@ Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Source3:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
 Patch0:		%{name}-info.patch
-Patch1:		%{name}-nops.patch
+Patch1:		%{name}-OPEN_MAX.patch
 Patch2:		%{name}-DESTDIR.patch
 Patch3:		%{name}-info_fixes.patch
 Patch4:		%{name}-root.patch
-Patch5:		%{name}-mawk.patch
-Patch6:		%{name}-OPEN_MAX.patch
-Patch7:		%{name}-limits.patch
-Patch8:		%{name}-serialconsole.patch
-Patch9:		%{name}-gawk.patch
+Patch5:		%{name}-serialconsole.patch
+Patch6:		%{name}-gawk.patch
+Patch7:		%{name}-mawk.patch
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gawk
 BuildRequires:	bison
@@ -196,15 +194,13 @@ linkar a biblioteca gpm estaticamente.
 %prep
 %setup -q
 %patch0 -p1
-#%patch1 -p1
-#%patch2 -p1
+%patch1 -p1
+%patch2 -p1
 #%patch3 -p1
 #%patch4 -p1
 #%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-#%patch8 -p1
-#%patch9 -p1
+#%patch6 -p1
+#%patch7 -p1
 
 %build
 aclocal
