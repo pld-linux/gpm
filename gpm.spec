@@ -132,7 +132,7 @@ gzip -9nf $RPM_BUILD_ROOT/usr/share/{info/gpm.info*,man/man{1,8}/*}
 
 %post
 /sbin/ldconfig
-/sbin/install-info /usr/share/info/gpm.info.gz /etc/info-dir
+/sbin/install-info %{_infodir}/gpm.info.gz /etc/info-dir
 
 /sbin/chkconfig --add gpm
 if test -r /var/run/gpm.pid; then
@@ -144,7 +144,7 @@ fi
 
 %preun
 if [ "$1" = "0" ]; then
-	/sbin/install-info /usr/share/info/gpm.info.gz --delete /etc/info-dir
+	/sbin/install-info %{_infodir}/gpm.info.gz --delete /etc/info-dir
 
 	/sbin/chkconfig --del gpm
 	/etc/rc.d/init.d/gpm stop >&2
@@ -165,8 +165,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /usr/bin/*
 %attr(755,root,root) /usr/sbin/*
 
-/usr/share/info/gpm.info*
-/usr/share/man/man[18]/*
+%{_infodir}/gpm.info*
+%{_mandir}/man[18]/*
 %attr(755,root,root) /usr/lib/lib*.so.*.*
 
 %files devel
