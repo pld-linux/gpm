@@ -11,7 +11,7 @@ Summary(tr):	Genel amaГlЩ fare desteПi
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
 Version:	1.20.1
-Release:	%{_rc}0.1
+Release:	%{_rc}0.2
 License:	GPL
 Group:		Daemons
 Source0:	ftp://arcana.linux.it/pub/gpm/%{name}-%{version}%{_rc}.tar.bz2
@@ -21,12 +21,11 @@ Source3:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-ma
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-OPEN_MAX.patch
 Patch2:		%{name}-DESTDIR.patch
-Patch3:		%{name}-info_fixes.patch
-Patch4:		%{name}-root.patch
-Patch5:		%{name}-serialconsole.patch
-Patch6:		%{name}-gawk.patch
-Patch7:		%{name}-mawk.patch
-Patch8:		%{name}-nodebug.patch
+Patch3:		%{name}-root.patch
+Patch4:		%{name}-serialconsole.patch
+Patch5:		%{name}-gawk.patch
+Patch6:		%{name}-mawk.patch
+Patch7:		%{name}-nodebug.patch
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gawk
 BuildRequires:	bison
@@ -199,12 +198,11 @@ linkar a biblioteca gpm estaticamente.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-#%patch3 -p1
+%patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1
-#%patch7 -p1
-%{!?debug:%patch8 -p1}
+#%patch6 -p1
+%{!?debug:%patch7 -p1}
 
 %build
 aclocal
