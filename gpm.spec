@@ -4,12 +4,12 @@ Summary(es):	Soporte para ratСn en terminales modo texto
 Summary(fr):	Gestion gИnИrale de la souris pour Linux
 Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(pt_BR):	Suporte para mouse em terminais modo texto
-Summary(tr):	Genel amaГlЩ fare desteПi
 Summary(ru):	Сервер работы с мышью для консоли Linux
+Summary(tr):	Genel amaГlЩ fare desteПi
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
 Version:	1.20.0
-Release:	0.11
+Release:	0.12
 License:	GPL
 Group:		Daemons
 Source0:	ftp://arcana.linux.it/pub/gpm/%{name}-%{version}.tar.bz2
@@ -75,19 +75,19 @@ Gpm acrescenta suporte a mouse para aplicaГУes Linux baseadas em modo
 texto, como emacs, Midnight Commander, e outros. Fornece ainda, para a
 console, operaГУes de cortar e colar usando o mouse.
 
-%description -l tr
-GPM metin ekranda ГalЩЧan Linux uygulamalarЩna (emacs, Midnight
-Commander ve diПerleri gibi) fare desteПi saПlar. AyrЩca fare
-yardЩmЩyla konsollar arasЩnda kopyalama ve yapЩЧtЩrma olanaПЩ sunar.
-Fare tЩklamasЩyla pop-up menЭlerin ГЩkmasЩnЩ saПlayan bir program da
-iГerir.
-
 %description -l ru
 GPM обеспечивает поддержку мыши в текстовых приложениях Linux, таких
 как emacs, Midnight Commander и других. Также обеспечивает операции
 вырезки и вставки на консоли с использованием мыши. Включает
 программу, позволяющую вызывать всплывающие меню по нажатию кнопки
 мыши.
+
+%description -l tr
+GPM metin ekranda ГalЩЧan Linux uygulamalarЩna (emacs, Midnight
+Commander ve diПerleri gibi) fare desteПi saПlar. AyrЩca fare
+yardЩmЩyla konsollar arasЩnda kopyalama ve yapЩЧtЩrma olanaПЩ sunar.
+Fare tЩklamasЩyla pop-up menЭlerin ГЩkmasЩnЩ saПlayan bir program da
+iГerir.
 
 %description -l uk
 GPM забезпечу╓ п╕дтримку миш╕ в текстових програмах Linux, таких як
@@ -143,16 +143,16 @@ pisaФ wЁasne programy z wykorzystaniem myszki.
 Este pacote permite o desenvolvimento de programas em modo texto que
 usam mouse.
 
-%description devel -l tr
-Bu paket, fare kullanan yazЩlЩmlar geliЧtirmenizi saПlayan dosyalarЩ
-iГerir.
-
 %description devel -l ru
 GPM обеспечивает поддержку мыши в текстовых приложениях Linux, таких
 как emacs, Midnight Commander и других. Также обеспечивает операции
 вырезки и вставки на консоли с использованием мыши. Включает
 программу, позволяющую вызывать всплывающие меню по нажатию кнопки
 мыши.
+
+%description devel -l tr
+Bu paket, fare kullanan yazЩlЩmlar geliЧtirmenizi saПlayan dosyalarЩ
+iГerir.
 
 %description devel -l uk
 GPM забезпечу╓ п╕дтримку миш╕ в текстових програмах Linux, таких як
@@ -228,8 +228,6 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
 bzip2 -dc %{SOURCE3} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
-gzip -9nf BUGS ChangeLog Changes README TODO doc/FAQ doc/README* conf/*.conf
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -259,7 +257,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz doc/*.gz conf/*.conf*
+%doc BUGS ChangeLog Changes README TODO doc/FAQ doc/README* conf/*.conf
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gpm-root.conf
 %attr(754,root,root) /etc/rc.d/init.d/gpm
 %config(noreplace) %verify(not size mtime md5) /etc/sysconfig/mouse
