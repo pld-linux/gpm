@@ -157,8 +157,8 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 
-%config /etc/gpm-root.conf
-%config /etc/sysconfig/mouse
+%config(noreplace) /etc/gpm-root.conf
+%config(noreplace) /etc/sysconfig/mouse
 
 %attr(754,root,root) /etc/rc.d/init.d/gpm
 %attr(755,root,root) /usr/bin/*
@@ -182,6 +182,7 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Mon Apr 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.17.7-2]
+- added noreplace parameter to %config files,
 - recompiles on new rpm.
 
 * Sat Feb 27 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
