@@ -12,7 +12,7 @@ Summary(tr):	Genel amaГlЩ fare desteПi
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
 Version:	1.20.1
-Release:	%{_rc}.3
+Release:	%{_rc}.4
 License:	GPL
 Group:		Daemons
 Source0:	ftp://arcana.linux.it/pub/gpm/%{name}-%{version}%{_rc}.tar.bz2
