@@ -42,7 +42,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 PreReq:		rc-scripts >= 0.2.0
 Requires(post,preun):	/sbin/chkconfig
-Requires:	%{name}-libs = %{epoch}:%{version}
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -77,7 +77,7 @@ CommanderеЫ╓н╔ф╔╜╔╧╔х╔ы║╪╔╧╓гф╟╨Н╓╧╓К╔╒╔в╔Й╔╠║╪╔╥╔Г╔С
 %description -l pl
 GPM zapewnia wsparcie dla myszki w systemie Linux na konsoli
 systemowej. DziЙki niemu mo©na zaznaczaФ fragmenty tekstu na konsoli i
-wklejaФ je w edytowany plik tekstowy. Operacje te s╠ najczЙ╤ciej
+wklejaФ je w obrabiany plik tekstowy. Operacje te s╠ najczЙ╤ciej
 dokonywane przez przytrzymanie lewego klawisza myszki (operacja
 zaznaczania fragmentu tekstu) i nastЙpnie wci╤niЙcie ╤rodkowego
 klawisza myszki (operacja wklejania tekstu).
@@ -129,7 +129,7 @@ Summary(ja):	gpm╓нЁ╚х╞╔И╔╓╔ж╔И╔Й
 Summary(pl):	Pliki nagЁСwkowe i dokumentacja do gpm
 Summary(pt_BR):	Bibliotecas e arquivos de inclusЦo para desenvolver programas que utilizam mouse
 Group:		Development/Libraries
-Requires:	%{name}-libs = %{epoch}:%{version}
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Obsoletes:	libgpm1-devel
 
 %description devel
@@ -185,7 +185,7 @@ Summary(pt_BR):	Biblioteca de desenvolvimento estАtica do gpm
 Summary(ru):	Статическая библиотека для разработки программ, использующих мышь Статическая
 Summary(uk):	Статична б╕бл╕отека для розробки програм, що використовують мишу
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{epoch}:%{version}
+Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
 Static gpm library.
