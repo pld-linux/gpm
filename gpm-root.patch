@@ -1,0 +1,140 @@
+--- gpm-1.19.1/gpm-root.y.jj	Fri Mar 31 23:30:52 2000
++++ gpm-1.19.1/gpm-root.y	Thu Apr  6 11:38:20 2000
+@@ -41,6 +41,7 @@ static char rcsid[] = "$Id: gpm-root.y,v
+ #include <sys/syslog.h>
+ #include <signal.h>         /* sigaction() */
+ #include <pwd.h>            /* pwd entries */
++#include <grp.h>	    /* initgroups */
+ #include <sys/kd.h>         /* KDGETMODE */
+ #include <sys/stat.h>       /* fstat() */
+ #include <sys/utsname.h>    /* uname() */
+@@ -48,7 +49,8 @@ static char rcsid[] = "$Id: gpm-root.y,v
+ #include <linux/limits.h>   /* OPEN_MAX */
+ #include <linux/vt.h>       /* VT_ACTIVATE */
+ #include <linux/keyboard.h> /* K_SHIFT */
+-#include <utmp.h>         
++#include <utmp.h>
++#include <endian.h>
+ 
+ #ifdef HAVE_SYS_SYSMACROS_H
+ #include <sys/sysmacros.h>
+@@ -446,8 +448,10 @@ DrawItem *cfg_cat(DrawItem *d1, DrawItem
+ /*====================================================================*/
+ void f__fix(struct passwd *pass)
+ {
+-  setgid(pass->pw_gid);
+-  setuid(pass->pw_uid);
++  if (setgid(pass->pw_gid) < 0 ||
++      initgroups(pass->pw_name, pass->pw_gid) < 0 ||
++      setuid(pass->pw_uid) < 0)
++    exit(1);
+   setenv("HOME",    pass->pw_dir, 1);
+   setenv("LOGNAME", pass->pw_name,1);
+   setenv("USER",    pass->pw_name,1);
+@@ -1043,6 +1047,12 @@ static inline void scr_restore(int fd, F
+ static int postcount;
+ static Posted *activemenu;
+ 
++#if __BYTE_ORDER == __BIG_ENDIAN
++#define bigendian 1
++#else
++#define bigendian 0
++#endif
++
+ Posted *postmenu(int fd, FILE *f, Draw *draw, int x, int y, int console)
+ {
+   Posted *new;
+@@ -1060,9 +1070,9 @@ Posted *postmenu(int fd, FILE *f, Draw *
+   lines=dump[0]; columns=dump[1];
+   i=(columns*dump[3]+dump[2])*2+1; /* where to get it */
+   if (i<0) i=1;
+-  new->colorcell=dump[4+i];
++  new->colorcell=dump[4+i-bigendian];
+   gpm_debug_log(LOG_DEBUG,"Colorcell=%02x (at %i,%i = %i)",
+-                new->colorcell,dump[2],dump[3],i);
++                new->colorcell,dump[2],dump[3],i-bigendian);
+ 
+   /* place the box relative to the mouse */
+   if (!postcount) x -= draw->width/2; else x+=2;
+@@ -1076,7 +1086,11 @@ Posted *postmenu(int fd, FILE *f, Draw *
+   new->y=y; new->Y=y+draw->height-1;
+ 
+   /* these definitions are dirty hacks, but they help in writing to the screen */
++#if __BYTE_ORDER == __BIG_ENDIAN
++#define PUTC(c,f,b)   (*(curr++)=((b)<<4)+(f),*(curr++)=(c))
++#else
+ #define PUTC(c,f,b)   (*(curr++)=(c),*(curr++)=((b)<<4)+(f))
++#endif
+ #define PUTS(s,f,b)   for(curr2=s;*curr2;PUTC(*(curr2++),f,b))
+ #define GOTO(x,y)     (curr=dump+4+2*((y)*columns+(x)))
+ 
+--- gpm-1.19.1/gpm-root.c.jj	Fri Mar 31 23:34:16 2000
++++ gpm-1.19.1/gpm-root.c	Thu Apr  6 11:38:20 2000
+@@ -35,6 +35,7 @@ static char rcsid[] = "$Id: gpm-root.y,v
+ #include <sys/syslog.h>
+ #include <signal.h>         /* sigaction() */
+ #include <pwd.h>            /* pwd entries */
++#include <grp.h>	    /* initgroups */
+ #include <sys/kd.h>         /* KDGETMODE */
+ #include <sys/stat.h>       /* fstat() */
+ #include <sys/utsname.h>    /* uname() */
+@@ -42,7 +43,8 @@ static char rcsid[] = "$Id: gpm-root.y,v
+ #include <linux/limits.h>   /* OPEN_MAX */
+ #include <linux/vt.h>       /* VT_ACTIVATE */
+ #include <linux/keyboard.h> /* K_SHIFT */
+-#include <utmp.h>         
++#include <utmp.h>
++#include <endian.h>
+ 
+ #ifdef HAVE_SYS_SYSMACROS_H
+ #include <sys/sysmacros.h>
+@@ -1304,8 +1306,10 @@ DrawItem *cfg_cat(DrawItem *d1, DrawItem
+ /*====================================================================*/
+ void f__fix(struct passwd *pass)
+ {
+-  setgid(pass->pw_gid);
+-  setuid(pass->pw_uid);
++  if (setgid(pass->pw_gid) < 0 ||
++      initgroups(pass->pw_name, pass->pw_gid) < 0 ||
++      setuid(pass->pw_uid) < 0)
++    exit(1);
+   setenv("HOME",    pass->pw_dir, 1);
+   setenv("LOGNAME", pass->pw_name,1);
+   setenv("USER",    pass->pw_name,1);
+@@ -1901,6 +1905,12 @@ static inline void scr_restore(int fd, F
+ static int postcount;
+ static Posted *activemenu;
+ 
++#if __BYTE_ORDER == __BIG_ENDIAN
++#define bigendian 1
++#else
++#define bigendian 0
++#endif
++
+ Posted *postmenu(int fd, FILE *f, Draw *draw, int x, int y, int console)
+ {
+   Posted *new;
+@@ -1918,9 +1928,9 @@ Posted *postmenu(int fd, FILE *f, Draw *
+   lines=dump[0]; columns=dump[1];
+   i=(columns*dump[3]+dump[2])*2+1; /* where to get it */
+   if (i<0) i=1;
+-  new->colorcell=dump[4+i];
++  new->colorcell=dump[4+i-bigendian];
+   gpm_debug_log(LOG_DEBUG,"Colorcell=%02x (at %i,%i = %i)",
+-                new->colorcell,dump[2],dump[3],i);
++                new->colorcell,dump[2],dump[3],i-bigendian);
+ 
+   /* place the box relative to the mouse */
+   if (!postcount) x -= draw->width/2; else x+=2;
+@@ -1934,7 +1944,11 @@ Posted *postmenu(int fd, FILE *f, Draw *
+   new->y=y; new->Y=y+draw->height-1;
+ 
+   /* these definitions are dirty hacks, but they help in writing to the screen */
++#if __BYTE_ORDER == __BIG_ENDIAN
++#define PUTC(c,f,b)   (*(curr++)=((b)<<4)+(f),*(curr++)=(c))
++#else
+ #define PUTC(c,f,b)   (*(curr++)=(c),*(curr++)=((b)<<4)+(f))
++#endif
+ #define PUTS(s,f,b)   for(curr2=s;*curr2;PUTC(*(curr2++),f,b))
+ #define GOTO(x,y)     (curr=dump+4+2*((y)*columns+(x)))
+ 
