@@ -114,6 +114,8 @@ install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig}
 
 %ifarch sparc
 (echo MOUSETYPE=\"sun\"; echo XEMU3=no) > $RPM_BUILD_ROOT/etc/sysconfig/mouse
+%else
+(echo "MOUSETYPE="; echo "XEMU3=") > $RPM_BUILD_ROOT/etc/sysconfig/mouse
 %endif
 
 make install-strip \
@@ -159,9 +161,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 
 %config /etc/gpm-root.conf
-%ifarch sparc
 %config /etc/sysconfig/mouse
-%endif
 
 %attr(754,root,root) /etc/rc.d/init.d/gpm
 %attr(755,root,root) /usr/bin/*
