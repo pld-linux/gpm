@@ -143,8 +143,8 @@ emacs, Midnight Commander та ╕нших. Також забезпечу╓ операц╕╖ вир╕зки
 %package static
 Summary:	Static gpm library
 Summary(pl):	Biblioteki statyczne gpm
-Summary(ru):	Статическая библиотека для разработки программ, использующих мышь
-Summary(uk):	Статична б╕бл╕отека для розробки програм, що використовують мишу                                          Summary(ru): Статическая
+Summary(ru):	Статическая библиотека для разработки программ, использующих мышь Статическая
+Summary(uk):	Статична б╕бл╕отека для розробки програм, що використовують мишу
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
