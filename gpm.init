@@ -18,13 +18,12 @@
 # Get service config
 [ -f /etc/sysconfig/mouse ] && . /etc/sysconfig/mouse
 
-
 # See how we were called.
 case "$1" in
   start)
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/gpm ]; then
-		show Starting gpm mouse services
+		msg_starting "gpm mouse"
 		OPTIONS=""
 		[ -n "$MOUSETYPE" ] && OPTIONS="-t $MOUSETYPE"
 		[ -n "$DEVICE" ] && OPTIONS="$OPTIONS -m $DEVICE"
@@ -47,12 +46,13 @@ case "$1" in
 		fi
 		daemon gpm $OPTIONS
 	else
-		echo "gpm already is running"
+		msg_Already_Running gpm
+		exit 1
 	fi
 	touch /var/lock/subsys/gpm
 	;;
   stop)
-	show Shutting down gpm mouse services
+	msg_stopping "gpm mouse"
 	killproc gpm 
 	rm -f /var/lock/subsys/gpm
 	;;
@@ -64,7 +64,7 @@ case "$1" in
 	status gpm
 	;;
   *)
-	echo "Usage: $0 {start|stop|status|restart|reload}"
+	msg_Usage "$0 {start|stop|status|restart|reload}"
 	exit 1
 esac
 
