@@ -4,7 +4,7 @@ Summary(fr):	Gestion générale de la souris pour Linux
 Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
-Version:	1.17.5
+Version:	1.17.6
 Release:	1
 Release:	1
 Group:		Daemons
@@ -14,7 +14,6 @@ Source1:	gpm.init
 Patch0:		gpm-info.patch
 Patch1:		gpm-nops.patch
 Patch2:		gpm-non-root.patch
-Patch3:		gpm-makedev.patch
 Prereq:		/sbin/chkconfig
 Prereq:		/sbin/install-info
 Buildroot:	/tmp/%{name}-%{version}-root
@@ -96,7 +95,6 @@ Biblioteki statyczne gpm.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %build
 autoconf
