@@ -119,7 +119,7 @@ install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig}
 make install-strip \
 	prefix=$RPM_BUILD_ROOT/usr \
 	sysconfdir=$RPM_BUILD_ROOT/etc \
-	lispdir=$RPM_BUILD_ROOT/usr/share/emacs/site-lisp
+	lispdir=$RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp
 
 install gpm-root.conf $RPM_BUILD_ROOT/etc
 install mouse-test hltest $RPM_BUILD_ROOT/usr/bin
@@ -128,7 +128,7 @@ strip $RPM_BUILD_ROOT/usr/{bin/*,lib/lib*.so.*.*}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
 
-gzip -9nf $RPM_BUILD_ROOT/usr/share/{info/gpm.info*,man/man{1,8}/*}
+gzip -9nf $RPM_BUILD_ROOT%{_datadir}/{info/gpm.info*,man/man{1,8}/*}
 
 %post
 /sbin/ldconfig
