@@ -13,12 +13,3 @@ diff -Nru gpm-1.17.9/doc/doc.gpm gpm-1.17.9.new/doc/doc.gpm
  @end direntry
  @end format
  @end ifinfo
-@@ -1178,7 +1178,7 @@
- @item int gpm_hflag
- 	Used to signal if a character has been generated
- 	by a mouse handler. 
--        @xref{Handling Functions}
-+        @xref{Handling Functions}.
- @vindex gpm_handler
- @vindex gpm_data
- @item Gpm_Handler *gpm_handler; void *gpm_data

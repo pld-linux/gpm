@@ -1,5 +1,5 @@
---- gpm-1.19.2/special.c.openmax	Mon Jan 17 16:34:00 2000
-+++ gpm-1.19.2/special.c	Fri Jun 30 10:49:40 2000
+--- gpm-1.19.5/src/special.c.openmax	Mon Jan 17 16:34:00 2000
++++ gpm-1.19.5/src/special.c	Fri Jun 30 10:49:40 2000
 @@ -154,7 +154,7 @@
        open("/dev/null",O_RDONLY); /* stdin  */
        open("/dev/tty0",O_WRONLY); /* stdout */

@@ -6,8 +6,8 @@ Summary(tr):	Genel amaГlЩ fare desteПi
 Summary(ru):	Сервер работы с мышью для консоли Linux
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
-Version:	1.19.4
-Release:	4
+Version:	1.19.5
+Release:	1
 License:	GPL
 Group:		Daemons
 Group(de):	Server
@@ -17,15 +17,14 @@ Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-nops.patch
-Patch2:		%{name}-non-root.patch
-Patch3:		%{name}-DESTDIR.patch
-Patch4:		%{name}-info_fixes.patch
-Patch5:		%{name}-root.patch
-Patch6:		%{name}-mawk.patch
-Patch7:		%{name}-OPEN_MAX.patch
-Patch8:		%{name}-limits.patch
-Patch9:		%{name}-checkdevfsbug.patch
-Patch10:	%{name}-serialconsole.patch
+Patch2:		%{name}-DESTDIR.patch
+Patch3:		%{name}-info_fixes.patch
+Patch4:		%{name}-root.patch
+Patch5:		%{name}-mawk.patch
+Patch6:		%{name}-OPEN_MAX.patch
+Patch7:		%{name}-limits.patch
+Patch8:		%{name}-serialconsole.patch
+Patch9:		%{name}-nosecenhance.patch
 Requires:	%{name}-libs = %{version}
 Prereq:		rc-scripts >= 0.2.0
 Prereq:		/sbin/chkconfig
@@ -184,12 +183,11 @@ Biblioteki statyczne gpm.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
-#%patch6 -p1
+#%patch5 -p1
+%patch6 -p1
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
-%patch10 -p1
 
 %build
 aclocal
@@ -206,13 +204,13 @@ install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,/etc/sysconfig}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install gpm-root.conf $RPM_BUILD_ROOT%{_sysconfdir}
-install mouse-test hltest $RPM_BUILD_ROOT%{_bindir}
+install conf/gpm-root.conf $RPM_BUILD_ROOT%{_sysconfdir}
+install src/mouse-test src/hltest $RPM_BUILD_ROOT%{_bindir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
 
-gzip -9nf README* *.conf
+gzip -9nf ChangeLog Changes FAQ README TODO doc/README* conf/*.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -221,7 +219,6 @@ rm -rf $RPM_BUILD_ROOT
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 /sbin/chkconfig --add gpm
-
 if [ -f /var/lock/subsys/gpm ]; then
 	/etc/rc.d/init.d/gpm restart >&2
 fi
@@ -242,7 +239,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc README*gz *.conf*
+%doc *.gz doc/README* *.conf*
 %config(noreplace) %{_sysconfdir}/gpm-root.conf
 %attr(754,root,root) /etc/rc.d/init.d/gpm
 %config(noreplace) %verify(not size mtime md5) /etc/sysconfig/mouse
@@ -251,7 +248,7 @@ fi
 %attr(755,root,root) %{_sbindir}/*
 
 %{_infodir}/gpm.info*
-%{_mandir}/man[18]/*
+%{_mandir}/man[178]/*
 
 %files libs
 %defattr(644,root,root,755)

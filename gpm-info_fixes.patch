@@ -1,7 +1,6 @@
-diff -Nru gpm-1.19.0/doc/Makefile.in gpm-1.19.0.new/doc/Makefile.in
---- gpm-1.19.0/doc/Makefile.in	Fri Apr  7 14:26:44 2000
-+++ gpm-1.19.0.new/doc/Makefile.in	Fri Apr  7 14:28:52 2000
-@@ -37,7 +37,7 @@
+--- gpm-1.19.5/doc/Makefile.in.orig	Mon Sep 24 21:42:08 2001
++++ gpm-1.19.5/doc/Makefile.in	Mon Sep 24 21:45:38 2001
+@@ -38,7 +38,7 @@
  TEX = tex
  TEXINDEX = texindex
  DVIPS = dvips
@@ -10,33 +9,34 @@ diff -Nru gpm-1.19.0/doc/Makefile.in gpm-1.19.0.new/doc/Makefile.in
  DIFF = diff
  TEXI2HTML = texi2html -monolithic
  
-@@ -84,7 +84,7 @@
- 	$(DVIPS) -f $< > $@
- 
+@@ -89,7 +89,7 @@
+ 		$(DVIPS) -f $< > $@; \
+ 	fi
  
 -%.info: %.texinfo
 +%.info: %.texinfo doc.gpm
- 	$(MAKEINFO) $< -o $@
- 
- 
-@@ -121,20 +121,7 @@
+ 	if [ "$ex_makeinfo" = yes ]; then \
+ 		$(MAKEINFO) $< -o $@; \
+ 	fi
+@@ -128,21 +128,7 @@
  	$(INSTALL_DATA) -m 644 $(srcdir)/gpm-root.1     $(DESTDIR)$(man1dir)
  	$(INSTALL_DATA) -m 644 $(srcdir)/gpm-types.7    $(DESTDIR)$(man7dir)
  	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.8          $(DESTDIR)$(man8dir)
 -	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info       $(DESTDIR)$(infodir)
 -	# Use install-info if available
 -	-if $(SHELL) -c 'install-info --version' >/dev/null 2>&1; then \
--	  if [ -f $(infodir)/dir ] ; then \
--		install-info --dir-file=$(infodir)/dir $(infodir)/gpm.info; \
+-	  if [ -f $(DESTDIR)$(infodir)/dir ] ; then \
+-		install-info --dir-file=$(DESTDIR)$(infodir)/dir $(DESTDIR)$(infodir)/gpm.info; \
 -	  fi; \
 -	fi
 -	#itz Sat Dec 26 23:21:05 PST 1998
 -	#i keep all my infopages compressed and i'm tired to do it by
 -	#hand, so check if there are any compressed pages and do this
 -	#one too
--	-ls $(infodir)/*[-.]info.gz >/dev/null 2>&1 \
--		&& gzip -f $(infodir)/gpm.info
+-	-ls $(DESTDIR)$(infodir)/*[-.]info.gz >/dev/null 2>&1 \
+-		&& gzip -f $(DESTDIR)$(infodir)/gpm.info
 -	# Hmm.... shouldn't man pages be compressed too?
+-   # maybe they should, but at least at my system they are not.
 +	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info*      $(DESTDIR)$(infodir)
  
  # This potentially leaves around cached manpages,

@@ -1,5 +1,5 @@
---- gpm-1.19.3/gpm.c.serialconsole	Fri Jan  5 14:10:46 2001
-+++ gpm-1.19.3/gpm.c	Fri Jan  5 14:39:28 2001
+--- gpm-1.19.5/src/gpm.c.serialconsole	Fri Jan  5 14:10:46 2001
++++ gpm-1.19.5/src/gpm.c	Fri Jan  5 14:39:28 2001
 @@ -38,6 +38,7 @@
  #include <sys/un.h>        /* struct sockaddr_un */
  

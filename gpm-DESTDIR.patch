@@ -1,9 +1,9 @@
-diff -Nru gpm-1.19.0/Makefile.in gpm-1.19.0.new/Makefile.in
---- gpm-1.19.0/Makefile.in	Fri Apr  7 14:16:56 2000
-+++ gpm-1.19.0.new/Makefile.in	Fri Apr  7 14:16:28 2000
-@@ -124,36 +124,36 @@
+diff -Nur gpm-1.19.5.orig/Makefile.in gpm-1.19.5/Makefile.in
+--- gpm-1.19.5.orig/Makefile.in	Sun Sep 23 20:07:26 2001
++++ gpm-1.19.5/Makefile.in	Mon Sep 24 21:36:45 2001
+@@ -83,13 +83,13 @@
  
- installdirs:	do-installdirs
+ installdirs:
  	$(SHELL) $(srcdir)/mkinstalldirs \
 -	$(libdir) \
 -	$(bindir) \
@@ -20,48 +20,28 @@ diff -Nru gpm-1.19.0/Makefile.in gpm-1.19.0.new/Makefile.in
 +		$(SHELL) $(srcdir)/mkinstalldirs $(DESTDIR)$(lispdir) ;\
  	fi
  
- STRIP = -s
+ # Note: this leaves around /usr/lib/libgpm.so.1 and /usr/lib/libgpm.so.1.nn
+diff -Nur gpm-1.19.5.orig/contrib/Makefile.in gpm-1.19.5/contrib/Makefile.in
+--- gpm-1.19.5.orig/contrib/Makefile.in	Sun Sep 23 20:23:18 2001
++++ gpm-1.19.5/contrib/Makefile.in	Mon Sep 24 21:37:31 2001
+@@ -6,7 +6,7 @@
  
- install:	check installdirs do-install
--	$(INSTALL_PROGRAM) gpm $(sbindir)/gpm
--	$(INSTALL_DATA) -m 644 libgpm.a $(libdir)/libgpm.a
--	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.h $(includedir)/gpm.h
-+	$(INSTALL_PROGRAM) gpm $(DESTDIR)$(sbindir)/gpm
-+	$(INSTALL_DATA) -m 644 libgpm.a $(DESTDIR)$(libdir)/libgpm.a
-+	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.h $(DESTDIR)$(includedir)/gpm.h
- 	for i in mev gpm-root; do \
--		$(INSTALL_PROGRAM) $$i $(bindir)/$$i ;\
-+		$(INSTALL_PROGRAM) $$i $(DESTDIR)$(bindir)/$$i ;\
- 	done
--	$(INSTALL_PROGRAM) disable-paste $(bindir)/disable-paste
-+	$(INSTALL_PROGRAM) disable-paste $(DESTDIR)$(bindir)/disable-paste
- 	# POSIX requires the range of a for loop be nonempty and Bash
- 	# 2.x goes along; unfortunately that means an additional
- 	# headache in cases like this
- 	if test "x@ELISP@" != "x" ; then \
- 	cd $(srcdir) && for i in `echo @ELISP@`; do \
--		$(INSTALL_DATA) -m 644 $$i $(lispdir)/$$i ;\
-+		$(INSTALL_DATA) -m 644 $$i $(DESTDIR)$(lispdir)/$$i ;\
- 	done ; fi
- 	if test "x@SHLIB@" != "x" ; then \
--		$(INSTALL_DATA) -m 644 libgpm.so.@abi_full@ $(libdir)/libgpm.so.@abi_full@ ;\
--		cd $(libdir) && $(LN_S) -f libgpm.so.@abi_full@ libgpm.so ;\
--		/sbin/ldconfig -n -l $(libdir)/libgpm.so.@abi_full@ ;\
-+		$(INSTALL_DATA) -m 644 libgpm.so.@abi_full@ $(DESTDIR)$(libdir)/libgpm.so.@abi_full@ ;\
-+		cd $(DESTDIR)$(libdir) && $(LN_S) -f libgpm.so.@abi_full@ libgpm.so ;\
-+		/sbin/ldconfig -n -l $(DESTDIR)$(libdir)/libgpm.so.@abi_full@ ;\
- 	fi		
+ install:
+ 	if [ -n "$(ELISP)" ]; then for i in `echo $(ELISP)`; do \
+-		$(INSTALL_DATA) -m 644 emacs/$$i $(lispdir)/$$i ;\
++		$(INSTALL_DATA) -m 644 emacs/$$i $(DESTDIR)$(lispdir)/$$i ;\
+ 	done; fi
  
- install-strip:
-diff -Nru gpm-1.19.0/doc/Makefile.in gpm-1.19.0.new/doc/Makefile.in
---- gpm-1.19.0/doc/Makefile.in	Fri Apr  7 14:16:56 2000
-+++ gpm-1.19.0.new/doc/Makefile.in	Fri Apr  7 14:14:48 2000
-@@ -113,15 +113,15 @@
+ uninstall:
+diff -Nur gpm-1.19.5.orig/doc/Makefile.in gpm-1.19.5/doc/Makefile.in
+--- gpm-1.19.5.orig/doc/Makefile.in	Mon Sep 24 21:35:48 2001
++++ gpm-1.19.5/doc/Makefile.in	Mon Sep 24 21:39:50 2001
+@@ -120,27 +120,27 @@
  
  installdirs:	
  	$(SHELL) $(top_srcdir)/mkinstalldirs \
 -		$(man1dir) $(man7dir) $(man8dir) $(infodir)	
-+		$(DESTDIR)$(man1dir) $(DESTDIR)$(man7dir) $(DESTDIR)$(man8dir) $(DESTDIR)$(infodir)
++		$(DESTDIR)$(man1dir) $(DESTDIR)$(man7dir) $(DESTDIR)$(man8dir) $(DESTDIR)$(infodir)	
  
  install:	all installdirs
 -	$(INSTALL_DATA) -m 644 $(srcdir)/mev.1          $(man1dir)
@@ -78,4 +58,57 @@ diff -Nru gpm-1.19.0/doc/Makefile.in gpm-1.19.0.new/doc/Makefile.in
 +	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info       $(DESTDIR)$(infodir)
  	# Use install-info if available
  	-if $(SHELL) -c 'install-info --version' >/dev/null 2>&1; then \
- 	  if [ -f $(infodir)/dir ] ; then \
+-	  if [ -f $(infodir)/dir ] ; then \
+-		install-info --dir-file=$(infodir)/dir $(infodir)/gpm.info; \
++	  if [ -f $(DESTDIR)$(infodir)/dir ] ; then \
++		install-info --dir-file=$(DESTDIR)$(infodir)/dir $(DESTDIR)$(infodir)/gpm.info; \
+ 	  fi; \
+ 	fi
+ 	#itz Sat Dec 26 23:21:05 PST 1998
+ 	#i keep all my infopages compressed and i'm tired to do it by
+ 	#hand, so check if there are any compressed pages and do this
+ 	#one too
+-	-ls $(infodir)/*[-.]info.gz >/dev/null 2>&1 \
+-		&& gzip -f $(infodir)/gpm.info
++	-ls $(DESTDIR)$(infodir)/*[-.]info.gz >/dev/null 2>&1 \
++		&& gzip -f $(DESTDIR)$(infodir)/gpm.info
+ 	# Hmm.... shouldn't man pages be compressed too?
+    # maybe they should, but at least at my system they are not.
+ 
+diff -Nur gpm-1.19.5.orig/src/Makefile.in gpm-1.19.5/src/Makefile.in
+--- gpm-1.19.5.orig/src/Makefile.in	Sun Sep 23 19:59:05 2001
++++ gpm-1.19.5/src/Makefile.in	Mon Sep 24 21:41:33 2001
+@@ -114,24 +114,24 @@
+ STRIP = -s
+ 
+ install:	check 
+-	$(INSTALL_PROGRAM) gpm $(sbindir)/gpm
+-	$(INSTALL_DATA) -m 644 libgpm.a $(libdir)/libgpm.a
+-	$(INSTALL_DATA) -m 644 $(srcdir)/headers/gpm.h $(includedir)/gpm.h
++	$(INSTALL_PROGRAM) gpm $(DESTDIR)$(sbindir)/gpm
++	$(INSTALL_DATA) -m 644 libgpm.a $(DESTDIR)$(libdir)/libgpm.a
++	$(INSTALL_DATA) -m 644 $(srcdir)/headers/gpm.h $(DESTDIR)$(includedir)/gpm.h
+ 	for i in mev gpm-root; do \
+-		$(INSTALL_PROGRAM) $$i $(bindir)/$$i ;\
++		$(INSTALL_PROGRAM) $$i $(DESTDIR)$(bindir)/$$i ;\
+ 	done
+-	$(INSTALL_PROGRAM) disable-paste $(bindir)/disable-paste
++	$(INSTALL_PROGRAM) disable-paste $(DESTDIR)$(bindir)/disable-paste
+ 	# POSIX requires the range of a for loop be nonempty and Bash
+ 	# 2.x goes along; unfortunately that means an additional
+ 	# headache in cases like this
+ 	if test "x@ELISP@" != "x" ; then \
+ 	for i in `echo @ELISP@`; do \
+-		$(INSTALL_DATA) -m 644 $$i $(lispdir)/$$i ;\
++		$(INSTALL_DATA) -m 644 $$i $(DESTDIR)$(lispdir)/$$i ;\
+ 	done ; fi
+ 	if test "x@SHLIB@" != "x" ; then \
+-		$(INSTALL_DATA) -m 644 libgpm.so.@abi_full@ $(libdir)/libgpm.so.@abi_full@ ;\
+-		cd $(libdir) && $(LN_S) -f libgpm.so.@abi_full@ libgpm.so ;\
+-		ldconfig -n -l $(libdir)/libgpm.so.@abi_full@ ;\
++		$(INSTALL_DATA) -m 644 libgpm.so.@abi_full@ $(DESTDIR)$(libdir)/libgpm.so.@abi_full@ ;\
++		cd $(DESTDIR)$(libdir) && $(LN_S) -f libgpm.so.@abi_full@ libgpm.so ;\
++		/sbin/ldconfig -n -l $(DESTDIR)$(libdir)/libgpm.so.@abi_full@ ;\
+ 	fi		
+ 
+ install-strip:
