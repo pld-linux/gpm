@@ -24,7 +24,7 @@ Patch8:		%{name}-limits.patch
 Patch9:		%{name}-secenhance.patch
 Prereq:		/sbin/chkconfig
 Prereq:		/sbin/ldconfig
-Requires:	rc-scripts >= 0.2.0
+Prereq:		rc-scripts >= 0.2.0
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gawk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
