@@ -1,7 +1,9 @@
 Summary:	General Purpose Mouse support for Linux
 Summary(de):	Allgemeine Mausunterstützung für Linux
+Summary(es):	Soporte para ratón en terminales modo texto
 Summary(fr):	Gestion générale de la souris pour Linux
 Summary(pl):	Wsparcie dla myszki w systemie Linux
+Summary(pt_BR):	Suporte para mouse em terminais modo texto
 Summary(tr):	Genel amaçlı fare desteği
 Summary(ru):	óÅÒ×ÅÒ ÒÁÂÏÔÙ Ó ÍÙÛØÀ ÄÌÑ ËÏÎÓÏÌÉ Linux
 Summary(uk):	óÅÒ×ÅÒ ÒÏÂÏÔÉ Ú ÍÉÛÏÀ ÄÌÑ ËÏÎÓÏÌ¦ Linux
@@ -63,6 +65,11 @@ Anwendungen wie z.B. emacs und Midnight Commander. Außerdem sind
 Ausschneiden und Einfügen mit der Maus auf der Konsole möglich.
 Enthält ein Programm, daß bei Mausklick ein Pop-up-Menü aufruft.
 
+%description -l es
+Gpm acrecienta soporte a ratón para aplicaciones Linux basadas en modo
+texto, como emacs, Midnight Commander, y otros. Ofrece aún, soporte a
+pantalla y operaciones de cortar-pegar usando el ratón.
+
 %description -l fr
 GPM ajoute un support souris au applications en mode texte de Linux
 comme emacs, Midnight Commander, et bien d'autres. Cela fournit aussi
@@ -77,6 +84,11 @@ wklejaæ je w edytowany plik tekstowy. Operacje te s± najczê¶ciej
 dokonywane przez wci¶niêcie prawego klawisza myszki (operacja
 zaznaczania fragmentu tekstu) i nastêpnie wci¶niêcie klawisza
 <Shift>+¶rodkowego klawisza myszki (operacja wklejania tekstu).
+
+%description -l pt_BR
+Gpm acrescenta suporte a mouse para aplicações Linux baseadas em modo
+texto, como emacs, Midnight Commander, e outros. Fornece ainda, para a
+console, operações de cortar e colar usando o mouse.
 
 %description -l tr
 GPM metin ekranda çalışan Linux uygulamalarına (emacs, Midnight
@@ -131,7 +143,9 @@ programów ze wsparciem do obs³ugi myszki.
 
 %package devel
 Summary:	Header files and documentation for writing mouse driven programs
+Summary(es):	Bibliotecas y archivos de inclusión para desarrollar programas que utilicen ratón
 Summary(pl):	Pliki nag³ówkowe i dokumentacja do gpm
+Summary(pt_BR):	Bibliotecas e arquivos de inclusão para desenvolver programas que utilizam mouse
 Group:		Development/Libraries
 Group(cs):	Vıvojové prostøedky/Knihovny
 Group(da):	Udvikling/Biblioteker
@@ -160,6 +174,10 @@ take advantage of the mouse.
 Mit diesem Paket können Sie Ihre eigenen text-orientierten Programme
 mit Mausunterstützung entwickeln.
 
+%description devel -l es
+Este paquete permite el desarrollo de programas en modo texto que usan
+ratón.
+
 %description devel -l fr
 Ce paquetage permet de développer des programmes en mode texte tirant
 avantage de la souris.
@@ -167,6 +185,10 @@ avantage de la souris.
 %description devel -l pl
 Pliki nag³ówkowe i dokumentacja dla gpm. Dziêki nim bêdziesz móg³
 pisaæ w³asne programy z wykorzystaniem myszki.
+
+%description devel -l pt_BR
+Este pacote permite o desenvolvimento de programas em modo texto que
+usam mouse.
 
 %description devel -l tr
 Bu paket, fare kullanan yazılımlar geliştirmenizi sağlayan dosyaları
@@ -187,7 +209,9 @@ emacs, Midnight Commander ÔÁ ¦ÎÛÉÈ. ôÁËÏÖ ÚÁÂÅÚĞÅŞÕ¤ ÏĞÅÒÁÃ¦§ ×ÉÒ¦ÚËÉ
 
 %package static
 Summary:	Static gpm library
+Summary(es):	Static library for developing mouse driven programs
 Summary(pl):	Biblioteki statyczne gpm
+Summary(pt_BR):	Biblioteca de desenvolvimento estática do gpm
 Summary(ru):	óÔÁÔÉŞÅÓËÁÑ ÂÉÂÌÉÏÔÅËÁ ÄÌÑ ÒÁÚÒÁÂÏÔËÉ ĞÒÏÇÒÁÍÍ, ÉÓĞÏÌØÚÕÀİÉÈ ÍÙÛØ óÔÁÔÉŞÅÓËÁÑ
 Summary(uk):	óÔÁÔÉŞÎÁ Â¦ÂÌ¦ÏÔÅËÁ ÄÌÑ ÒÏÚÒÏÂËÉ ĞÒÏÇÒÁÍ, İÏ ×ÉËÏÒÉÓÔÏ×ÕÀÔØ ÍÉÛÕ
 Group:		Development/Libraries
@@ -212,8 +236,17 @@ Requires:	%{name}-devel = %{version}
 %description static
 Static gpm library.
 
+%description static -l es
+Este paquete permite el desarrollo de programas en modo texto que usan
+ratón.
+
 %description static -l pl
 Biblioteki statyczne gpm.
+
+%description static -l pt_BR
+Este pacote contém uma biblioteca estática para ser usada no
+desenvolvimento de programas modo texto que usem o mouse e que desejam
+linkar a biblioteca gpm estaticamente.
 
 %description static -l ru
 üÔÏÔ ĞÁËÅÔ ĞÏÚ×ÏÌÑÅÔ ÒÁÚÒÁÂÁÔÙ×ÁÔØ ÔÅËÓÔÏ×ÙÅ ĞÒÉÌÏÖÅÎÉÑ, ÉÓĞÏÌØÚÕÀİÉÅ
