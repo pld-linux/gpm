@@ -5,7 +5,7 @@ Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
 Version:	1.19.3
-Release:	5
+Release:	6
 License:	GPL
 Group:		Daemons
 Group(pl):	Serwery
@@ -118,7 +118,7 @@ Biblioteki statyczne gpm.
 #%patch6 -p1
 %patch7 -p1
 %patch8 -p1
-%patch9 -p1
+#%patch9 -p1
 
 %build
 %configure \
