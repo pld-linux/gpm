@@ -1,0 +1,25 @@
+--- gpm-1.20.0/src/report-lib.c.orig	Sat Feb 23 16:42:23 2002
++++ gpm-1.20.0/src/report-lib.c	Fri May  3 20:16:02 2002
+@@ -30,10 +30,10 @@
+    va_start(ap,text);
+ 
+    switch(stat) {
+-      case GPM_STAT_INFO : string = GPM_TEXT_INFO ; break;
++      case GPM_STAT_INFO : string = GPM_TEXT_INFO ; return;
+       case GPM_STAT_WARN : string = GPM_TEXT_WARN ; break;
+       case GPM_STAT_ERR  : string = GPM_TEXT_ERR  ; break;
+-      case GPM_STAT_DEBUG: string = GPM_TEXT_DEBUG; break;
++      case GPM_STAT_DEBUG: string = GPM_TEXT_DEBUG; return;
+       case GPM_STAT_OOPS : string = GPM_TEXT_OOPS; break;
+    }
+    fprintf(stderr,"%s[%s(%d)]:\n",string,file,line);
+--- gpm-1.20.0/src/report.c.orig	Sat Feb 23 16:42:23 2002
++++ gpm-1.20.0/src/report.c	Fri May  3 20:12:51 2002
+@@ -130,6 +130,7 @@
+       case GPM_RUN_DAEMON:
+          switch(stat) {
+             case GPM_STAT_INFO:
++	       break;
+ #ifdef HAVE_VSYSLOG
+                syslog(LOG_INFO | LOG_USER, GPM_STRING_INFO);
+                vsyslog(LOG_INFO | LOG_USER, text, ap);
