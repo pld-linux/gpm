@@ -4,8 +4,8 @@ Summary(fr):	Gestion générale de la souris pour Linux
 Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
-Version:	1.17.6
-Release:	2
+Version:	1.17.7
+Copyright:	GPL
 Release:	1
 Group:		Daemons
 Group(pl):	Serwery
@@ -97,7 +97,6 @@ Biblioteki statyczne gpm.
 %patch2 -p1
 
 %build
-autoconf
 autoconf
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" SOLDFLAGS="-s" \
 	--sysconfdir=/etc \
