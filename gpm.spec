@@ -16,6 +16,7 @@ Patch1:		gpm-nops.patch
 Patch2:		gpm-non-root.patch
 Prereq:		/sbin/chkconfig
 Prereq:		/sbin/install-info
+BuildPrereq:	ncurses-devel
 Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
