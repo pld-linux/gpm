@@ -1,6 +1,6 @@
-diff -Nru gpm-1.17.8/Makefile.in gpm-1.17.8.new/Makefile.in
---- gpm-1.17.8/Makefile.in	Tue Jun 29 11:32:45 1999
-+++ gpm-1.17.8.new/Makefile.in	Tue Jun 29 11:32:29 1999
+diff -Nru gpm-1.18.1/Makefile.in gpm-1.18.1.new/Makefile.in
+--- gpm-1.18.1/Makefile.in	Tue Nov 16 19:33:50 1999
++++ gpm-1.18.1.new/Makefile.in	Tue Nov 16 19:33:11 1999
 @@ -121,36 +121,36 @@
  
  installdirs:	do-installdirs
@@ -19,7 +19,7 @@ diff -Nru gpm-1.17.8/Makefile.in gpm-1.17.8.new/Makefile.in
 -		$(SHELL) $(srcdir)/mkinstalldirs $(lispdir) ;\
 +		$(SHELL) $(srcdir)/mkinstalldirs $(DESTDIR)$(lispdir) ;\
  	fi
- 	
+ 
  STRIP = -s
  
  install:	check installdirs do-install
@@ -53,9 +53,9 @@ diff -Nru gpm-1.17.8/Makefile.in gpm-1.17.8.new/Makefile.in
  	fi		
  
  install-strip:
-diff -Nru gpm-1.17.8/doc/Makefile.in gpm-1.17.8.new/doc/Makefile.in
---- gpm-1.17.8/doc/Makefile.in	Tue Jun 29 11:32:45 1999
-+++ gpm-1.17.8.new/doc/Makefile.in	Tue Jun 29 11:27:23 1999
+diff -Nru gpm-1.18.1/doc/Makefile.in gpm-1.18.1.new/doc/Makefile.in
+--- gpm-1.18.1/doc/Makefile.in	Tue Nov 16 19:33:50 1999
++++ gpm-1.18.1.new/doc/Makefile.in	Tue Nov 16 19:30:51 1999
 @@ -107,24 +107,19 @@
  
  installdirs:	
