@@ -1,41 +1,37 @@
 #!/bin/sh
 #
-# chkconfig: 2345 85 15
-# description: GPM adds mouse support to text-based Linux applications such \
-#              the Midnight Commander. Is also allows mouse-based console \
-#              cut-and-paste operations, and includes support for pop-up \
-#              menus on the console.
-# processname: gpm
-# pidfile: /var/run/gpmpid
-# config: /etc/sysconfig/mouse
+# chkconfig:	2345 85 15
+#
+# description:	GPM adds mouse support to text-based Linux applications such \
+#		the Midnight Commander. Is also allows mouse-based console \
+#		cut-and-paste operations, and includes support for pop-up \
+#		menus on the console.
+#
+# processname:	gpm
+# pidfile:	/var/run/gpmpid
+# config:	/etc/sysconfig/mouse
 
-# source function library
+
+# Source function library
 . /etc/rc.d/init.d/functions
 
-MOUSECFG=/etc/sysconfig/mouse
+# Get service config
+[ -f /etc/sysconfig/gpm ] && . /etc/sysconfig/gpm
 
-# Get service nice level ..
-if [ -f /etc/sysconfig/gpm ]; then
-    . /etc/sysconfig/gpm
-fi    
 
+# See how we were called.
 case "$1" in
   start)
-	show Starting gpm mouse services
-	if [ -f "$MOUSECFG" ]; then
-		. "$MOUSECFG"
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/gpm ]; then
+		show Starting gpm mouse services
+		if [ -n "$MOUSETYPE" ]; then
+			daemon gpm -t $MOUSETYPE
+		else
+			daemon gpm
+		fi
 	else
-		exit 0
-	fi
-
-	if [ "$MOUSETYPE" = "Microsoft" ]; then
-		MOUSETYPE=ms
-	fi
-
-	if [ -n "$MOUSETYPE" ]; then
-		daemon gpm -t $MOUSETYPE
-	else
-		daemon gpm
+		echo "gpm already is running"
 	fi
 	touch /var/lock/subsys/gpm
 	;;
