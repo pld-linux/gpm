@@ -7,7 +7,7 @@ Summary(ru):	Сервер работы с мышью для консоли Linux
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
 Version:	1.19.6
-Release:	2
+Release:	3
 License:	GPL
 Group:		Daemons
 Group(de):	Server
@@ -15,6 +15,7 @@ Group(pl):	Serwery
 Source0:	ftp://arcana.linux.it/pub/gpm/%{name}-%{version}.tar.bz2
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
+Source3:	%{name}-non-english-man-pages.tar.bz2
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-nops.patch
 Patch2:		%{name}-DESTDIR.patch
@@ -213,6 +214,7 @@ install src/mouse-test src/hltest $RPM_BUILD_ROOT%{_bindir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
+bzip2 -dc %{SOURCE3} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
 gzip -9nf BUGS ChangeLog Changes README TODO doc/FAQ doc/README* conf/*.conf
 
@@ -253,6 +255,9 @@ fi
 
 %{_infodir}/gpm.info*
 %{_mandir}/man[178]/*
+%lang(es) %{_mandir}/es/man[178]/*
+%lang(hu) %{_mandir}/hu/man[178]/*
+%lang(pl) %{_mandir}/pl/man[178]/*
 
 %files libs
 %defattr(644,root,root,755)
