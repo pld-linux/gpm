@@ -163,7 +163,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %attr(754,root,root) /etc/rc.d/init.d/gpm
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) /usr/sbin/*
+%attr(755,root,root) %{_sbindir}/*
 
 %{_infodir}/gpm.info*
 %{_mandir}/man[18]/*
@@ -172,7 +172,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/lib*.so
-/usr/include/gpm.h
+%{_includedir}/gpm.h
 
 %files static
 %defattr(644,root,root,755)
