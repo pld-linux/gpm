@@ -5,7 +5,7 @@ Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
 Version:	1.17.8
-Release:	3
+Release:	4
 Copyright:	GPL
 Group:		Daemons
 Group(pl):	Serwery
@@ -102,6 +102,7 @@ Biblioteki statyczne gpm.
 %patch3 -p1
 
 %build
+LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--disable-debug \
 	--with-curses
@@ -116,7 +117,7 @@ make install-strip DESTDIR=$RPM_BUILD_ROOT
 install gpm-root.conf $RPM_BUILD_ROOT/etc
 install mouse-test hltest $RPM_BUILD_ROOT%{_bindir}
 
-strip $RPM_BUILD_ROOT/usr/lib/lib*.so.*.*
+strip --strip-unneeded $RPM_BUILD_ROOT/usr/lib/lib*.so.*.*
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/gpm
