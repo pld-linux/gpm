@@ -12,7 +12,7 @@ Summary(tr):	Genel amaçlý fare desteði
 Summary(uk):	óÅÒ×ÅÒ ÒÏÂÏÔÉ Ú ÍÉÛÏÀ ÄÌÑ ËÏÎÓÏÌ¦ Linux
 Name:		gpm
 Version:	1.20.1
-Release:	%{_rc}.2
+Release:	%{_rc}.3
 License:	GPL
 Group:		Daemons
 Source0:	ftp://arcana.linux.it/pub/gpm/%{name}-%{version}%{_rc}.tar.bz2
@@ -27,6 +27,7 @@ Patch4:		%{name}-serialconsole.patch
 Patch5:		%{name}-gawk.patch
 Patch6:		%{name}-mawk.patch
 Patch7:		%{name}-nodebug.patch
+Patch8:		%{name}-dont_display_stupid_error_messages.patch
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gawk
 BuildRequires:	bison
@@ -143,7 +144,6 @@ Ce paquetage permet de développer des programmes en mode texte tirant
 avantage de la souris.
 
 %description devel -l ja
-
 gpm-devel¤Ïgpm¤òÍøÍÑ¤·¤¿¥¢¥×¥ê¥±¡¼¥·¥ç¥ó³«È¯¤ËÉ¬Í×¤Ê¥é¥¤¥Ö¥é¥ê¤ä¥Ø¥Ã¥À¥Õ¥¡¥¤¥ë
 ¤ò¥Ñ¥Ã¥±¡¼¥¸¥ó¥°¤·¤¿¤â¤Î¡£
 
@@ -215,9 +215,10 @@ linkar a biblioteca gpm estaticamente.
 %patch5 -p1
 #%patch6 -p1
 %{!?debug:%patch7 -p1}
+%patch8 -p1
 
 %build
-aclocal
+%{__aclocal}
 %{__autoconf}
 %configure \
 	--disable-debug \
