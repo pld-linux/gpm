@@ -1,6 +1,6 @@
 --- ./doc/Makefile.in.org	Sun Jun 30 17:56:12 2002
-+++ ./doc/Makefile.in	Sun Jun 30 17:58:07 2002
-@@ -113,29 +113,21 @@
++++ ./doc/Makefile.in	Sun Jun 30 18:13:44 2002
+@@ -113,29 +113,16 @@
  # install & uninstall
  
  installdirs:	
@@ -19,14 +19,13 @@
 +	$(INSTALL_DATA) -m 644 gpm-root.1     $(DESTDIR)$(man1dir)
 +	$(INSTALL_DATA) -m 644 gpm-types.7    $(DESTDIR)$(man7dir)
 +	$(INSTALL_DATA) -m 644 gpm.8          $(DESTDIR)$(man8dir)
-+	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info       $(DESTDIR)$(infodir)
++	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info*	$(DESTDIR)$(infodir)
  	# Use install-info if available
- 	-if $(SHELL) -c 'install-info --version' >/dev/null 2>&1; then \
- 	  if [ -f $(infodir)/dir ] ; then \
+-	-if $(SHELL) -c 'install-info --version' >/dev/null 2>&1; then \
+-	  if [ -f $(infodir)/dir ] ; then \
 -		install-info --dir-file=$(infodir)/dir $(infodir)/gpm.info; \
-+		install-info --dir-file=$(infodir)/dir $(DESTDIR)$(infodir)/gpm.info; \
- 	  fi; \
- 	fi
+-	  fi; \
+-	fi
 -	#itz Sat Dec 26 23:21:05 PST 1998
 -	#i keep all my infopages compressed and i'm tired to do it by
 -	#hand, so check if there are any compressed pages and do this
@@ -95,3 +94,14 @@
  	fi
  
  ### GENERIC
+--- ./Makefile.include.in.org	Sat May 11 17:55:37 2002
++++ ./Makefile.include.in	Sun Jun 30 18:15:17 2002
+@@ -46,7 +46,7 @@
+ TEX               = @TEX@
+ TEXINDEX          = @TEXINDEX@
+ DVIPS             = @DVIPS@
+-MAKEINFO          = @MAKEINFO@ --no-split
++MAKEINFO          = @MAKEINFO@
+ TEXI2HTML         = texi2html -monolithic
+ 
+ AR                = ar
