@@ -35,8 +35,8 @@ case "$1" in
 	if [ ! -f /var/lock/subsys/gpm ]; then
 		msg_starting "Gpm"
 		OPTIONS=""
-		# [ -n "$DEVICE" ] && OPTIONS="-m $DEVICE"
-		# [ -n "$MOUSETYPE" ] && OPTIONS="$OPTIONS -t $MOUSETYPE"
+		[ -n "$DEVICE" ] && OPTIONS="-m $DEVICE"
+		[ -n "$MOUSETYPE" ] && OPTIONS="$OPTIONS -t $MOUSETYPE"
 		[ -n "$BAUD_RATE" ] && OPTIONS="$OPTIONS -b $BAUD_RATE"
 		[ -n "$CLEAR_LINES" ] && OPTIONS="$OPTIONS -o $CLEAR_LINES"
 		[ -n "$BUTTON_SEQ" ] && OPTIONS="$OPTIONS -B $BUTTON_SEQ"
