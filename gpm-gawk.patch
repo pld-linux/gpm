@@ -1,11 +1,16 @@
---- gpm-1.19.6/doc/Makefile.in.orig	Thu Oct 11 08:07:39 2001
-+++ gpm-1.19.6/doc/Makefile.in	Thu Oct 11 08:09:09 2001
-@@ -64,7 +64,7 @@
+--- ./doc/Makefile.in.orgnl	Mon Mar 11 23:57:59 2002
++++ ./doc/Makefile.in	Tue Mar 12 00:23:14 2002
+@@ -52,11 +52,11 @@
  
- 
- %doc.txt: %.info
+ # TXT (-)
+ %.txt: %.info
 -	$(AWK) -f $(srcdir)/mktxt $< > $@
 +	$(srcdir)/mktxt $< > $@
  
- # Main portion
- 
+ # MAN (-)
+ $(MANPAGES): doc.gpm $(srcdir)/manpager
+-	$(AWK) -f $(srcdir)/manpager doc.gpm
++	$(srcdir)/manpager doc.gpm
+ 	for i in gpm-root.1 gpm-types.7 gpm.8 mev.1 mouse-test.1; do \
+ 		expand $$i | sed s/^'[ ]*'//g > $$i.new; \
+ 		mv $$i.new $$i; \
