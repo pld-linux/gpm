@@ -28,6 +28,7 @@ case "$1" in
 		[ -n "$MOUSETYPE" ] && OPTIONS="-t $MOUSETYPE"
 		[ -n "$DEVICE" ] && OPTIONS="$OPTIONS -m $DEVICE"
 		[ -n "$BAUD_RATE" ] && OPTIONS="$OPTIONS -b $BAUD_RATE"
+		[ -n "$CLEAR_LINES" ] && OPTIONS="$OPTIONS -o $CLEAR_LINES"
 		[ -n "$BUTTON_SEQ" ] && OPTIONS="$OPTIONS -B $BUTTON_SEQ"
 		[ -n "$TAP_BUTTON" ] && OPTIONS="$OPTIONS -g $TAP_BUTTON"
 		[ -n "$ACCEL" ] && OPTIONS="$OPTIONS -a $ACCEL"
