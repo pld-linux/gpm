@@ -24,6 +24,7 @@ Patch5:		%{name}-root.patch
 Patch6:		%{name}-mawk.patch
 Patch7:		%{name}-OPEN_MAX.patch
 Patch8:		%{name}-limits.patch
+Patch9:		%{name}-checkdevfsbug.patch
 Patch10:	%{name}-serialconsole.patch
 Requires:	%{name}-libs = %{version}
 Prereq:		rc-scripts >= 0.2.0
@@ -186,6 +187,7 @@ Biblioteki statyczne gpm.
 #%patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 %patch10 -p1
 
 %build
