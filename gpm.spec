@@ -18,13 +18,11 @@ Epoch:		1
 License:	GPL
 Group:		Daemons
 Source0:	ftp://arcana.linux.it/pub/gpm/%{name}-%{version}.tar.bz2
-# Source0-md5: 
-#Source0-md5:	2c63e827d755527950d9d13fe3d87692
+# Source0-md5:	2c63e827d755527950d9d13fe3d87692
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Source3:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
-# Source3-md5: 
-#Source3-md5:	893cf1468604523c6e9f9257a5671688
+# Source3-md5:	893cf1468604523c6e9f9257a5671688
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-OPEN_MAX.patch
 Patch2:		%{name}-DESTDIR.patch
