@@ -23,7 +23,7 @@ case "$1" in
   start)
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/gpm ]; then
-		msg_starting "gpm"
+		msg_starting "Gpm"
 		OPTIONS=""
 		[ -n "$MOUSETYPE" ] && OPTIONS="-t $MOUSETYPE"
 		[ -n "$DEVICE" ] && OPTIONS="$OPTIONS -m $DEVICE"
@@ -49,17 +49,17 @@ case "$1" in
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/gpm
 	else
-		msg_Already_Running gpm
+		msg_Already_Running "Gpm"
 		exit 1
 	fi
 	;;
   stop)
 	if [ -f /var/lock/subsys/gpm ]; then
-		msg_stopping "gpm"
+		msg_stopping "Gpm"
 		killproc gpm
 		rm -f /var/lock/subsys/gpm >/dev/null 2>&1
 	else
-		msg_Not_Running "gpm"
+		msg_Not_Running "Gpm"
 		exit 1
 	fi	
 	;;
