@@ -23,7 +23,7 @@ case "$1" in
   start)
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/gpm ]; then
-		msg_starting "gpm mouse"
+		msg_starting "gpm"
 		OPTIONS=""
 		[ -n "$MOUSETYPE" ] && OPTIONS="-t $MOUSETYPE"
 		[ -n "$DEVICE" ] && OPTIONS="$OPTIONS -m $DEVICE"
