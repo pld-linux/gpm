@@ -7,13 +7,13 @@
 #		cut-and-paste operations, and includes support for pop-up \
 #		menus on the console.
 # description(es): GPM añade soporte al ratón para aplicaciones Linux \
-#               consola como el Midnight Commander.  También permite \
-#               operaciones con el ratón de cortar y pegar e incluye soporte \
-#               para menús pop-up en la consola.
+#		consola como el Midnight Commander.  También permite \
+#		operaciones con el ratón de cortar y pegar e incluye soporte \
+#		para menús pop-up en la consola.
 # description(pt_BR): O GPM adiciona suporte a mouse para aplicações Linux \
-#		      console como o Midnight Commander. Também permite \
-#		      operações com o mouse de cortar-e-colar e inclui suporte \
-#		      a menus pop-up no console.
+#		console como o Midnight Commander. Também permite \
+#		operações com o mouse de cortar-e-colar e inclui suporte \
+#		a menus pop-up no console.
 #
 # processname:	gpm
 # pidfile:	/var/run/gpmpid
@@ -25,6 +25,9 @@
 # Get service config
 [ -f /etc/sysconfig/mouse ] && . /etc/sysconfig/mouse
 
+[ -z "$DEVICE" ] && nls "Please set %s in /etc/sysconfig/mouse" "DEVICE"
+[ -z "$MOUSETYPE" ] && nls "Please set %s in /etc/sysconfig/mouse" "MOUSETYPE"
+
 # See how we were called.
 case "$1" in
   start)
@@ -32,8 +35,8 @@ case "$1" in
 	if [ ! -f /var/lock/subsys/gpm ]; then
 		msg_starting "Gpm"
 		OPTIONS=""
-		[ -n "$DEVICE" ] && OPTIONS="-m $DEVICE"
-		[ -n "$MOUSETYPE" ] && OPTIONS="$OPTIONS -t $MOUSETYPE"
+		# [ -n "$DEVICE" ] && OPTIONS="-m $DEVICE"
+		# [ -n "$MOUSETYPE" ] && OPTIONS="$OPTIONS -t $MOUSETYPE"
 		[ -n "$BAUD_RATE" ] && OPTIONS="$OPTIONS -b $BAUD_RATE"
 		[ -n "$CLEAR_LINES" ] && OPTIONS="$OPTIONS -o $CLEAR_LINES"
 		[ -n "$BUTTON_SEQ" ] && OPTIONS="$OPTIONS -B $BUTTON_SEQ"
@@ -78,7 +81,7 @@ case "$1" in
 	status gpm
 	;;
   *)
-	msg_usage "$0 {start|stop|status|restart|reload}"
+	msg_usage "$0 {start|stop|restart|reload|status}"
 	RETVAL=1
 esac
 
