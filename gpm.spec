@@ -11,7 +11,7 @@ Summary(tr):	Genel amaГlЩ fare desteПi
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
 Version:	1.20.1
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL
 Group:		Daemons
@@ -28,6 +28,7 @@ Patch5:		%{name}-gawk.patch
 Patch6:		%{name}-mawk.patch
 Patch7:		%{name}-nodebug.patch
 Patch8:		%{name}-dont_display_stupid_error_messages.patch
+Patch9:		%{name}-lm.patch
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gawk
 BuildRequires:	bison
@@ -216,6 +217,7 @@ linkar a biblioteca gpm estaticamente.
 #%patch6 -p1
 %{!?debug:%patch7 -p1}
 %patch8 -p1
+%patch9 -p0
 
 %build
 %{__aclocal}
