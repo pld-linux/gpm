@@ -9,7 +9,7 @@ Summary(ru):	Сервер работы с мышью для консоли Linux
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
 Version:	1.19.6
-Release:	5
+Release:	6
 License:	GPL
 Group:		Daemons
 Group(cs):	DИmoni
