@@ -1,0 +1,15 @@
+diff -Nru gpm-1.17.3/doc/gpm.info gpm-1.17.3.new/doc/gpm.info
+--- gpm-1.17.3/doc/gpm.info	Thu Jan 14 07:51:34 1999
++++ gpm-1.17.3.new/doc/gpm.info	Sun Jan 31 20:40:47 1999
+@@ -1,9 +1,9 @@
+ This is Info file /usr/src/gpm-1.17/doc/gpm.info, produced by Makeinfo
+ version 1.68 from the input file /usr/src/gpm-1.17/doc/gpm.texinfo.
+ 
+-INFO-DIR-SECTION Emacs
++INFO-DIR-SECTION Miscellaneous:
+ START-INFO-DIR-ENTRY
+-* Gpm: (gpm).   A server wich hands mouse events to non-X programs.
++* Gpm: (gpm)			Text-mode mouse library and server daemon
+ END-INFO-DIR-ENTRY
+ 
+    This file is a user's and programmer's manual for gpm 1.17.3.
