@@ -39,7 +39,6 @@ case "$1" in
 	else
 		daemon gpm
 	fi
-	echo
 	touch /var/lock/subsys/gpm
 	;;
   stop)
@@ -48,7 +47,6 @@ case "$1" in
 	gpm -k
 	deltext; ok
 	rm -f /var/lock/subsys/gpm
-	echo
 	;;
   restart|reload)
 	$0 stop
