@@ -41,7 +41,7 @@ BuildRequires:	bison
 BuildRequires:	autoconf
 BuildRequires:	automake
 PreReq:		rc-scripts >= 0.2.0
-PreReq:		/sbin/chkconfig
+Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name}-libs = %{epoch}:%{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
