@@ -1,3 +1,5 @@
+
+%define		_rc	rc1
 Summary:	General Purpose Mouse support for Linux
 Summary(de):	Allgemeine Mausunterst¸tzung f¸r Linux
 Summary(es):	Soporte para ratÛn en terminales modo texto
@@ -8,11 +10,11 @@ Summary(ru):	Û≈“◊≈“ “¡¬œ‘Ÿ ” ÕŸ€ÿ¿ ƒÃ— ÀœŒ”œÃ… Linux
 Summary(tr):	Genel amaÁl˝ fare destei
 Summary(uk):	Û≈“◊≈“ “œ¬œ‘… ⁄ Õ…€œ¿ ƒÃ— ÀœŒ”œÃ¶ Linux
 Name:		gpm
-Version:	1.20.0
-Release:	0.12
+Version:	1.20.1
+Release:	%{_rc}0.1
 License:	GPL
 Group:		Daemons
-Source0:	ftp://arcana.linux.it/pub/gpm/%{name}-%{version}.tar.bz2
+Source0:	ftp://arcana.linux.it/pub/gpm/%{name}-%{version}%{_rc}.tar.bz2
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Source3:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
@@ -25,7 +27,6 @@ Patch5:		%{name}-serialconsole.patch
 Patch6:		%{name}-gawk.patch
 Patch7:		%{name}-mawk.patch
 Patch8:		%{name}-nodebug.patch
-Patch9:		%{name}-vcnum-bug.patch
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gawk
 BuildRequires:	bison
@@ -194,17 +195,16 @@ linkar a biblioteca gpm estaticamente.
 Õ…€’.
 
 %prep
-%setup -q
+%setup -q -n %{name}-cvs
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
+#%patch3 -p1
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
 #%patch7 -p1
 %{!?debug:%patch8 -p1}
-%patch9 -p1
 
 %build
 aclocal
