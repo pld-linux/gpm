@@ -208,7 +208,7 @@ linkar a biblioteca gpm estaticamente.
 
 %build
 aclocal
-autoconf
+%{__autoconf}
 %configure \
 	--disable-debug \
 	--with-curses
