@@ -3,11 +3,14 @@ Summary(de):	Allgemeine MausunterstЭtzung fЭr Linux
 Summary(fr):	Gestion gИnИrale de la souris pour Linux
 Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaГlЩ fare desteПi
+Summary(ru):	Сервер работы с мышью для консоли Linux
+Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
 Version:	1.19.3
-Release:	8
+Release:	20
 License:	GPL
 Group:		Daemons
+Group(de):	Server
 Group(pl):	Serwery
 Source0:	ftp://animal.unipv.it/pub/gpm/%{name}-%{version}.tar.gz
 Source1:	%{name}.init
@@ -22,8 +25,9 @@ Patch6:		%{name}-mawk.patch
 Patch7:		%{name}-OPEN_MAX.patch
 Patch8:		%{name}-limits.patch
 Patch9:		%{name}-secenhance.patch
-Prereq:		/sbin/chkconfig
-Prereq:		/sbin/ldconfig
+Patch10:	%{name}-serialconsole.patch
+Patch11:	%{name}-tempfilesecurity.patch
+Requires:	%{name}-libs = %{version}
 Prereq:		rc-scripts >= 0.2.0
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gawk
@@ -65,14 +69,31 @@ yardЩmЩyla konsollar arasЩnda kopyalama ve yapЩЧtЩrma olanaПЩ sunar.
 Fare tЩklamasЩyla pop-up menЭlerin ГЩkmasЩnЩ saПlayan bir program da
 iГerir.
 
+%description -l ru
+GPM обеспечивает поддержку мыши в текстовых приложениях Linux, таких
+как emacs, Midnight Commander и других. Также обеспечивает операции
+вырезки и вставки на консоли с использованием мыши. Включает
+программу, позволяющую вызывать всплывающие меню по нажатию кнопки
+мыши.
+
+%description -l uk
+GPM забезпечу╓ п╕дтримку миш╕ в текстових програмах Linux, таких як
+emacs, Midnight Commander та ╕нших. Також забезпечу╓ операц╕╖ вир╕зки
+та вставки на консол╕ з використанням миш╕. М╕стить програму, що
+дозволя╓ викликати спливаюч╕ меню натискаючи кнопку миш╕.
+
 %package libs
 Summary:	GPM libraries
 Summary(pl):	Biblioteki GPM
 Group:		Libraries
+Group(de):	Libraries
+Group(es):	Bibliotecas
+Group(fr):	Librairies
+Group(pl):	Biblioteki
 
 %description libs
-This package contains library files neccessary to run most of mouse-aware
-applications.
+This package contains library files neccessary to run most of
+mouse-aware applications.
 
 %description -l pl libs
 Ten pakiet zawiera biblioteki potrzebne do uruchomienia wiЙkszo╤ci
@@ -82,6 +103,7 @@ programСw ze wsparciem do obsЁugi myszki.
 Summary:	Header files and documentation for writing mouse driven programs
 Summary(pl):	Pliki nagЁСwkowe i dokumentacja do gpm
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-libs = %{version}
@@ -106,12 +128,28 @@ pisaФ wЁasne programy z wykorzystaniem myszki.
 Bu paket, fare kullanan yazЩlЩmlar geliЧtirmenizi saПlayan dosyalarЩ
 iГerir.
 
+%description -l ru
+GPM обеспечивает поддержку мыши в текстовых приложениях Linux, таких
+как emacs, Midnight Commander и других. Также обеспечивает операции
+вырезки и вставки на консоли с использованием мыши. Включает
+программу, позволяющую вызывать всплывающие меню по нажатию кнопки
+мыши.
+
+%description -l uk
+GPM забезпечу╓ п╕дтримку миш╕ в текстових програмах Linux, таких як
+emacs, Midnight Commander та ╕нших. Також забезпечу╓ операц╕╖ вир╕зки
+та вставки на консол╕ з використанням миш╕. М╕стить програму, що
+дозволя╓ викликати спливаюч╕ меню натискаючи кнопку миш╕.
+
 %package static
 Summary:	Static gpm library
 Summary(pl):	Biblioteki statyczne gpm
+Summary(ru):	Статическая библиотека для разработки программ, использующих мышь
+Summary(uk):	Статична б╕бл╕отека для розробки програм, що використовують мишу                                          Summary(ru): Статическая
 Group:		Development/Libraries
-Group(pl):	Programowanie/Biblioteki
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
 
 %description static
@@ -119,6 +157,14 @@ Static gpm library.
 
 %description -l pl static
 Biblioteki statyczne gpm.
+
+%description -l ru static
+Этот пакет позволяет разрабатывать текстовые приложения, использующие
+мышь.
+
+%description -l uk static
+Цей пакет дозволя╓ розробляти текстов╕ програми, що використовують
+мишу.
 
 %prep
 %setup 	-q
@@ -131,7 +177,9 @@ Biblioteki statyczne gpm.
 #%patch6 -p1
 %patch7 -p1
 %patch8 -p1
-#%patch9 -p1
+%patch9 -p1
+%patch10 -p1
+%patch11 -p1
 
 %build
 %configure \
