@@ -28,6 +28,7 @@
 [ -z "$DEVICE" ] && nls "Please set %s in /etc/sysconfig/mouse" "DEVICE"
 [ -z "$MOUSETYPE" ] && nls "Please set %s in /etc/sysconfig/mouse" "MOUSETYPE"
 
+RETVAL=0
 # See how we were called.
 case "$1" in
   start)
@@ -60,7 +61,6 @@ case "$1" in
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/gpm
 	else
 		msg_already_running "Gpm"
-		RETVAL=1
 	fi
 	;;
   stop)
@@ -70,19 +70,20 @@ case "$1" in
 		rm -f /var/lock/subsys/gpm >/dev/null 2>&1
 	else
 		msg_not_running "Gpm"
-		RETVAL=1
 	fi	
 	;;
-  restart|reload)
+  restart|force-reload)
 	$0 stop
 	$0 start
+	exit $?
 	;;
   status)
 	status gpm
+	exit $?
 	;;
   *)
-	msg_usage "$0 {start|stop|restart|reload|status}"
-	RETVAL=1
+	msg_usage "$0 {start|stop|restart|force-reload|status}"
+	exit 3
 esac
 
 exit $RETVAL
