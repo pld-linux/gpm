@@ -229,6 +229,8 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/chkconfig --add gpm
 if [ -f /var/lock/subsys/gpm ]; then
 	/etc/rc.d/init.d/gpm restart >&2
+else
+	echo "Run \"/etc/rc.d/init.d/gpm start\" to start gpm daemon."
 fi
 
 %preun
