@@ -5,7 +5,7 @@ Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
 Version:	1.19.2
-Release:	4
+Release:	5
 License:	GPL
 Group:		Daemons
 Group(pl):	Serwery
