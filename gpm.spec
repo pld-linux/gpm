@@ -5,7 +5,7 @@ Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
 Version:	1.19.3
-Release:	7
+Release:	8
 License:	GPL
 Group:		Daemons
 Group(pl):	Serwery
@@ -155,7 +155,6 @@ install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
 gzip -9nf README* *.conf
 
 %post
-/sbin/ldconfig
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 /sbin/chkconfig --add gpm
@@ -173,8 +172,10 @@ if [ "$1" = "0" ]; then
 fi
 
 %postun
-/sbin/ldconfig
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+
+%post   libs -p /sbin/ldconfig
+%postun libs -p /sbin/ldconfig
 
 %clean
 rm -rf $RPM_BUILD_ROOT
