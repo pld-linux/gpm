@@ -12,6 +12,7 @@ Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
 Version:	1.20.1
 Release:	1
+Epoch:		1
 License:	GPL
 Group:		Daemons
 Source0:	ftp://arcana.linux.it/pub/gpm/%{name}-%{version}.tar.bz2
