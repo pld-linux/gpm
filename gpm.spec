@@ -7,7 +7,7 @@ Summary(ru):	Сервер работы с мышью для консоли Linux
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
 Version:	1.19.4
-Release:	3
+Release:	4
 License:	GPL
 Group:		Daemons
 Group(de):	Server
@@ -28,6 +28,7 @@ Patch9:		%{name}-checkdevfsbug.patch
 Patch10:	%{name}-serialconsole.patch
 Requires:	%{name}-libs = %{version}
 Prereq:		rc-scripts >= 0.2.0
+Prereq:		/sbin/chkconfig
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gawk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -213,6 +214,9 @@ install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
 
 gzip -9nf README* *.conf
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
@@ -235,9 +239,6 @@ fi
 
 %post   libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
