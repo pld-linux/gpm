@@ -42,7 +42,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 PreReq:		rc-scripts >= 0.2.0
 PreReq:		/sbin/chkconfig
-Requires:	%{name}-libs = %{version}
+Requires:	%{name}-libs = %{epoch}:%{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc
@@ -131,7 +131,7 @@ Summary(ja):	gpm╓нЁ╚х╞╔И╔╓╔ж╔И╔Й
 Summary(pl):	Pliki nagЁСwkowe i dokumentacja do gpm
 Summary(pt_BR):	Bibliotecas e arquivos de inclusЦo para desenvolver programas que utilizam mouse
 Group:		Development/Libraries
-Requires:	%{name}-libs = %{version}
+Requires:	%{name}-libs = %{epoch}:%{version}
 Obsoletes:	libgpm1-devel
 
 %description devel
@@ -187,7 +187,7 @@ Summary(pt_BR):	Biblioteca de desenvolvimento estАtica do gpm
 Summary(ru):	Статическая библиотека для разработки программ, использующих мышь Статическая
 Summary(uk):	Статична б╕бл╕отека для розробки програм, що використовують мишу
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{epoch}:%{version}
 
 %description static
 Static gpm library.
