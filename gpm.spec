@@ -13,7 +13,7 @@ Summary(tr):	Genel amaГlЩ fare desteПi
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
 Version:	1.20.1
-Release:	6
+Release:	7
 Epoch:		1
 License:	GPL
 Group:		Daemons
