@@ -6,11 +6,18 @@
 #		the Midnight Commander. Is also allows mouse-based console \
 #		cut-and-paste operations, and includes support for pop-up \
 #		menus on the console.
+# description(es): GPM añade soporte al ratón para aplicaciones Linux \
+#               consola como el Midnight Commander.  También permite \
+#               operaciones con el ratón de cortar y pegar e incluye soporte \
+#               para menús pop-up en la consola.
+# description(pt_BR): O GPM adiciona suporte a mouse para aplicações Linux \
+#		      console como o Midnight Commander. Também permite \
+#		      operações com o mouse de cortar-e-colar e inclui suporte \
+#		      a menus pop-up no console.
 #
 # processname:	gpm
 # pidfile:	/var/run/gpmpid
 # config:	/etc/sysconfig/mouse
-
 
 # Source function library
 . /etc/rc.d/init.d/functions
@@ -50,7 +57,7 @@ case "$1" in
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/gpm
 	else
 		msg_already_running "Gpm"
-		exit 1
+		RETVAL=1
 	fi
 	;;
   stop)
@@ -60,7 +67,7 @@ case "$1" in
 		rm -f /var/lock/subsys/gpm >/dev/null 2>&1
 	else
 		msg_not_running "Gpm"
-		exit 1
+		RETVAL=1
 	fi	
 	;;
   restart|reload)
@@ -72,7 +79,7 @@ case "$1" in
 	;;
   *)
 	msg_usage "$0 {start|stop|status|restart|reload}"
-	exit 1
+	RETVAL=1
 esac
 
 exit $RETVAL
