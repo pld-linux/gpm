@@ -35,11 +35,12 @@ Patch8:		%{name}-dont_display_stupid_error_messages.patch
 Patch9:		%{name}-link.patch
 Patch10:	%{name}-lib-segv.patch
 Patch11:	%{name}-pmake.patch
-BuildRequires:	ncurses-devel >= 5.0
-BuildRequires:	gawk
-BuildRequires:	bison
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	bison
+BuildRequires:	gawk
+BuildRequires:	ncurses-devel >= 5.0
+BuildRequires:	texinfo
 PreReq:		rc-scripts >= 0.2.0
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
