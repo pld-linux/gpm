@@ -225,6 +225,8 @@ linkar a biblioteca gpm estaticamente.
 %patch10 -p1
 %patch11 -p1
 
+sed -i -e 's#/usr##' doc/manpager
+
 %build
 %{__aclocal}
 %{__autoconf}
