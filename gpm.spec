@@ -5,7 +5,7 @@ Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
 Version:	1.17.8
-Release:	1
+Release:	2
 Copyright:	GPL
 Group:		Daemons
 Group(pl):	Serwery
@@ -101,6 +101,7 @@ Biblioteki statyczne gpm.
 autoconf
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" SOLDFLAGS="-s" \
 ./configure %{_target_platform} \
+	--prefix=/usr \
 	--sysconfdir=/etc \
 	--disable-debug \
 	--with-curses
@@ -179,6 +180,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
+* Mon Jun 07 1999 Jan Rêkorajski <baggins@pld.org.pl>
+  [1.17.8-2]
+- prefix=/usr
+
 * Sun May  9 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.17.8-1]
 - now package is FHS 2.0 compliant.
