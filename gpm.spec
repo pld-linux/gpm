@@ -9,7 +9,7 @@ Summary(ru):	Сервер работы с мышью для консоли Linux
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
 Version:	1.20.0
-Release:	0.2
+Release:	0.3
 License:	GPL
 Group:		Daemons
 Source0:	ftp://arcana.linux.it/pub/gpm/%{name}-%{version}.tar.bz2
@@ -196,8 +196,8 @@ linkar a biblioteca gpm estaticamente.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-#%patch3 -p1
-#%patch4 -p1
+%patch3 -p1
+%patch4 -p1
 #%patch5 -p1
 #%patch6 -p1
 #%patch7 -p1
