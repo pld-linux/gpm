@@ -1,0 +1,47 @@
+diff -Nur gpm-1.19.6.orig/Makefile.include.in gpm-1.19.6/Makefile.include.in
+--- gpm-1.19.6.orig/Makefile.include.in	Tue Oct  2 15:40:26 2001
++++ gpm-1.19.6/Makefile.include.in	Thu Oct 11 07:59:26 2001
+@@ -42,7 +42,7 @@
+ TEX = @TEX@
+ TEXINDEX = @TEXINDEX@
+ DVIPS = @DVIPS@
+-MAKEINFO = @MAKEINFO@ --no-split
++MAKEINFO = @MAKEINFO@
+ TEXI2HTML = texi2html -monolithic
+ 
+ AR = ar
+diff -Nur gpm-1.19.6.orig/doc/Makefile.in gpm-1.19.6/doc/Makefile.in
+--- gpm-1.19.6.orig/doc/Makefile.in	Thu Oct 11 07:58:29 2001
++++ gpm-1.19.6/doc/Makefile.in	Thu Oct 11 08:02:06 2001
+@@ -59,7 +59,7 @@
+ %.ps: %.dvi
+ 		$(DVIPS) -f $< > $@; \
+ 
+-%.info: %.texinfo
++%.info: %.texinfo doc.gpm
+ 		$(MAKEINFO) $< -o $@; \
+ 
+ 
+@@ -95,21 +95,7 @@
+ 	$(INSTALL_DATA) -m 644 gpm-root.1     $(DESTDIR)$(man1dir)
+ 	$(INSTALL_DATA) -m 644 gpm-types.7    $(DESTDIR)$(man7dir)
+ 	$(INSTALL_DATA) -m 644 gpm.8          $(DESTDIR)$(man8dir)
+-	$(INSTALL_DATA) -m 644 gpm.info       $(DESTDIR)$(infodir)
+-	# Use install-info if available
+-	-if $(SHELL) -c 'install-info --version' >/dev/null 2>&1; then \
+-	  if [ -f $(infodir)/dir ] ; then \
+-		install-info --dir-file=$(DESTDIR)$(infodir)/dir $(DESTDIR)$(infodir)/gpm.info; \
+-	  fi; \
+-	fi
+-	#itz Sat Dec 26 23:21:05 PST 1998
+-	#i keep all my infopages compressed and i'm tired to do it by
+-	#hand, so check if there are any compressed pages and do this
+-	#one too
+-	-ls $(DESTDIR)$(infodir)/*[-.]info.gz >/dev/null 2>&1 \
+-		&& gzip -f $(DESTDIR)$(infodir)/gpm.info
+-	# Hmm.... shouldn't man pages be compressed too?
+-   # maybe they should, but at least at my system they are not.
++	$(INSTALL_DATA) -m 644 gpm.info*      $(DESTDIR)$(infodir)
+ 
+ # This potentially leaves around cached manpages,
+ # e.g. /var/cache/man/cat1/mev.1.gz.  Deleting these is not our job,
