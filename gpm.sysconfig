@@ -1,4 +1,4 @@
-# Customized setings for gpm
+# Customized settings for gpm
 # Check out "man gpm" for detailed setup options
 
 # Mouse device (for example /dev/mouse, /dev/ttyS0, /dev/psaux)
@@ -23,10 +23,10 @@ ACCEL=
 # Delta (must be 2 or more):
 DELTA=
 
-# Multiple click max interval (in miliseconds)
+# Multiple click max interval (in milliseconds)
 INTERVAL=
 
-# Mouse responsivenes
+# Mouse responsiveness
 RESP=
 
 # Mouse device sample frequency
@@ -44,15 +44,14 @@ TAP_BUTTON=
 POINTER_VIS=no
 
 # should gpm repeat received data to /dev/gpmdata (using MouseSystems
-# protocol). May be usefull for other programs that would like to use
+# protocol). May be useful for other programs that would like to use
 # mouse while gpm is running (does not require port access)
 REPEATER=no
 
-# word-consitituent characters. For example:
+# word-constituent characters. For example:
 # "a-zA-Z0-9_±æê³ñó¶¿¼¡ÆÊ£ÑÓ¦¯¬" selects polish national characters as
-# word-constituent. This is neccessary as gpm does not support locales.
+# word-constituent. This is necessary as gpm does not support locales.
 CHARSET=
 
 # Nice level for gpm
 SERVICE_RUN_NICE_LEVEL="-1"
-
