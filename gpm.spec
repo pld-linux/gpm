@@ -4,8 +4,8 @@ Summary(fr):	Gestion générale de la souris pour Linux
 Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
-Version:	1.17.8
-Release:	4
+Version:	1.17.9
+Release:	1
 Copyright:	GPL
 Group:		Daemons
 Group(pl):	Serwery
@@ -120,12 +120,12 @@ install mouse-test hltest $RPM_BUILD_ROOT%{_bindir}
 strip --strip-unneeded $RPM_BUILD_ROOT/usr/lib/lib*.so.*.*
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/gpm
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
 
 %ifarch sparc
-(echo MOUSETYPE=\"sun\"; echo XEMU3=no) > $RPM_BUILD_ROOT/etc/sysconfig/mouse
+(echo MOUSETYPE=\"sun\"; echo XEMU3=no) >> $RPM_BUILD_ROOT/etc/sysconfig/mouse
 %else
-(echo "MOUSETYPE="; echo "XEMU3=") > $RPM_BUILD_ROOT/etc/sysconfig/mouse
+(echo "MOUSETYPE="; echo "XEMU3=") >> $RPM_BUILD_ROOT/etc/sysconfig/mouse
 %endif
 
 gzip -9nf $RPM_BUILD_ROOT%{_datadir}/{info/gpm.info*,man/man{1,8}/*}
@@ -157,7 +157,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %config(noreplace) %{_sysconfdir}/gpm-root.conf
 %config(noreplace) %verify(not size mtime md5) /etc/sysconfig/mouse
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/sysconfig/gpm
 
 %attr(754,root,root) /etc/rc.d/init.d/gpm
 %attr(755,root,root) %{_bindir}/*
