@@ -4,8 +4,8 @@ Summary(fr):	Gestion générale de la souris pour Linux
 Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
-Version:	1.17.7
-Release:	3
+Version:	1.17.8
+Release:	1
 Copyright:	GPL
 Group:		Daemons
 Group(pl):	Serwery
@@ -128,11 +128,11 @@ strip $RPM_BUILD_ROOT/usr/{bin/*,lib/lib*.so.*.*}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
 
-gzip -9nf $RPM_BUILD_ROOT/usr/{info/gpm.info*,man/man{1,8}/*}
+gzip -9nf $RPM_BUILD_ROOT/usr/share/{info/gpm.info*,man/man{1,8}/*}
 
 %post
 /sbin/ldconfig
-/sbin/install-info /usr/info/gpm.info.gz /etc/info-dir
+/sbin/install-info /usr/share/info/gpm.info.gz /etc/info-dir
 
 /sbin/chkconfig --add gpm
 if test -r /var/run/gpm.pid; then
@@ -144,7 +144,7 @@ fi
 
 %preun
 if [ "$1" = "0" ]; then
-	/sbin/install-info /usr/info/gpm.info.gz --delete /etc/info-dir
+	/sbin/install-info /usr/share/info/gpm.info.gz --delete /etc/info-dir
 
 	/sbin/chkconfig --del gpm
 	/etc/rc.d/init.d/gpm stop >&2
@@ -165,11 +165,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) /usr/bin/*
 %attr(755,root,root) /usr/sbin/*
 
-/usr/info/gpm.info*
-/usr/man/man[18]/*
+/usr/share/info/gpm.info*
+/usr/share/man/man[18]/*
 %attr(755,root,root) /usr/lib/lib*.so.*.*
-
-#/usr/share/emacs/site-lisp/*
 
 %files devel
 %defattr(644,root,root,755)
@@ -181,6 +179,10 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/lib*.a
 
 %changelog
+* Sun May  9 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [1.17.8-1]
+- now package is FHS 2.0 compiliat.
+
 * Wed Apr 28 1999 Artur Frysiak <wiget@pld.org.pl>
   [1.17-7-3]
 - added BuildPrereq: ncurses-devel.
