@@ -170,14 +170,16 @@ rm -rf $RPM_BUILD_ROOT
 /usr/man/man[18]/*
 %attr(755,root,root) /usr/lib/lib*.so.*.*
 
-/usr/share/emacs/site-lisp/*
+#/usr/share/emacs/site-lisp/*
 
 %files devel
+%defattr(644,root,root,755)
 %attr(755,root,root) /usr/lib/lib*.so
-%attr(644,root,root) /usr/include/gpm.h
+/usr/include/gpm.h
 
 %files static
-%attr(644,root,root) /usr/lib/lib*.a
+%defattr(644,root,root,755)
+/usr/lib/lib*.a
 
 %changelog
 - added installing gpm-root(1) man page.
