@@ -29,6 +29,7 @@ Patch7:		%{name}-nodebug.patch
 Patch8:		%{name}-dont_display_stupid_error_messages.patch
 Patch9:		%{name}-link.patch
 Patch10:	%{name}-lib-segv.patch
+Patch11:	%{name}-pmake.patch
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gawk
 BuildRequires:	bison
@@ -219,6 +220,7 @@ linkar a biblioteca gpm estaticamente.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
+%patch11 -p1
 
 %build
 %{__aclocal}
