@@ -1,5 +1,15 @@
---- gpm-1.19.5/src/gpm.c.serialconsole	Fri Jan  5 14:10:46 2001
-+++ gpm-1.19.5/src/gpm.c	Fri Jan  5 14:39:28 2001
+--- ./src/headers/message.h.org	Sat Feb 23 16:42:23 2002
++++ ./src/headers/message.h	Tue Mar 12 00:16:35 2002
+@@ -125,6 +125,7 @@
+ #define GPM_MESS_NOTWRITE           "Can you write to %s?"
+ #define GPM_MESS_WRITE_ERR          "write(): %s"
+ #define GPM_MESS_OPEN_CON           "Opening console failed."
++#define GPM_MESS_OPEN_SERIALCON     "We seem to be on a serial console."
+ #define GPM_MESS_READ_FIRST         "Error in read()ing first: %s"
+ #define GPM_MESS_READ_REST          "Error in read()ing rest: %s"
+ #define GPM_MESS_REMOVE_FILES       "Removing files %s and %s"
+--- ./src/gpm.c.org	Sat Feb 23 16:42:23 2002
++++ ./src/gpm.c	Tue Mar 12 00:20:19 2002
 @@ -38,6 +38,7 @@
  #include <sys/un.h>        /* struct sockaddr_un */
  
@@ -8,33 +18,30 @@
  #include <sys/kd.h>        /* KDGETMODE */
  #include <termios.h>       /* winsize */
  
-@@ -142,10 +143,25 @@
+@@ -153,10 +154,23 @@
  static inline int open_console(const int mode)
  {
-   int fd;
+    int fd;
 -
--  if ((fd=open(consolename, mode)) < 0)
--    oops(consolename);
--  return fd;
-+  struct stat sb;
-+  int maj, twelve=12;
-+  struct serial_struct si;
+-   if ((fd=open(consolename, mode)) < 0)
+-      gpm_report(GPM_PR_OOPS,GPM_MESS_OPEN_CON);
++   struct stat sb;
++   int maj, twelve=12;
++   struct serial_struct si;
 +
-+  fd = open(consolename, mode);
-+  if (fd != -1) {
-+      fstat(fd, &sb);
-+      maj = major(sb.st_rdev);
-+      if (maj != 4 && (maj < 136 || maj > 143)) {
-+	  if (ioctl (fd, TIOCLINUX, &twelve) < 0) {
-+	      if (ioctl (fd, TIOCGSERIAL, &si) >= 0) {
-+		  if (si.line > 0)
-+		      oops("we seem to be on a serial console");
-+	      }
-+	  }
-+      }
-+      return fd;
-+  } else
-+      oops(consolename);
++   fd = open(consolename, mode);
++   if (fd != -1) {
++	   fstat(fd, &sb);
++	   maj = major(sb.st_rdev);
++	   if (maj != 4 && (maj < 136 || maj > 143)) {
++		   if (ioctl (fd, TIOCLINUX, &twelve) < 0) {
++			   if (si.line > 0)
++				   gpm_report(GPM_PR_OOPS,GPM_MESS_OPEN_SERIALCON);
++		   }
++	   }
+    return fd;
++   } else
++	gpm_report(GPM_PR_OOPS,GPM_MESS_OPEN_CON);
  }
  
  /*-------------------------------------------------------------------*/
