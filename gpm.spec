@@ -5,7 +5,7 @@ Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
 Version:	1.17.7
-Release:	2
+Release:	3
 Copyright:	GPL
 Group:		Daemons
 Group(pl):	Serwery
@@ -181,6 +181,10 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/lib*.a
 
 %changelog
+* Wed Apr 28 1999 Artur Frysiak <wiget@pld.org.pl>
+  [1.17-7-3]
+- added BuildPrereq: ncurses-devel.
+
 * Mon Apr 19 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [1.17.7-2]
 - added noreplace parameter to %config files,
