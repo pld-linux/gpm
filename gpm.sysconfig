@@ -1,4 +1,58 @@
 # Customized setings for gpm
+# Check out "man gpm" for detailed setup options
+
+# Mouse device (for example /dev/mouse, /dev/ttyS0, /dev/psaux)
+DEVICE=/dev/mouse
+
+# Mouse type (ms, msc, ps/2, ...) Use "gpm -t help" for detailed list
+MOUSETYPE=
+
+# Force specified button count (2/3)
+BUTTON_COUNT=
+
+# Device baud rate (default == 1200)
+BAUD_RATE=
+
+# Clear some serial lines on startup. May be "dtr", "rts" or "both".
+# Needed by some strange serial mice (for example A4Tech NWW-9)
+CLEAR_LINES=
+
+# Acceleration
+ACCEL=
+
+# Delta :)
+DELTA=
+
+# Multiple click max interval (in miliseconds)
+INTERVAL=
+
+# Mouse responsivenes
+RESP=
+
+# Mouse device sample frequency
+SAMPLE_RATE=
+
+# Button sequence ("123" by default). May be useful for left-handed people
+# ("321" reverts button order)
+BUTTON_SEQ=
+
+# Which button should be considered pressed if touchpad was "tapped"
+# (1,2,3)
+TAP_BUTTON=
+
+# when "yes", gpm shows mouse pointer during text selection
+POINTER_VIS=no
+
+# should gpm repeat received data to /dev/gpmdata (using MouseSystems
+# protocol). May be usefull for other programs that would like to use
+# mouse while gpm is running (does not require port access)
+REPEATER=no
+
+# word-consitituent characters. For example:
+# "a-zA-Z0-9_±æê³ñó¶¿¼¡ÆÊ£ÑÓ¦¯¬" selects polish national characters as
+# word-constituent. This is neccessary as gpm does not support locales.
+CHARSET=
 
 # Nice level for gpm
 SERVICE_RUN_NICE_LEVEL="+5"
+

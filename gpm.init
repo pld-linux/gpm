@@ -25,11 +25,27 @@ case "$1" in
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/gpm ]; then
 		show Starting gpm mouse services
-		if [ -n "$MOUSETYPE" ]; then
-			daemon gpm -t $MOUSETYPE
-		else
-			daemon gpm
+		OPTIONS=""
+		[ -n "$MOUSETYPE" ] && OPTIONS="-t $MOUSETYPE"
+		[ -n "$DEVICE" ] && OPTIONS="$OPTIONS -m $DEVICE"
+		[ -n "$BAUD_RATE" ] && OPTIONS="$OPTIONS -b $BAUD_RATE"
+		[ -n "$BUTTON_SEQ" ] && OPTIONS="$OPTIONS -B $BUTTON_SEQ"
+		[ -n "$TAP_BUTTON" ] && OPTIONS="$OPTIONS -g $TAP_BUTTON"
+		[ -n "$ACCEL" ] && OPTIONS="$OPTIONS -a $ACCEL"
+		[ -n "$DELTA" ] && OPTIONS="$OPTIONS -d $DELTA"
+		[ -n "$INTERVAL" ] && OPTIONS="$OPTIONS -i $INTERVAL"
+		[ -n "$RESP" ] && OPTIONS="$OPTIONS -r $RESP"
+		[ -n "$SAMPLE_RATE" ] && OPTIONS="$OPTIONS -s $SAMPLE_RATE"
+		[ -n "$CHARSET" ] && OPTIONS="$OPTIONS -l \"$CHARSET\""
+		[ "$BUTTON_COUNT" = "2" ] && OPTIONS="$OPTIONS -2"
+		[ "$BUTTON_COUNT" = "3" ] && OPTIONS="$OPTIONS -3"
+		if [ -n "$POINTER_VIS" ] && [ "$POINTER_VIS" != "no" ]; then
+			OPTIONS="$OPTIONS -p"
 		fi
+		if [ -n "$REPEATER" ] && [ "$REPEATER" != "no" ]; then
+			OPTIONS="$OPTIONS -R"
+		fi
+		daemon gpm $OPTIONS
 	else
 		echo "gpm already is running"
 	fi
