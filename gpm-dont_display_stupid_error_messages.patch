@@ -1,11 +1,11 @@
---- gpm-cvs/src/liblow.c~	Sun Oct  6 10:36:25 2002
-+++ gpm-cvs/src/liblow.c	Sun Oct  6 10:36:25 2002
+--- gpm-1.20.1/src/lib/liblow.c~	Sun Oct  6 10:36:25 2002
++++ gpm-1.20.1/src/lib/liblow.c	Sun Oct  6 10:36:25 2002
 @@ -258,7 +258,7 @@
           /* do we really need this check ? */
-          if(strncmp(tty,consolename,strlen(consolename)-1)
-             || !isdigit(tty[strlen(consolename)-1])) {
--            gpm_report(GPM_PR_ERR,"strncmp/isdigit/consolename failed");
-+           /* gpm_report(GPM_PR_ERR,"strncmp/isdigit/consolename failed"); */
+          if(strncmp(tty,option.consolename,strlen(option.consolename)-1)
+             || !isdigit(tty[strlen(option.consolename)-1])) {
+-            gpm_report(GPM_PR_ERR,"strncmp/isdigit/option.consolename failed");
++           /* gpm_report(GPM_PR_ERR,"strncmp/isdigit/option.consolename failed"); */
              goto err;
           }
            

@@ -1,5 +1,5 @@
---- gpm-1.20.0/src/report-lib.c.orig	Sat Feb 23 16:42:23 2002
-+++ gpm-1.20.0/src/report-lib.c	Fri May  3 20:16:02 2002
+--- gpm-1.20.1/src/lib/report-lib.c.orig	Sat Feb 23 16:42:23 2002
++++ gpm-1.20.1/src/lib/report-lib.c	Fri May  3 20:16:02 2002
 @@ -30,10 +30,10 @@
     va_start(ap,text);
  

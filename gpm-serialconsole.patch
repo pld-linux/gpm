@@ -23,13 +23,13 @@
  {
     int fd;
 -
--   if ((fd=open(consolename, mode)) < 0)
+-   if ((fd=open(option.consolename, mode)) < 0)
 -      gpm_report(GPM_PR_OOPS,GPM_MESS_OPEN_CON);
 +   struct stat sb;
 +   int maj, twelve=12;
 +   struct serial_struct si;
 +
-+   fd = open(consolename, mode);
++   fd = open(option.consolename, mode);
 +   if (fd != -1) {
 +	   fstat(fd, &sb);
 +	   maj = major(sb.st_rdev);

@@ -1,6 +1,46 @@
---- ./doc/Makefile.in.org	Sun Jun 30 17:56:12 2002
-+++ ./doc/Makefile.in	Sun Jun 30 18:13:44 2002
-@@ -113,29 +113,16 @@
+diff -Nur gpm-1.20.1.orig/Makefile.in gpm-1.20.1/Makefile.in
+--- gpm-1.20.1.orig/Makefile.in	Tue Dec 24 23:57:16 2002
++++ gpm-1.20.1/Makefile.in	Fri Jan 31 14:33:45 2003
+@@ -50,9 +50,9 @@
+ 	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) $(STRIP)' install
+ 
+ installdirs:
+-	$(MKDIR) $(libdir) $(bindir) $(sbindir) $(includedir) $(sysconfdir); \
++	$(MKDIR) $(DESTDIR)$(libdir) $(DESTDIR)$(bindir) $(DESTDIR)$(sbindir) $(DESTDIR)$(includedir) $(DESTDIR)$(sysconfdir); \
+ 	if test "x@ELISP@" != "x" ; then \
+-		$(MKDIR) $(lispdir) ; \
++		$(MKDIR) $(DESTDIR)$(lispdir) ; \
+ 	fi
+ 
+ ### GENERIC
+diff -Nur gpm-1.20.1.orig/Makefile.include.in gpm-1.20.1/Makefile.include.in
+--- gpm-1.20.1.orig/Makefile.include.in	Tue Dec 24 23:57:16 2002
++++ gpm-1.20.1/Makefile.include.in	Fri Jan 31 14:34:04 2003
+@@ -46,7 +46,7 @@
+ TEX               = @TEX@
+ TEXINDEX          = @TEXINDEX@
+ DVIPS             = @DVIPS@
+-MAKEINFO          = @MAKEINFO@ --no-split
++MAKEINFO          = @MAKEINFO@
+ TEXI2HTML         = texi2html -monolithic
+ STRIP             = -s
+ 
+diff -Nur gpm-1.20.1.orig/contrib/Makefile.in gpm-1.20.1/contrib/Makefile.in
+--- gpm-1.20.1.orig/contrib/Makefile.in	Tue Dec 24 23:57:16 2002
++++ gpm-1.20.1/contrib/Makefile.in	Fri Jan 31 14:30:12 2003
+@@ -13,7 +13,7 @@
+ 
+ install: all
+ 	if [ -n "$(ELISP)" ]; then for i in `echo $(ELISP)`; do \
+-		$(INSTALL_DATA) $(srcdir)/$$i $(lispdir)/`basename $$i` ;\
++		$(INSTALL_DATA) $(srcdir)/$$i $(DESTDIR)$(lispdir)/`basename $$i` ;\
+ 	done; fi
+ 
+ %.elc: %.el
+diff -Nur gpm-1.20.1.orig/doc/Makefile.in gpm-1.20.1/doc/Makefile.in
+--- gpm-1.20.1.orig/doc/Makefile.in	Tue Dec 24 23:57:16 2002
++++ gpm-1.20.1/doc/Makefile.in	Fri Jan 31 14:29:48 2003
+@@ -112,29 +112,15 @@
  # install & uninstall
  
  installdirs:	
@@ -14,13 +54,7 @@
 -	$(INSTALL_DATA) -m 644 gpm-types.7    $(man7dir)
 -	$(INSTALL_DATA) -m 644 gpm.8          $(man8dir)
 -	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info       $(infodir)
-+	$(INSTALL_DATA) -m 644 mev.1          $(DESTDIR)$(man1dir)
-+	$(INSTALL_DATA) -m 644 mouse-test.1   $(DESTDIR)$(man1dir)
-+	$(INSTALL_DATA) -m 644 gpm-root.1     $(DESTDIR)$(man1dir)
-+	$(INSTALL_DATA) -m 644 gpm-types.7    $(DESTDIR)$(man7dir)
-+	$(INSTALL_DATA) -m 644 gpm.8          $(DESTDIR)$(man8dir)
-+	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info*	$(DESTDIR)$(infodir)
- 	# Use install-info if available
+-	# Use install-info if available
 -	-if $(SHELL) -c 'install-info --version' >/dev/null 2>&1; then \
 -	  if [ -f $(infodir)/dir ] ; then \
 -		install-info --dir-file=$(infodir)/dir $(infodir)/gpm.info; \
@@ -34,74 +68,45 @@
 -		&& gzip -f $(infodir)/gpm.info
 -	# Hmm.... shouldn't man pages be compressed too?
 -   # maybe they should, but at least at my system they are not.
++	$(INSTALL_DATA) -m 644 mev.1          $(DESTDIR)$(man1dir)
++	$(INSTALL_DATA) -m 644 mouse-test.1   $(DESTDIR)$(man1dir)
++	$(INSTALL_DATA) -m 644 gpm-root.1     $(DESTDIR)$(man1dir)
++	$(INSTALL_DATA) -m 644 gpm-types.7    $(DESTDIR)$(man7dir)
++	$(INSTALL_DATA) -m 644 gpm.8          $(DESTDIR)$(man8dir)
++	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info       $(DESTDIR)$(infodir)
  
  # This potentially leaves around cached manpages,
  # e.g. /var/cache/man/cat1/mev.1.gz.  Deleting these is not our job,
---- ./contrib/Makefile.in.org	Sat May 11 18:29:14 2002
-+++ ./contrib/Makefile.in	Sun Jun 30 17:51:10 2002
-@@ -13,7 +13,7 @@
- 
- install: all
- 	if [ -n "$(ELISP)" ]; then for i in `echo $(ELISP)`; do \
--		$(INSTALL_DATA) $(srcdir)/$$i $(lispdir)/`basename $$i` ;\
-+		$(INSTALL_DATA) $(srcdir)/$$i $(DESTDIR)$(lispdir)/`basename $$i` ;\
- 	done; fi
- 
- %.elc: %.el
---- ./src/Makefile.in.org	Mon May 20 23:58:51 2002
-+++ ./src/Makefile.in	Sun Jun 30 17:54:52 2002
-@@ -101,21 +101,21 @@
+diff -Nur gpm-1.20.1.orig/src/Makefile.in gpm-1.20.1/src/Makefile.in
+--- gpm-1.20.1.orig/src/Makefile.in	Tue Dec 24 23:57:16 2002
++++ gpm-1.20.1/src/Makefile.in	Fri Jan 31 14:33:02 2003
+@@ -91,15 +91,15 @@
  installdirs:
  
  install:	check 
 -	$(INSTALL_PROGRAM) gpm $(sbindir)/gpm
--	$(INSTALL_DATA) -m 644 libgpm.a $(libdir)/libgpm.a
+-	$(INSTALL_DATA) -m 644 lib/libgpm.a $(libdir)/libgpm.a
 -	$(INSTALL_DATA) -m 644 $(srcdir)/headers/gpm.h $(includedir)/gpm.h
 +	$(INSTALL_PROGRAM) gpm $(DESTDIR)$(sbindir)/gpm
-+	$(INSTALL_DATA) -m 644 libgpm.a $(DESTDIR)$(libdir)/libgpm.a
++	$(INSTALL_DATA) -m 644 lib/libgpm.a $(DESTDIR)$(libdir)/libgpm.a
 +	$(INSTALL_DATA) -m 644 $(srcdir)/headers/gpm.h $(DESTDIR)$(includedir)/gpm.h
- 	for i in mev gpm-root; do \
--		$(INSTALL_PROGRAM) $$i $(bindir)/$$i ;\
-+		$(INSTALL_PROGRAM) $$i $(DESTDIR)$(bindir)/$$i ;\
- 	done
--	$(INSTALL_PROGRAM) disable-paste $(bindir)/disable-paste
-+	$(INSTALL_PROGRAM) disable-paste $(DESTDIR)$(bindir)/disable-paste
  	# POSIX requires the range of a for loop be nonempty and Bash
  	# 2.x goes along; unfortunately that means an additional
  	# headache in cases like this
  	if test "x@SHLIB@" != "x" ; then \
--		$(INSTALL_DATA) -m 644 libgpm.so.@abi_full@ $(libdir)/libgpm.so.@abi_full@ ;\
+-		$(INSTALL_DATA) -m 644 lib/libgpm.so.@abi_full@ $(libdir)/libgpm.so.@abi_full@ ;\
 -		cd $(libdir) && $(LN_S) -f libgpm.so.@abi_full@ libgpm.so ;\
-+		$(INSTALL_DATA) -m 644 libgpm.so.@abi_full@ $(DESTDIR)$(libdir)/libgpm.so.@abi_full@ ;\
++		$(INSTALL_DATA) -m 644 lib/libgpm.so.@abi_full@ $(DESTDIR)$(libdir)/libgpm.so.@abi_full@ ;\
 +		cd $(DESTDIR)$(libdir) && $(LN_S) -f libgpm.so.@abi_full@ libgpm.so ;\
        echo "WARNING: We installed a lib, you should now call ldconfig" ; \
--      echo "f.i.: ldconfig -n -l $(libdir)/libgpm.so.@abi_full@" ;\
-+      echo "f.i.: ldconfig -n -l $(DESTDIR)$(libdir)/libgpm.so.@abi_full@" ;\
+       echo "f.i.: ldconfig -n -l $(libdir)/libgpm.so.@abi_full@" ;\
        echo "Or to update everything just type ldconfig"; \
- 	fi
+@@ -107,7 +107,7 @@
  
---- ./Makefile.in.org	Sat Feb 23 22:19:07 2002
-+++ ./Makefile.in	Sun Jun 30 18:04:38 2002
-@@ -50,9 +50,9 @@
- 	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) $(STRIP)' install
+    # prog/
+ 	for i in $(PROG); do \
+-		$(INSTALL_PROGRAM) $$i $(bindir)/`echo $$i | sed 's,prog/,,'` ;\
++		$(INSTALL_PROGRAM) $$i $(DESTDIR)$(bindir)/`echo $$i | sed 's,prog/,,'` ;\
+ 	done
  
- installdirs:
--	$(MKDIR) $(libdir) $(bindir) $(sbindir) $(includedir) $(sysconfdir); \
-+	$(MKDIR) $(DESTDIR)$(libdir) $(DESTDIR)$(bindir) $(DESTDIR)$(sbindir) $(DESTDIR)$(includedir) $(DESTDIR)$(sysconfdir); \
- 	if test "x@ELISP@" != "x" ; then \
--		$(MKDIR) $(lispdir) ; \
-+		$(MKDIR) $(DESTDIR)$(lispdir) ; \
- 	fi
- 
- ### GENERIC
---- ./Makefile.include.in.org	Sat May 11 17:55:37 2002
-+++ ./Makefile.include.in	Sun Jun 30 18:15:17 2002
-@@ -46,7 +46,7 @@
- TEX               = @TEX@
- TEXINDEX          = @TEXINDEX@
- DVIPS             = @DVIPS@
--MAKEINFO          = @MAKEINFO@ --no-split
-+MAKEINFO          = @MAKEINFO@
- TEXI2HTML         = texi2html -monolithic
- 
- AR                = ar
+ install-strip:

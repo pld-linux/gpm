@@ -1,5 +1,5 @@
---- ./src/gpm-root.y.orgin	Sat Feb 23 16:42:23 2002
-+++ ./src/gpm-root.y	Mon Mar 11 17:32:37 2002
+--- ./src/prog/gpm-root.y.orgin	Sat Feb 23 16:42:23 2002
++++ ./src/prog/gpm-root.y	Mon Mar 11 17:32:37 2002
 @@ -433,9 +433,10 @@
  /*====================================================================*/
  void f__fix(struct passwd *pass)
