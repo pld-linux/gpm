@@ -1,40 +1,11 @@
-diff -Nur gpm-1.19.6.orig/Makefile.in gpm-1.19.6/Makefile.in
---- gpm-1.19.6.orig/Makefile.in	Wed Oct  3 23:17:45 2001
-+++ gpm-1.19.6/Makefile.in	Thu Oct 11 07:51:20 2001
-@@ -47,9 +47,9 @@
- 	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) $(STRIP)' install
- 
- installdirs:
--	$(MKDIR) $(libdir) $(bindir) $(sbindir) $(includedir) $(sysconfdir); \
-+	$(MKDIR) $(DESTDIR)$(libdir) $(DESTDIR)$(bindir) $(DESTDIR)$(sbindir) $(DESTDIR)$(includedir) $(DESTDIR)$(sysconfdir); \
- 	if test "x@ELISP@" != "x" ; then \
--		$(MKDIR) $(lispdir) ; \
-+		$(MKDIR) $(DESTDIR)$(lispdir) ; \
- 	fi
- 
- # do-all goes to all subdirectories and does all
-diff -Nur gpm-1.19.6.orig/contrib/Makefile.in gpm-1.19.6/contrib/Makefile.in
---- gpm-1.19.6.orig/contrib/Makefile.in	Tue Oct  2 01:07:18 2001
-+++ gpm-1.19.6/contrib/Makefile.in	Thu Oct 11 07:51:46 2001
-@@ -13,7 +13,7 @@
- 
- install: $(ELISP)
- 	if [ -n "$(ELISP)" ]; then for i in `echo $(ELISP)`; do \
--		$(INSTALL_DATA) -m 644 emacs/$$i $(lispdir)/$$i ;\
-+		$(INSTALL_DATA) -m 644 emacs/$$i $(DESTDIR)$(lispdir)/$$i ;\
- 	done; fi
- 
- %.elc: %.el
-diff -Nur gpm-1.19.6.orig/doc/Makefile.in gpm-1.19.6/doc/Makefile.in
---- gpm-1.19.6.orig/doc/Makefile.in	Thu Oct 11 07:50:03 2001
-+++ gpm-1.19.6/doc/Makefile.in	Thu Oct 11 07:54:38 2001
-@@ -87,27 +87,27 @@
+--- ./doc/Makefile.in.org	Sat Feb 23 16:42:23 2002
++++ ./doc/Makefile.in	Mon Mar 11 17:09:42 2002
+@@ -113,27 +113,27 @@
+ # install & uninstall
  
  installdirs:	
--	$(SHELL) $(top_builddir)/mkinstalldirs \
--		$(man1dir) $(man7dir) $(man8dir) $(infodir)	
-+	install -d \
-+		$(DESTDIR)$(man1dir) $(DESTDIR)$(man7dir) $(DESTDIR)$(man8dir) $(DESTDIR)$(infodir)	
+-	$(MKDIR) $(man1dir) $(man7dir) $(man8dir) $(infodir)	
++	$(MKDIR) $(DESTDIR)$(man1dir) $(DESTDIR)$(man7dir) $(DESTDIR)$(man8dir) $(DESTDIR)$(infodir)	
  
  install:	all installdirs
 -	$(INSTALL_DATA) -m 644 mev.1          $(man1dir)
@@ -42,13 +13,13 @@ diff -Nur gpm-1.19.6.orig/doc/Makefile.in gpm-1.19.6/doc/Makefile.in
 -	$(INSTALL_DATA) -m 644 gpm-root.1     $(man1dir)
 -	$(INSTALL_DATA) -m 644 gpm-types.7    $(man7dir)
 -	$(INSTALL_DATA) -m 644 gpm.8          $(man8dir)
--	$(INSTALL_DATA) -m 644 gpm.info       $(infodir)
+-	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info       $(infodir)
 +	$(INSTALL_DATA) -m 644 mev.1          $(DESTDIR)$(man1dir)
 +	$(INSTALL_DATA) -m 644 mouse-test.1   $(DESTDIR)$(man1dir)
 +	$(INSTALL_DATA) -m 644 gpm-root.1     $(DESTDIR)$(man1dir)
 +	$(INSTALL_DATA) -m 644 gpm-types.7    $(DESTDIR)$(man7dir)
 +	$(INSTALL_DATA) -m 644 gpm.8          $(DESTDIR)$(man8dir)
-+	$(INSTALL_DATA) -m 644 gpm.info       $(DESTDIR)$(infodir)
++	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info       $(DESTDIR)$(infodir)
  	# Use install-info if available
  	-if $(SHELL) -c 'install-info --version' >/dev/null 2>&1; then \
  	  if [ -f $(infodir)/dir ] ; then \
@@ -67,11 +38,10 @@ diff -Nur gpm-1.19.6.orig/doc/Makefile.in gpm-1.19.6/doc/Makefile.in
  	# Hmm.... shouldn't man pages be compressed too?
     # maybe they should, but at least at my system they are not.
  
-diff -Nur gpm-1.19.6.orig/src/Makefile.in gpm-1.19.6/src/Makefile.in
---- gpm-1.19.6.orig/src/Makefile.in	Tue Oct  2 16:26:25 2001
-+++ gpm-1.19.6/src/Makefile.in	Thu Oct 11 07:57:10 2001
-@@ -87,20 +87,20 @@
- STRIP = -s
+--- ./src/Makefile.in.org	Sat Feb 23 16:42:23 2002
++++ ./src/Makefile.in	Mon Mar 11 17:12:44 2002
+@@ -96,21 +96,21 @@
+ installdirs:
  
  install:	check 
 -	$(INSTALL_PROGRAM) gpm $(sbindir)/gpm
@@ -92,10 +62,36 @@ diff -Nur gpm-1.19.6.orig/src/Makefile.in gpm-1.19.6/src/Makefile.in
  	if test "x@SHLIB@" != "x" ; then \
 -		$(INSTALL_DATA) -m 644 libgpm.so.@abi_full@ $(libdir)/libgpm.so.@abi_full@ ;\
 -		cd $(libdir) && $(LN_S) -f libgpm.so.@abi_full@ libgpm.so ;\
--		ldconfig -n -l $(libdir)/libgpm.so.@abi_full@ ;\
 +		$(INSTALL_DATA) -m 644 libgpm.so.@abi_full@ $(DESTDIR)$(libdir)/libgpm.so.@abi_full@ ;\
 +		cd $(DESTDIR)$(libdir) && $(LN_S) -f libgpm.so.@abi_full@ libgpm.so ;\
-+		/sbin/ldconfig -n -l $(DESTDIR)$(libdir)/libgpm.so.@abi_full@ ;\
- 	fi		
+       echo "WARNING: We installed a lib, you should now call ldconfig" ; \
+-      echo "f.i.: ldconfig -n -l $(libdir)/libgpm.so.@abi_full@" ;\
++      echo "f.i.: ldconfig -n -l $(DESTDIR)$(libdir)/libgpm.so.@abi_full@" ;\
+       echo "Or to update everything just type ldconfig"; \
+ 	fi
  
- install-strip:
+--- ./contrib/Makefile.in.org	Sat Feb 23 16:42:23 2002
++++ ./contrib/Makefile.in	Mon Mar 11 17:05:54 2002
+@@ -13,7 +13,7 @@
+ 
+ install: all
+ 	if [ -n "$(ELISP)" ]; then for i in `echo $(ELISP)`; do \
+-		$(INSTALL_DATA) -m 644 $(srcdir)/emacs/$$i $(lispdir)/$$i ;\
++		$(INSTALL_DATA) -m 644 $(srcdir)/emacs/$$i $(DESTDIR)$(lispdir)/$$i ;\
+ 	done; fi
+ 
+ %.elc: %.el
+--- ./Makefile.in.org	Sat Feb 23 16:42:23 2002
++++ ./Makefile.in	Mon Mar 11 17:04:41 2002
+@@ -50,9 +50,9 @@
+ 	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) $(STRIP)' install
+ 
+ installdirs:
+-	$(MKDIR) $(libdir) $(bindir) $(sbindir) $(includedir) $(sysconfdir); \
++	$(MKDIR) $(DESTDIR)$(libdir) $(DESTDIR)$(bindir) $(DESTDIR)$(sbindir) $(DESTDIR)$(includedir) $(DESTDIR)$(sysconfdir); \
+ 	if test "x@ELISP@" != "x" ; then \
+-		$(MKDIR) $(lispdir) ; \
++		$(MKDIR) $(DESTDIR)$(lispdir) ; \
+ 	fi
+ 
+ ### GENERIC
