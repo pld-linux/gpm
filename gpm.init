@@ -52,7 +52,7 @@ case "$1" in
 		if [ -n "$REPEATER" ] && [ "$REPEATER" != "no" ]; then
 			OPTIONS="$OPTIONS -R"
 		fi
-		daemon gpm $OPTIONS
+		daemon gpm $OPTIONS < /dev/null
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/gpm
 	else
