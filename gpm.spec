@@ -4,7 +4,7 @@ Summary(fr):	Gestion générale de la souris pour Linux
 Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
-Version:	1.17.9
+Version:	1.18.0
 Release:	1
 Copyright:	GPL
 Group:		Daemons
@@ -17,7 +17,8 @@ Patch1:		gpm-nops.patch
 Patch2:		gpm-non-root.patch
 Patch3:		gpm-DESTDIR.patch
 Prereq:		/sbin/chkconfig
-Prereq:		/sbin/install-info
+Prereq:		/usr/sbin/fix-info-dir
+Prereq:		/sbin/ldconfig
 Requires:	rc-scripts
 Buildroot:	/tmp/%{name}-%{version}-root
 
@@ -129,11 +130,12 @@ install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
 (echo "MOUSETYPE="; echo "XEMU3=") >> $RPM_BUILD_ROOT/etc/sysconfig/mouse
 %endif
 
-gzip -9nf $RPM_BUILD_ROOT%{_datadir}/{info/gpm.info*,man/man{1,8}/*}
+gzip -9nf $RPM_BUILD_ROOT%{_datadir}/{info/gpm.info*,man/man{1,8}/*} \
+	README* *.conf
 
 %post
 /sbin/ldconfig
-/sbin/install-info %{_infodir}/gpm.info.gz /etc/info-dir
+/usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 /sbin/chkconfig --add gpm
 
@@ -143,29 +145,30 @@ fi
 
 %preun
 if [ "$1" = "0" ]; then
-	/sbin/install-info %{_infodir}/gpm.info.gz --delete /etc/info-dir
 	/sbin/chkconfig --del gpm
 	/etc/rc.d/init.d/gpm stop >&2
 fi
 
-%postun -p /sbin/ldconfig
+%postun
+/sbin/ldconfig
+/usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-
+%doc README*gz *.conf*
 %config(noreplace) %{_sysconfdir}/gpm-root.conf
+%attr(754,root,root) /etc/rc.d/init.d/gpm
 %config(noreplace) %verify(not size mtime md5) /etc/sysconfig/mouse
 
-%attr(754,root,root) /etc/rc.d/init.d/gpm
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
+%attr(755,root,root) %{_libdir}/lib*.so.*
 
 %{_infodir}/gpm.info*
 %{_mandir}/man[18]/*
-%attr(755,root,root) %{_libdir}/lib*.so.*
 
 %files devel
 %defattr(644,root,root,755)
