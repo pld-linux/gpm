@@ -15,7 +15,7 @@ Group(pl):	Serwery
 Source0:	ftp://arcana.linux.it/pub/gpm/%{name}-%{version}.tar.bz2
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
-Source3:	%{name}-non-english-man-pages.tar.bz2
+Source3:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-nops.patch
 Patch2:		%{name}-DESTDIR.patch
