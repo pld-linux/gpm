@@ -4,6 +4,7 @@ Summary:	General Purpose Mouse support for Linux
 Summary(de):	Allgemeine Mausunterstützung für Linux
 Summary(es):	Soporte para ratón en terminales modo texto
 Summary(fr):	Gestion générale de la souris pour Linux
+Summary(ja):	Linux¥³¥ó¥½¡¼¥ë¤Î¤¿¤á¤Î¥Þ¥¦¥¹¡¦¥µ¡¼¥Ð¡£
 Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(pt_BR):	Suporte para mouse em terminais modo texto
 Summary(ru):	óÅÒ×ÅÒ ÒÁÂÏÔÙ Ó ÍÙÛØÀ ÄÌÑ ËÏÎÓÏÌÉ Linux
@@ -62,10 +63,15 @@ des opérations de copier/coller avec la souris sur les consoles.
 Comprend un programme pour permettre l'apparition de menus déroulants
 grace à un clic droit avec la souris.
 
+%description -l ja
+gpm ¤Ïemacs¥¨¥Ç¥£¥¿¤äMidnight
+CommanderÅù¤Î¥Æ¥­¥¹¥È¥Ù¡¼¥¹¤ÇÆ°ºî¤¹¤ë¥¢¥×¥ê¥±¡¼¥·¥ç¥ó
+¤ËÂÐ¤¹¤ë¥Þ¥¦¥¹¥µ¥Ý¡¼¥È¤ò¹Ô¤¦¥Ñ¥Ã¥±¡¼¥¸¡£
+
 %description -l pl
 GPM zapewnia wsparcie dla myszki w systemie Linux na konsoli
-systemowej. Dziêki niemu mo¿na zaznaczaæ fragmenty tekstu na konsoli
-i wklejaæ je w edytowany plik tekstowy. Operacje te s± najczê¶ciej
+systemowej. Dziêki niemu mo¿na zaznaczaæ fragmenty tekstu na konsoli i
+wklejaæ je w edytowany plik tekstowy. Operacje te s± najczê¶ciej
 dokonywane przez przytrzymanie lewego klawisza myszki (operacja
 zaznaczania fragmentu tekstu) i nastêpnie wci¶niêcie ¶rodkowego
 klawisza myszki (operacja wklejania tekstu).
@@ -113,6 +119,7 @@ programów ze wsparciem do obs³ugi myszki.
 %package devel
 Summary:	Header files and documentation for writing mouse driven programs
 Summary(es):	Bibliotecas y archivos de inclusión para desarrollar programas que utilicen ratón
+Summary(ja):	gpm¤Î³«È¯¥é¥¤¥Ö¥é¥ê
 Summary(pl):	Pliki nag³ówkowe i dokumentacja do gpm
 Summary(pt_BR):	Bibliotecas e arquivos de inclusão para desenvolver programas que utilizam mouse
 Group:		Development/Libraries
@@ -134,6 +141,11 @@ ratón.
 %description devel -l fr
 Ce paquetage permet de développer des programmes en mode texte tirant
 avantage de la souris.
+
+%description devel -l ja
+
+gpm-devel¤Ïgpm¤òÍøÍÑ¤·¤¿¥¢¥×¥ê¥±¡¼¥·¥ç¥ó³«È¯¤ËÉ¬Í×¤Ê¥é¥¤¥Ö¥é¥ê¤ä¥Ø¥Ã¥À¥Õ¥¡¥¤¥ë
+¤ò¥Ñ¥Ã¥±¡¼¥¸¥ó¥°¤·¤¿¤â¤Î¡£
 
 %description devel -l pl
 Pliki nag³ówkowe i dokumentacja dla gpm. Dziêki nim bêdziesz móg³
