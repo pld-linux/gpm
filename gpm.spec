@@ -15,6 +15,7 @@ Source2:	gpm.sysconfig
 Patch0:		gpm-info.patch
 Patch1:		gpm-nops.patch
 Patch2:		gpm-non-root.patch
+Patch3:		gpm-DESTDIR.patch
 Prereq:		/sbin/chkconfig
 Prereq:		/sbin/install-info
 Buildroot:	/tmp/%{name}-%{version}-root
@@ -98,6 +99,7 @@ Biblioteki statyczne gpm.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 %configure \
