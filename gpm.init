@@ -16,7 +16,7 @@ MOUSECFG=/etc/sysconfig/mouse
 
 case "$1" in
   start)
-	echo -n "Starting gpm mouse services: "
+	show "Starting gpm mouse services:"
 	if [ -f "$MOUSECFG" ]; then
 		. "$MOUSECFG"
 	else
@@ -43,9 +43,10 @@ case "$1" in
 	touch /var/lock/subsys/gpm
 	;;
   stop)
-	echo -n "Shutting down gpm mouse services: "
+	show "Shutting down gpm mouse services: "
+	busy
 	gpm -k
-	echo -n "gpm"
+	deltext; ok
 	rm -f /var/lock/subsys/gpm
 	echo
 	;;
