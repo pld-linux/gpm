@@ -116,7 +116,7 @@ LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--disable-debug \
 	--with-curses
-make
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
