@@ -1,5 +1,4 @@
 
-%define		_rc	rc1
 Summary:	General Purpose Mouse support for Linux
 Summary(de):	Allgemeine MausunterstЭtzung fЭr Linux
 Summary(es):	Soporte para ratСn en terminales modo texto
@@ -12,10 +11,10 @@ Summary(tr):	Genel amaГlЩ fare desteПi
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
 Version:	1.20.1
-Release:	%{_rc}.4
+Release:	1
 License:	GPL
 Group:		Daemons
-Source0:	ftp://arcana.linux.it/pub/gpm/%{name}-%{version}%{_rc}.tar.bz2
+Source0:	ftp://arcana.linux.it/pub/gpm/%{name}-%{version}.tar.bz2
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Source3:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
@@ -206,7 +205,7 @@ linkar a biblioteca gpm estaticamente.
 мишу.
 
 %prep
-%setup -q -n %{name}-cvs
+%setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -233,7 +232,7 @@ install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,/etc/sysconfig}
 	DESTDIR=$RPM_BUILD_ROOT
 
 install conf/gpm-root.conf $RPM_BUILD_ROOT%{_sysconfdir}
-install src/mouse-test src/hltest $RPM_BUILD_ROOT%{_bindir}
+install src/prog/mouse-test src/prog/hltest $RPM_BUILD_ROOT%{_bindir}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
@@ -268,7 +267,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc BUGS ChangeLog Changes README TODO doc/FAQ doc/README* conf/*.conf
+%doc BUGS Changelog Changes README TODO doc/FAQ doc/README* conf/*.conf
 %config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gpm-root.conf
 %attr(754,root,root) /etc/rc.d/init.d/gpm
 %config(noreplace) %verify(not size mtime md5) /etc/sysconfig/mouse
