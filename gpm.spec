@@ -7,7 +7,7 @@ Summary(ru):	Сервер работы с мышью для консоли Linux
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
 Version:	1.19.3
-Release:	20
+Release:	21
 License:	GPL
 Group:		Daemons
 Group(de):	Server
@@ -24,7 +24,6 @@ Patch5:		%{name}-root.patch
 Patch6:		%{name}-mawk.patch
 Patch7:		%{name}-OPEN_MAX.patch
 Patch8:		%{name}-limits.patch
-Patch9:		%{name}-secenhance.patch
 Patch10:	%{name}-serialconsole.patch
 Patch11:	%{name}-tempfilesecurity.patch
 Requires:	%{name}-libs = %{version}
@@ -177,11 +176,11 @@ Biblioteki statyczne gpm.
 #%patch6 -p1
 %patch7 -p1
 %patch8 -p1
-%patch9 -p1
 %patch10 -p1
 %patch11 -p1
 
 %build
+autoconf
 %configure \
 	--disable-debug \
 	--with-curses
