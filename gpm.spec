@@ -6,7 +6,7 @@ Summary(tr):	Genel amaГlЩ fare desteПi
 Summary(ru):	Сервер работы с мышью для консоли Linux
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
-Version:	1.19.5
+Version:	1.19.6
 Release:	1
 License:	GPL
 Group:		Daemons
@@ -24,12 +24,13 @@ Patch5:		%{name}-mawk.patch
 Patch6:		%{name}-OPEN_MAX.patch
 Patch7:		%{name}-limits.patch
 Patch8:		%{name}-serialconsole.patch
-Patch9:		%{name}-nosecenhance.patch
+Patch9:		%{name}-gawk.patch
 Requires:	%{name}-libs = %{version}
 Prereq:		rc-scripts >= 0.2.0
 Prereq:		/sbin/chkconfig
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	gawk
+BuildRequires:	bison
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -212,7 +213,7 @@ install src/mouse-test src/hltest $RPM_BUILD_ROOT%{_bindir}
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
 
-gzip -9nf ChangeLog Changes FAQ README TODO doc/README* conf/*.conf
+gzip -9nf BUGS ChangeLog Changes README TODO doc/FAQ doc/README* conf/*.conf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -241,7 +242,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc *.gz doc/README* *.conf*
+%doc *.gz doc/*.gz conf/*.conf*
 %config(noreplace) %{_sysconfdir}/gpm-root.conf
 %attr(754,root,root) /etc/rc.d/init.d/gpm
 %config(noreplace) %verify(not size mtime md5) /etc/sysconfig/mouse

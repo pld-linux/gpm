@@ -1,31 +1,35 @@
---- gpm-1.19.5/doc/Makefile.in.orig	Mon Sep 24 21:42:08 2001
-+++ gpm-1.19.5/doc/Makefile.in	Mon Sep 24 21:45:38 2001
-@@ -38,7 +38,7 @@
- TEX = tex
- TEXINDEX = texindex
- DVIPS = dvips
--MAKEINFO = makeinfo --no-split
-+MAKEINFO = makeinfo
- DIFF = diff
+diff -Nur gpm-1.19.6.orig/Makefile.include.in gpm-1.19.6/Makefile.include.in
+--- gpm-1.19.6.orig/Makefile.include.in	Tue Oct  2 15:40:26 2001
++++ gpm-1.19.6/Makefile.include.in	Thu Oct 11 07:59:26 2001
+@@ -42,7 +42,7 @@
+ TEX = @TEX@
+ TEXINDEX = @TEXINDEX@
+ DVIPS = @DVIPS@
+-MAKEINFO = @MAKEINFO@ --no-split
++MAKEINFO = @MAKEINFO@
  TEXI2HTML = texi2html -monolithic
  
-@@ -89,7 +89,7 @@
+ AR = ar
+diff -Nur gpm-1.19.6.orig/doc/Makefile.in gpm-1.19.6/doc/Makefile.in
+--- gpm-1.19.6.orig/doc/Makefile.in	Thu Oct 11 07:58:29 2001
++++ gpm-1.19.6/doc/Makefile.in	Thu Oct 11 08:02:06 2001
+@@ -59,7 +59,7 @@
+ %.ps: %.dvi
  		$(DVIPS) -f $< > $@; \
- 	fi
  
 -%.info: %.texinfo
 +%.info: %.texinfo doc.gpm
- 	if [ "$ex_makeinfo" = yes ]; then \
  		$(MAKEINFO) $< -o $@; \
- 	fi
-@@ -128,21 +128,7 @@
- 	$(INSTALL_DATA) -m 644 $(srcdir)/gpm-root.1     $(DESTDIR)$(man1dir)
- 	$(INSTALL_DATA) -m 644 $(srcdir)/gpm-types.7    $(DESTDIR)$(man7dir)
- 	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.8          $(DESTDIR)$(man8dir)
--	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info       $(DESTDIR)$(infodir)
+ 
+ 
+@@ -95,21 +95,7 @@
+ 	$(INSTALL_DATA) -m 644 gpm-root.1     $(DESTDIR)$(man1dir)
+ 	$(INSTALL_DATA) -m 644 gpm-types.7    $(DESTDIR)$(man7dir)
+ 	$(INSTALL_DATA) -m 644 gpm.8          $(DESTDIR)$(man8dir)
+-	$(INSTALL_DATA) -m 644 gpm.info       $(DESTDIR)$(infodir)
 -	# Use install-info if available
 -	-if $(SHELL) -c 'install-info --version' >/dev/null 2>&1; then \
--	  if [ -f $(DESTDIR)$(infodir)/dir ] ; then \
+-	  if [ -f $(infodir)/dir ] ; then \
 -		install-info --dir-file=$(DESTDIR)$(infodir)/dir $(DESTDIR)$(infodir)/gpm.info; \
 -	  fi; \
 -	fi
@@ -37,7 +41,7 @@
 -		&& gzip -f $(DESTDIR)$(infodir)/gpm.info
 -	# Hmm.... shouldn't man pages be compressed too?
 -   # maybe they should, but at least at my system they are not.
-+	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info*      $(DESTDIR)$(infodir)
++	$(INSTALL_DATA) -m 644 gpm.info*      $(DESTDIR)$(infodir)
  
  # This potentially leaves around cached manpages,
  # e.g. /var/cache/man/cat1/mev.1.gz.  Deleting these is not our job,

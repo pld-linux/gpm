@@ -1,66 +1,58 @@
-diff -Nur gpm-1.19.5.orig/Makefile.in gpm-1.19.5/Makefile.in
---- gpm-1.19.5.orig/Makefile.in	Sun Sep 23 20:07:26 2001
-+++ gpm-1.19.5/Makefile.in	Mon Sep 24 21:36:45 2001
-@@ -83,13 +83,13 @@
+diff -Nur gpm-1.19.6.orig/Makefile.in gpm-1.19.6/Makefile.in
+--- gpm-1.19.6.orig/Makefile.in	Wed Oct  3 23:17:45 2001
++++ gpm-1.19.6/Makefile.in	Thu Oct 11 07:51:20 2001
+@@ -47,9 +47,9 @@
+ 	$(MAKE) INSTALL_PROGRAM='$(INSTALL_PROGRAM) $(STRIP)' install
  
  installdirs:
- 	$(SHELL) $(srcdir)/mkinstalldirs \
--	$(libdir) \
--	$(bindir) \
--	$(sbindir) \
--	$(includedir) \
--	$(sysconfdir) 
-+	$(DESTDIR)$(libdir) \
-+	$(DESTDIR)$(bindir) \
-+	$(DESTDIR)$(sbindir) \
-+	$(DESTDIR)$(includedir) \
-+	$(DESTDIR)$(sysconfdir) 
+-	$(MKDIR) $(libdir) $(bindir) $(sbindir) $(includedir) $(sysconfdir); \
++	$(MKDIR) $(DESTDIR)$(libdir) $(DESTDIR)$(bindir) $(DESTDIR)$(sbindir) $(DESTDIR)$(includedir) $(DESTDIR)$(sysconfdir); \
  	if test "x@ELISP@" != "x" ; then \
--		$(SHELL) $(srcdir)/mkinstalldirs $(lispdir) ;\
-+		$(SHELL) $(srcdir)/mkinstalldirs $(DESTDIR)$(lispdir) ;\
+-		$(MKDIR) $(lispdir) ; \
++		$(MKDIR) $(DESTDIR)$(lispdir) ; \
  	fi
  
- # Note: this leaves around /usr/lib/libgpm.so.1 and /usr/lib/libgpm.so.1.nn
-diff -Nur gpm-1.19.5.orig/contrib/Makefile.in gpm-1.19.5/contrib/Makefile.in
---- gpm-1.19.5.orig/contrib/Makefile.in	Sun Sep 23 20:23:18 2001
-+++ gpm-1.19.5/contrib/Makefile.in	Mon Sep 24 21:37:31 2001
-@@ -6,7 +6,7 @@
+ # do-all goes to all subdirectories and does all
+diff -Nur gpm-1.19.6.orig/contrib/Makefile.in gpm-1.19.6/contrib/Makefile.in
+--- gpm-1.19.6.orig/contrib/Makefile.in	Tue Oct  2 01:07:18 2001
++++ gpm-1.19.6/contrib/Makefile.in	Thu Oct 11 07:51:46 2001
+@@ -13,7 +13,7 @@
  
- install:
+ install: $(ELISP)
  	if [ -n "$(ELISP)" ]; then for i in `echo $(ELISP)`; do \
 -		$(INSTALL_DATA) -m 644 emacs/$$i $(lispdir)/$$i ;\
 +		$(INSTALL_DATA) -m 644 emacs/$$i $(DESTDIR)$(lispdir)/$$i ;\
  	done; fi
  
- uninstall:
-diff -Nur gpm-1.19.5.orig/doc/Makefile.in gpm-1.19.5/doc/Makefile.in
---- gpm-1.19.5.orig/doc/Makefile.in	Mon Sep 24 21:35:48 2001
-+++ gpm-1.19.5/doc/Makefile.in	Mon Sep 24 21:39:50 2001
-@@ -120,27 +120,27 @@
+ %.elc: %.el
+diff -Nur gpm-1.19.6.orig/doc/Makefile.in gpm-1.19.6/doc/Makefile.in
+--- gpm-1.19.6.orig/doc/Makefile.in	Thu Oct 11 07:50:03 2001
++++ gpm-1.19.6/doc/Makefile.in	Thu Oct 11 07:54:38 2001
+@@ -87,27 +87,27 @@
  
  installdirs:	
- 	$(SHELL) $(top_srcdir)/mkinstalldirs \
+-	$(SHELL) $(top_builddir)/mkinstalldirs \
 -		$(man1dir) $(man7dir) $(man8dir) $(infodir)	
++	install -d \
 +		$(DESTDIR)$(man1dir) $(DESTDIR)$(man7dir) $(DESTDIR)$(man8dir) $(DESTDIR)$(infodir)	
  
  install:	all installdirs
--	$(INSTALL_DATA) -m 644 $(srcdir)/mev.1          $(man1dir)
--	$(INSTALL_DATA) -m 644 $(srcdir)/mouse-test.1   $(man1dir)
--	$(INSTALL_DATA) -m 644 $(srcdir)/gpm-root.1     $(man1dir)
--	$(INSTALL_DATA) -m 644 $(srcdir)/gpm-types.7    $(man7dir)
--	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.8          $(man8dir)
--	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info       $(infodir)
-+	$(INSTALL_DATA) -m 644 $(srcdir)/mev.1          $(DESTDIR)$(man1dir)
-+	$(INSTALL_DATA) -m 644 $(srcdir)/mouse-test.1   $(DESTDIR)$(man1dir)
-+	$(INSTALL_DATA) -m 644 $(srcdir)/gpm-root.1     $(DESTDIR)$(man1dir)
-+	$(INSTALL_DATA) -m 644 $(srcdir)/gpm-types.7    $(DESTDIR)$(man7dir)
-+	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.8          $(DESTDIR)$(man8dir)
-+	$(INSTALL_DATA) -m 644 $(srcdir)/gpm.info       $(DESTDIR)$(infodir)
+-	$(INSTALL_DATA) -m 644 mev.1          $(man1dir)
+-	$(INSTALL_DATA) -m 644 mouse-test.1   $(man1dir)
+-	$(INSTALL_DATA) -m 644 gpm-root.1     $(man1dir)
+-	$(INSTALL_DATA) -m 644 gpm-types.7    $(man7dir)
+-	$(INSTALL_DATA) -m 644 gpm.8          $(man8dir)
+-	$(INSTALL_DATA) -m 644 gpm.info       $(infodir)
++	$(INSTALL_DATA) -m 644 mev.1          $(DESTDIR)$(man1dir)
++	$(INSTALL_DATA) -m 644 mouse-test.1   $(DESTDIR)$(man1dir)
++	$(INSTALL_DATA) -m 644 gpm-root.1     $(DESTDIR)$(man1dir)
++	$(INSTALL_DATA) -m 644 gpm-types.7    $(DESTDIR)$(man7dir)
++	$(INSTALL_DATA) -m 644 gpm.8          $(DESTDIR)$(man8dir)
++	$(INSTALL_DATA) -m 644 gpm.info       $(DESTDIR)$(infodir)
  	# Use install-info if available
  	-if $(SHELL) -c 'install-info --version' >/dev/null 2>&1; then \
--	  if [ -f $(infodir)/dir ] ; then \
+ 	  if [ -f $(infodir)/dir ] ; then \
 -		install-info --dir-file=$(infodir)/dir $(infodir)/gpm.info; \
-+	  if [ -f $(DESTDIR)$(infodir)/dir ] ; then \
 +		install-info --dir-file=$(DESTDIR)$(infodir)/dir $(DESTDIR)$(infodir)/gpm.info; \
  	  fi; \
  	fi
@@ -75,10 +67,10 @@ diff -Nur gpm-1.19.5.orig/doc/Makefile.in gpm-1.19.5/doc/Makefile.in
  	# Hmm.... shouldn't man pages be compressed too?
     # maybe they should, but at least at my system they are not.
  
-diff -Nur gpm-1.19.5.orig/src/Makefile.in gpm-1.19.5/src/Makefile.in
---- gpm-1.19.5.orig/src/Makefile.in	Sun Sep 23 19:59:05 2001
-+++ gpm-1.19.5/src/Makefile.in	Mon Sep 24 21:41:33 2001
-@@ -114,24 +114,24 @@
+diff -Nur gpm-1.19.6.orig/src/Makefile.in gpm-1.19.6/src/Makefile.in
+--- gpm-1.19.6.orig/src/Makefile.in	Tue Oct  2 16:26:25 2001
++++ gpm-1.19.6/src/Makefile.in	Thu Oct 11 07:57:10 2001
+@@ -87,20 +87,20 @@
  STRIP = -s
  
  install:	check 
@@ -97,11 +89,6 @@ diff -Nur gpm-1.19.5.orig/src/Makefile.in gpm-1.19.5/src/Makefile.in
  	# POSIX requires the range of a for loop be nonempty and Bash
  	# 2.x goes along; unfortunately that means an additional
  	# headache in cases like this
- 	if test "x@ELISP@" != "x" ; then \
- 	for i in `echo @ELISP@`; do \
--		$(INSTALL_DATA) -m 644 $$i $(lispdir)/$$i ;\
-+		$(INSTALL_DATA) -m 644 $$i $(DESTDIR)$(lispdir)/$$i ;\
- 	done ; fi
  	if test "x@SHLIB@" != "x" ; then \
 -		$(INSTALL_DATA) -m 644 libgpm.so.@abi_full@ $(libdir)/libgpm.so.@abi_full@ ;\
 -		cd $(libdir) && $(LN_S) -f libgpm.so.@abi_full@ libgpm.so ;\

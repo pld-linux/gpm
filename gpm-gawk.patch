@@ -1,0 +1,11 @@
+--- gpm-1.19.6/doc/Makefile.in.orig	Thu Oct 11 08:07:39 2001
++++ gpm-1.19.6/doc/Makefile.in	Thu Oct 11 08:09:09 2001
+@@ -64,7 +64,7 @@
+ 
+ 
+ %doc.txt: %.info
+-	$(AWK) -f $(srcdir)/mktxt $< > $@
++	$(srcdir)/mktxt $< > $@
+ 
+ # Main portion
+ 
