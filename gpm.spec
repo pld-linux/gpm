@@ -132,12 +132,6 @@ strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
 install %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/rc.d/init.d/gpm
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/mouse
 
-%ifarch sparc
-(echo MOUSETYPE=\"sun\"; echo XEMU3=no) >> $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/mouse
-%else
-(echo "MOUSETYPE="; echo "XEMU3=") >> $RPM_BUILD_ROOT%{_sysconfdir}/sysconfig/mouse
-%endif
-
 gzip -9nf $RPM_BUILD_ROOT%{_datadir}/{info/gpm.info*,man/man{1,8}/*} \
 	README* *.conf
 
