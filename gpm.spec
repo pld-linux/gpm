@@ -5,7 +5,7 @@ Summary(pl):	Wsparcie dla myszki w systemie Linux
 Summary(tr):	Genel amaçlý fare desteði
 Name:		gpm
 Version:	1.19.3
-Release:	2
+Release:	3
 License:	GPL
 Group:		Daemons
 Group(pl):	Serwery
@@ -19,6 +19,7 @@ Patch3:		%{name}-DESTDIR.patch
 Patch4:		%{name}-info_fixes.patch
 Patch5:		%{name}-root.patch
 Patch6:		%{name}-mawk.patch
+Patch7:		%{name}-OPEN_MAX.patch
 Prereq:		/sbin/chkconfig
 Prereq:		/sbin/ldconfig
 Requires:	rc-scripts >= 0.2.0
@@ -113,6 +114,7 @@ Biblioteki statyczne gpm.
 %patch4 -p1
 %patch5 -p1
 #%patch6 -p1
+%patch7 -p1
 
 %build
 LDFLAGS="-s"; export LDFLAGS
