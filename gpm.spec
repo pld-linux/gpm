@@ -45,8 +45,6 @@ Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name}-libs = %{epoch}:%{version}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_sysconfdir	/etc
-
 %description
 GPM adds mouse support to text-based Linux applications such as emacs,
 Midnight Commander, and more. It also provides console cut-and-paste
