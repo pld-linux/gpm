@@ -122,7 +122,7 @@ make
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,/etc/sysconfig}
 
-make install-strip DESTDIR=$RPM_BUILD_ROOT
+%{__make} install-strip DESTDIR=$RPM_BUILD_ROOT
 
 install gpm-root.conf $RPM_BUILD_ROOT%{_sysconfdir}
 install mouse-test hltest $RPM_BUILD_ROOT%{_bindir}
