@@ -61,12 +61,12 @@ Comprend un programme pour permettre l'apparition de menus déroulants
 grace à un clic droit avec la souris.
 
 %description -l pl
-GPM zapewnia wsparcie dla myszki dla systemu Linux na konsoli
-systemowej. Dziêki niemu mo¿na zaznaczaæ fragmenty tekstu na konsoli i
-wklejaæ je w edytowany plik tekstowy. Operacje te s± najczê¶ciej
-dokonywane przez wci¶niêcie prawego klawisza myszki (operacja
-zaznaczania fragmentu tekstu) i nastêpnie wci¶niêcie klawisza
-<Shift>+¶rodkowego klawisza myszki (operacja wklejania tekstu).
+GPM zapewnia wsparcie dla myszki w systemie Linux na konsoli
+systemowej. Dziêki niemu mo¿na zaznaczaæ fragmenty tekstu na konsoli
+i wklejaæ je w edytowany plik tekstowy. Operacje te s± najczê¶ciej
+dokonywane przez przytrzymanie lewego klawisza myszki (operacja
+zaznaczania fragmentu tekstu) i nastêpnie wci¶niêcie ¶rodkowego
+klawisza myszki (operacja wklejania tekstu).
 
 %description -l pt_BR
 Gpm acrescenta suporte a mouse para aplicações Linux baseadas em modo
@@ -250,8 +250,8 @@ fi
 %postun
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
-%post libs -p /sbin/ldconfig
-%postun libs -p /sbin/ldconfig
+%post	libs -p /sbin/ldconfig
+%postun	libs -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
