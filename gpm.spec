@@ -19,7 +19,6 @@ Patch3:		gpm-DESTDIR.patch
 Patch4:		gpm-info_fixes.patch
 Patch5:		gpm-root.patch
 Prereq:		/sbin/chkconfig
-Prereq:		/usr/sbin/fix-info-dir
 Prereq:		/sbin/ldconfig
 Requires:	rc-scripts >= 0.2.0
 BuildRequires:	ncurses-devel >= 5.0
@@ -137,7 +136,7 @@ gzip -9nf $RPM_BUILD_ROOT%{_datadir}/{info/gpm.info*,man/man{1,8}/*} \
 
 %post
 /sbin/ldconfig
-%{_sbindir}/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+[ -x /usr/sbin/fix-info-dir ] && /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 /sbin/chkconfig --add gpm
 
@@ -155,7 +154,7 @@ fi
 
 %postun
 /sbin/ldconfig
-/usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+[ -x /usr/sbin/fix-info-dir ] && /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
