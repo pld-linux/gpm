@@ -12,21 +12,6 @@ Version:	1.19.6
 Release:	6
 License:	GPL
 Group:		Daemons
-Group(cs):	DИmoni
-Group(da):	DФmoner
-Group(de):	Server
-Group(es):	Servidores
-Group(fr):	Serveurs
-Group(is):	PЗkar
-Group(it):	Demoni
-Group(ja):	╔г║╪╔Б╔С
-Group(no):	Daemoner
-Group(pl):	Serwery
-Group(pt):	Servidores
-Group(ru):	Демоны
-Group(sl):	Stre╬niki
-Group(sv):	Demoner
-Group(uk):	Демони
 Source0:	ftp://arcana.linux.it/pub/gpm/%{name}-%{version}.tar.bz2
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
@@ -114,22 +99,6 @@ emacs, Midnight Commander та ╕нших. Також забезпечу╓ операц╕╖ вир╕зки
 Summary:	GPM libraries
 Summary(pl):	Biblioteki GPM
 Group:		Libraries
-Group(cs):	Knihovny
-Group(da):	Biblioteker
-Group(de):	Bibliotheken
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(is):	AПgerПasЖfn
-Group(it):	Librerie
-Group(ja):	╔И╔╓╔ж╔И╔Й
-Group(no):	Biblioteker
-Group(pl):	Biblioteki
-Group(pt):	Bibliotecas
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(sl):	Knji╬nice
-Group(sv):	Bibliotek
-Group(uk):	Б╕бл╕отеки
 Conflicts:	gpm < 1.19.3-7
 Obsoletes:	libgpm1
 
@@ -147,22 +116,6 @@ Summary(es):	Bibliotecas y archivos de inclusiСn para desarrollar programas que 
 Summary(pl):	Pliki nagЁСwkowe i dokumentacja do gpm
 Summary(pt_BR):	Bibliotecas e arquivos de inclusЦo para desenvolver programas que utilizam mouse
 Group:		Development/Libraries
-Group(cs):	VЩvojovИ prostЬedky/Knihovny
-Group(da):	Udvikling/Biblioteker
-Group(de):	Entwicklung/Bibliotheken
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(is):	чrСunartСl/AПgerПasЖfn
-Group(it):	Sviluppo/Librerie
-Group(ja):	Ё╚х╞/╔И╔╓╔ж╔И╔Й
-Group(no):	Utvikling/Bibliotek
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(pt):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(sl):	Razvoj/Knji╬nice
-Group(sv):	Utveckling/Bibliotek
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-libs = %{version}
 Obsoletes:	libgpm1-devel
 
@@ -215,22 +168,6 @@ Summary(pt_BR):	Biblioteca de desenvolvimento estАtica do gpm
 Summary(ru):	Статическая библиотека для разработки программ, использующих мышь Статическая
 Summary(uk):	Статична б╕бл╕отека для розробки програм, що використовують мишу
 Group:		Development/Libraries
-Group(cs):	VЩvojovИ prostЬedky/Knihovny
-Group(da):	Udvikling/Biblioteker
-Group(de):	Entwicklung/Bibliotheken
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(is):	чrСunartСl/AПgerПasЖfn
-Group(it):	Sviluppo/Librerie
-Group(ja):	Ё╚х╞/╔И╔╓╔ж╔И╔Й
-Group(no):	Utvikling/Bibliotek
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(pt):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(sl):	Razvoj/Knji╬nice
-Group(sv):	Utveckling/Bibliotek
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
