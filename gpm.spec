@@ -202,14 +202,24 @@ install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
 gzip -9nf README* *.conf
 
 %post
-%fix_info_dir
-%chkconfig_add
+[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+
+/sbin/chkconfig --add gpm
+
+if [ -f /var/lock/subsys/gpm ]; then
+	/etc/rc.d/init.d/gpm restart >&2
+fi
 
 %preun
-%chkconfig_del
+if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/gpm ]; then
+		/etc/rc.d/init.d/gpm stop >&2
+	fi
+	/sbin/chkconfig --del gpm
+fi
 
 %postun
-%fix_info_dir
+[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 %post   libs -p /sbin/ldconfig
 %postun libs -p /sbin/ldconfig
