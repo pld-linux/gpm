@@ -23,7 +23,7 @@ Prereq:		/sbin/chkconfig
 Prereq:		/sbin/ldconfig
 Requires:	rc-scripts >= 0.2.0
 BuildRequires:	ncurses-devel >= 5.0
-BuildRequires:	mawk
+BuildRequires:	gawk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sysconfdir	/etc
@@ -112,7 +112,7 @@ Biblioteki statyczne gpm.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1
+#%patch6 -p1
 
 %build
 LDFLAGS="-s"; export LDFLAGS
