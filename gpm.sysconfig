@@ -1,10 +1,10 @@
 # Customized settings for gpm
 # Check out "man gpm" for detailed setup options
 
-# Mouse device (for example /dev/mouse, /dev/ttyS0, /dev/psaux)
+# Mouse device (for example /dev/mouse, /dev/ttyS0, /dev/psaux, /dev/input/mice)
 DEVICE=/dev/mouse
 
-# Mouse type (ms, msc, ps2, ...) Use "gpm -t help" for detailed list
+# Mouse type (ms, msc, ps2, ...) Use "gpm -m /dev/mouse -t help" for detailed list
 MOUSETYPE=
 
 # Force specified button count (2/3)
