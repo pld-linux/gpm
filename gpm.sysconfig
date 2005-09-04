@@ -5,7 +5,7 @@
 DEVICE=/dev/mouse
 
 # Mouse type (ms, msc, ps2, ...) Use "gpm -m /dev/mouse -t help" for detailed list
-MOUSETYPE=
+MOUSETYPE=imps2
 
 # Force specified button count (2/3)
 BUTTON_COUNT=
