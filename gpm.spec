@@ -41,9 +41,9 @@ BuildRequires:	bison
 BuildRequires:	gawk
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	texinfo
-PreReq:		rc-scripts >= 0.2.0
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	rc-scripts >= 0.2.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -280,9 +280,9 @@ fi
 %files
 %defattr(644,root,root,755)
 %doc BUGS Changelog Changes README TODO doc/FAQ doc/README* conf/*.conf
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gpm-root.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gpm-root.conf
 %attr(754,root,root) /etc/rc.d/init.d/gpm
-%config(noreplace) %verify(not size mtime md5) /etc/sysconfig/mouse
+%config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/mouse
 
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
