@@ -40,6 +40,7 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	gawk
 BuildRequires:	ncurses-devel >= 5.0
+BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	texinfo
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -112,8 +113,8 @@ emacs, Midnight Commander та ╕нших. Також забезпечу╓ операц╕╖ вир╕зки
 Summary:	GPM libraries
 Summary(pl):	Biblioteki GPM
 Group:		Libraries
-Conflicts:	gpm < 1.19.3-7
 Obsoletes:	libgpm1
+Conflicts:	gpm < 1.19.3-7
 
 %description libs
 This package contains library files neccessary to run most of
@@ -257,17 +258,11 @@ rm -rf $RPM_BUILD_ROOT
 [ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
 
 /sbin/chkconfig --add gpm
-if [ -f /var/lock/subsys/gpm ]; then
-	/etc/rc.d/init.d/gpm restart >&2
-else
-	echo "Run \"/etc/rc.d/init.d/gpm start\" to start gpm daemon."
-fi
+%service gpm restart "gpm daemon"
 
 %preun
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/gpm ]; then
-		/etc/rc.d/init.d/gpm stop >&2
-	fi
+	%service gpm stop
 	/sbin/chkconfig --del gpm
 fi
 
