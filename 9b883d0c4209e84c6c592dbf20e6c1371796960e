@@ -1,0 +1,2 @@
+- release 3,
+- removed using %{_sysconfdir} in some cases.
