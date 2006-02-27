@@ -1,0 +1,5 @@
+- 1.19.5
+- updated info,DESTDIR,info_fixes,root,OPEN_MAX,limits,serialconsole patches
+- removed non-root,checkdevfsbug patches
+- updated %files (more docs, man7 page)
+- added nosecenhance patch (argh, secenhance patch is in sources)
