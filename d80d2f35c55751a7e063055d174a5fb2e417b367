@@ -1,0 +1,7 @@
+- release 20,
+- run ldconfig in %postun (not %preun) in libs,
+- added missing "Requires: %{name} = %{version}" for main,
+- spec adapterized,
+- fix tmp race (patch from Conectiva),
+- merge two patches from rawhide (secenhance and serialconsole),
+- merge ru, uk translation form KSI.
