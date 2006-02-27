@@ -1,0 +1,2 @@
+- added detaching fd 0 from terminal to init script
+- new %doc, release 0.12
