@@ -35,6 +35,7 @@ Patch8:		%{name}-dont_display_stupid_error_messages.patch
 Patch9:		%{name}-link.patch
 Patch10:	%{name}-lib-segv.patch
 Patch11:	%{name}-pmake.patch
+URL:		http://linux.schottelius.org/gpm/
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
