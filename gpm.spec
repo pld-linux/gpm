@@ -13,7 +13,7 @@ Summary(tr):	Genel amaГlЩ fare desteПi
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
 Version:	1.20.1
-Release:	7
+Release:	8
 Epoch:		1
 License:	GPL
 Group:		Daemons
@@ -35,6 +35,7 @@ Patch8:		%{name}-dont_display_stupid_error_messages.patch
 Patch9:		%{name}-link.patch
 Patch10:	%{name}-lib-segv.patch
 Patch11:	%{name}-pmake.patch
+Patch12:	%{name}-wheel.patch
 URL:		http://linux.schottelius.org/gpm/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -227,6 +228,7 @@ linkar a biblioteca gpm estaticamente.
 %patch9 -p1
 %patch10 -p1
 %patch11 -p1
+%patch12 -p1
 
 sed -i -e 's#/usr##' doc/manpager
 
