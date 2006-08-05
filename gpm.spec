@@ -238,7 +238,8 @@ sed -i -e 's#/usr##' doc/manpager
 %configure \
 	--disable-debug \
 	--with-curses
-%{__make}
+%{__make} \
+	LDFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
