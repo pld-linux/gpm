@@ -25,12 +25,12 @@
 # Get service config
 [ -f /etc/sysconfig/mouse ] && . /etc/sysconfig/mouse
 
-[ -z "$DEVICE" ] && nls "Please set %s in /etc/sysconfig/mouse" "DEVICE"
-[ -z "$MOUSETYPE" ] && nls "Please set %s in /etc/sysconfig/mouse" "MOUSETYPE"
-
 start() {
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/gpm ]; then
+		[ -z "$DEVICE" ] && nls "Please set %s in /etc/sysconfig/mouse" "DEVICE"
+		[ -z "$MOUSETYPE" ] && nls "Please set %s in /etc/sysconfig/mouse" "MOUSETYPE"
+
 		msg_starting "Gpm"
 		OPTIONS=""
 		[ -n "$DEVICE" ] && OPTIONS="-m $DEVICE"
