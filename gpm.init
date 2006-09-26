@@ -28,10 +28,7 @@
 [ -z "$DEVICE" ] && nls "Please set %s in /etc/sysconfig/mouse" "DEVICE"
 [ -z "$MOUSETYPE" ] && nls "Please set %s in /etc/sysconfig/mouse" "MOUSETYPE"
 
-RETVAL=0
-# See how we were called.
-case "$1" in
-  start)
+start() {
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/gpm ]; then
 		msg_starting "Gpm"
@@ -62,8 +59,9 @@ case "$1" in
 	else
 		msg_already_running "Gpm"
 	fi
-	;;
-  stop)
+}
+
+stop() {
 	if [ -f /var/lock/subsys/gpm ]; then
 		msg_stopping "Gpm"
 		killproc gpm
@@ -71,11 +69,20 @@ case "$1" in
 	else
 		msg_not_running "Gpm"
 	fi
+}
+
+RETVAL=0
+# See how we were called.
+case "$1" in
+  start)
+  	start
+	;;
+  stop)
+  	stop
 	;;
   restart|force-reload)
-	$0 stop
-	$0 start
-	exit $?
+	stop
+	start
 	;;
   status)
 	status gpm
