@@ -1,6 +1,5 @@
 # TODO:
 # - make modprobe of kernel mouse modules for 2.5
-
 Summary:	General Purpose Mouse support for Linux
 Summary(de):	Allgemeine MausunterstЭtzung fЭr Linux
 Summary(es):	Soporte para ratСn en terminales modo texto
@@ -13,7 +12,7 @@ Summary(tr):	Genel amaГlЩ fare desteПi
 Summary(uk):	Сервер роботи з мишою для консол╕ Linux
 Name:		gpm
 Version:	1.20.1
-Release:	8
+Release:	9
 Epoch:		1
 License:	GPL
 Group:		Daemons
