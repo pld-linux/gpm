@@ -2,7 +2,7 @@
 # Check out "man gpm" for detailed setup options
 
 # Mouse device (for example /dev/mouse, /dev/ttyS0, /dev/psaux, /dev/input/mice)
-DEVICE=/dev/mouse
+DEVICE=/dev/input/mice
 
 # Mouse type (ms, msc, ps2, ...) Use "gpm -m /dev/mouse -t help" for detailed list
 MOUSETYPE=imps2
