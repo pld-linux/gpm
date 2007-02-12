@@ -1,15 +1,15 @@
 # TODO:
 # - make modprobe of kernel mouse modules for 2.5
 Summary:	General Purpose Mouse support for Linux
-Summary(de):	Allgemeine MausunterstЭtzung fЭr Linux
-Summary(es):	Soporte para ratСn en terminales modo texto
-Summary(fr):	Gestion gИnИrale de la souris pour Linux
-Summary(ja):	Linux╔Ё╔С╔╫║╪╔К╓н╓©╓А╓н╔ч╔╕╔╧║╕╔╣║╪╔п║ё
-Summary(pl):	Wsparcie dla myszki w systemie Linux
-Summary(pt_BR):	Suporte para mouse em terminais modo texto
-Summary(ru):	Сервер работы с мышью для консоли Linux
-Summary(tr):	Genel amaГlЩ fare desteПi
-Summary(uk):	Сервер роботи з мишою для консол╕ Linux
+Summary(de.UTF-8):   Allgemeine Mausunterstц╪tzung fц╪r Linux
+Summary(es.UTF-8):   Soporte para ratцЁn en terminales modo texto
+Summary(fr.UTF-8):   Gestion gц╘nц╘rale de la souris pour Linux
+Summary(ja.UTF-8):   LinuxЦ┌ЁЦ┐ЁЦ┌╫Ц┐╪Ц┐╚Ц│╝Ц│÷Ц┌│Ц│╝Ц┐·Ц┌╕Ц┌╧Ц┐╩Ц┌╣Ц┐╪Ц┐░Ц─┌
+Summary(pl.UTF-8):   Wsparcie dla myszki w systemie Linux
+Summary(pt_BR.UTF-8):   Suporte para mouse em terminais modo texto
+Summary(ru.UTF-8):   п║п╣я─п╡п╣я─ я─п╟п╠п╬я┌я▀ я│ п╪я▀я┬я▄я▌ п╢п╩я▐ п╨п╬п╫я│п╬п╩п╦ Linux
+Summary(tr.UTF-8):   Genel amaц╖lд╠ fare desteд÷i
+Summary(uk.UTF-8):   п║п╣я─п╡п╣я─ я─п╬п╠п╬я┌п╦ п╥ п╪п╦я┬п╬я▌ п╢п╩я▐ п╨п╬п╫я│п╬п╩я√ Linux
 Name:		gpm
 Version:	1.20.1
 Release:	9
@@ -54,65 +54,65 @@ Midnight Commander, and more. It also provides console cut-and-paste
 operations using the mouse. Includes a program to allow pop-up menus
 to appear at the click of a mouse button.
 
-%description -l de
-GPM ermЖglicht Maus-UnterstЭtzung fЭr zeichenorientierte Linux-
-Anwendungen wie z.B. emacs und Midnight Commander. Auъerdem sind
-Ausschneiden und EinfЭgen mit der Maus auf der Konsole mЖglich.
-EnthДlt ein Programm, daъ bei Mausklick ein Pop-up-MenЭ aufruft.
+%description -l de.UTF-8
+GPM ermц╤glicht Maus-Unterstц╪tzung fц╪r zeichenorientierte Linux-
+Anwendungen wie z.B. emacs und Midnight Commander. Auц÷erdem sind
+Ausschneiden und Einfц╪gen mit der Maus auf der Konsole mц╤glich.
+Enthц╓lt ein Programm, daц÷ bei Mausklick ein Pop-up-Menц╪ aufruft.
 
-%description -l es
-Gpm acrecienta soporte a ratСn para aplicaciones Linux basadas en modo
-texto, como emacs, Midnight Commander, y otros. Ofrece aЗn, soporte a
-pantalla y operaciones de cortar-pegar usando el ratСn.
+%description -l es.UTF-8
+Gpm acrecienta soporte a ratцЁn para aplicaciones Linux basadas en modo
+texto, como emacs, Midnight Commander, y otros. Ofrece aц╨n, soporte a
+pantalla y operaciones de cortar-pegar usando el ratцЁn.
 
-%description -l fr
+%description -l fr.UTF-8
 GPM ajoute un support souris au applications en mode texte de Linux
 comme emacs, Midnight Commander, et bien d'autres. Cela fournit aussi
-des opИrations de copier/coller avec la souris sur les consoles.
-Comprend un programme pour permettre l'apparition de menus dИroulants
-grace Ю un clic droit avec la souris.
+des opц╘rations de copier/coller avec la souris sur les consoles.
+Comprend un programme pour permettre l'apparition de menus dц╘roulants
+grace ц═ un clic droit avec la souris.
 
-%description -l ja
-gpm ╓оemacs╔╗╔г╔ё╔©╓ДMidnight
-CommanderеЫ╓н╔ф╔╜╔╧╔х╔ы║╪╔╧╓гф╟╨Н╓╧╓К╔╒╔в╔Й╔╠║╪╔╥╔Г╔С
-╓кбп╓╧╓К╔ч╔╕╔╧╔╣╔щ║╪╔х╓Р╧т╓╕╔я╔ц╔╠║╪╔╦║ё
+%description -l ja.UTF-8
+gpm Ц│╞emacsЦ┌╗Ц┐┤Ц┌ёЦ┌©Ц┌└Midnight
+CommanderГ╜┴Ц│╝Ц┐├Ц┌╜Ц┌╧Ц┐┬Ц┐≥Ц┐╪Ц┌╧Ц│╖Е▀∙Д╫°Ц│≥Ц┌▀Ц┌╒Ц┐≈Ц┐╙Ц┌╠Ц┐╪Ц┌╥Ц┐╖Ц┐Ё
+Ц│╚Е╞╬Ц│≥Ц┌▀Ц┐·Ц┌╕Ц┌╧Ц┌╣Ц┐²Ц┐╪Ц┐┬Ц┌▓Х║▄Ц│├Ц┐▒Ц┐┐Ц┌╠Ц┐╪Ц┌╦Ц─┌
 
-%description -l pl
+%description -l pl.UTF-8
 GPM zapewnia wsparcie dla myszki w systemie Linux na konsoli
-systemowej. DziЙki niemu mo©na zaznaczaФ fragmenty tekstu na konsoli i
-wklejaФ je w obrabiany plik tekstowy. Operacje te s╠ najczЙ╤ciej
+systemowej. Dziд≥ki niemu moе╪na zaznaczaд┤ fragmenty tekstu na konsoli i
+wklejaд┤ je w obrabiany plik tekstowy. Operacje te sд┘ najczд≥е⌡ciej
 dokonywane przez przytrzymanie lewego klawisza myszki (operacja
-zaznaczania fragmentu tekstu) i nastЙpnie wci╤niЙcie ╤rodkowego
+zaznaczania fragmentu tekstu) i nastд≥pnie wciе⌡niд≥cie е⌡rodkowego
 klawisza myszki (operacja wklejania tekstu).
 
-%description -l pt_BR
-Gpm acrescenta suporte a mouse para aplicaГУes Linux baseadas em modo
+%description -l pt_BR.UTF-8
+Gpm acrescenta suporte a mouse para aplicaц╖ц╣es Linux baseadas em modo
 texto, como emacs, Midnight Commander, e outros. Fornece ainda, para a
-console, operaГУes de cortar e colar usando o mouse.
+console, operaц╖ц╣es de cortar e colar usando o mouse.
 
-%description -l ru
-GPM обеспечивает поддержку мыши в текстовых приложениях Linux, таких
-как emacs, Midnight Commander и других. Также обеспечивает операции
-вырезки и вставки на консоли с использованием мыши. Включает
-программу, позволяющую вызывать всплывающие меню по нажатию кнопки
-мыши.
+%description -l ru.UTF-8
+GPM п╬п╠п╣я│п©п╣я┤п╦п╡п╟п╣я┌ п©п╬п╢п╢п╣я─п╤п╨я┐ п╪я▀я┬п╦ п╡ я┌п╣п╨я│я┌п╬п╡я▀я┘ п©я─п╦п╩п╬п╤п╣п╫п╦я▐я┘ Linux, я┌п╟п╨п╦я┘
+п╨п╟п╨ emacs, Midnight Commander п╦ п╢я─я┐пЁп╦я┘. п╒п╟п╨п╤п╣ п╬п╠п╣я│п©п╣я┤п╦п╡п╟п╣я┌ п╬п©п╣я─п╟я├п╦п╦
+п╡я▀я─п╣п╥п╨п╦ п╦ п╡я│я┌п╟п╡п╨п╦ п╫п╟ п╨п╬п╫я│п╬п╩п╦ я│ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╣п╪ п╪я▀я┬п╦. п▓п╨п╩я▌я┤п╟п╣я┌
+п©я─п╬пЁя─п╟п╪п╪я┐, п©п╬п╥п╡п╬п╩я▐я▌я┴я┐я▌ п╡я▀п╥я▀п╡п╟я┌я▄ п╡я│п©п╩я▀п╡п╟я▌я┴п╦п╣ п╪п╣п╫я▌ п©п╬ п╫п╟п╤п╟я┌п╦я▌ п╨п╫п╬п©п╨п╦
+п╪я▀я┬п╦.
 
-%description -l tr
-GPM metin ekranda ГalЩЧan Linux uygulamalarЩna (emacs, Midnight
-Commander ve diПerleri gibi) fare desteПi saПlar. AyrЩca fare
-yardЩmЩyla konsollar arasЩnda kopyalama ve yapЩЧtЩrma olanaПЩ sunar.
-Fare tЩklamasЩyla pop-up menЭlerin ГЩkmasЩnЩ saПlayan bir program da
-iГerir.
+%description -l tr.UTF-8
+GPM metin ekranda ц╖alд╠е÷an Linux uygulamalarд╠na (emacs, Midnight
+Commander ve diд÷erleri gibi) fare desteд÷i saд÷lar. Ayrд╠ca fare
+yardд╠mд╠yla konsollar arasд╠nda kopyalama ve yapд╠е÷tд╠rma olanaд÷д╠ sunar.
+Fare tд╠klamasд╠yla pop-up menц╪lerin ц╖д╠kmasд╠nд╠ saд÷layan bir program da
+iц╖erir.
 
-%description -l uk
-GPM забезпечу╓ п╕дтримку миш╕ в текстових програмах Linux, таких як
-emacs, Midnight Commander та ╕нших. Також забезпечу╓ операц╕╖ вир╕зки
-та вставки на консол╕ з використанням миш╕. М╕стить програму, що
-дозволя╓ викликати спливаюч╕ меню натискаючи кнопку миш╕.
+%description -l uk.UTF-8
+GPM п╥п╟п╠п╣п╥п©п╣я┤я┐я■ п©я√п╢я┌я─п╦п╪п╨я┐ п╪п╦я┬я√ п╡ я┌п╣п╨я│я┌п╬п╡п╦я┘ п©я─п╬пЁя─п╟п╪п╟я┘ Linux, я┌п╟п╨п╦я┘ я▐п╨
+emacs, Midnight Commander я┌п╟ я√п╫я┬п╦я┘. п╒п╟п╨п╬п╤ п╥п╟п╠п╣п╥п©п╣я┤я┐я■ п╬п©п╣я─п╟я├я√я≈ п╡п╦я─я√п╥п╨п╦
+я┌п╟ п╡я│я┌п╟п╡п╨п╦ п╫п╟ п╨п╬п╫я│п╬п╩я√ п╥ п╡п╦п╨п╬я─п╦я│я┌п╟п╫п╫я▐п╪ п╪п╦я┬я√. п°я√я│я┌п╦я┌я▄ п©я─п╬пЁя─п╟п╪я┐, я┴п╬
+п╢п╬п╥п╡п╬п╩я▐я■ п╡п╦п╨п╩п╦п╨п╟я┌п╦ я│п©п╩п╦п╡п╟я▌я┤я√ п╪п╣п╫я▌ п╫п╟я┌п╦я│п╨п╟я▌я┤п╦ п╨п╫п╬п©п╨я┐ п╪п╦я┬я√.
 
 %package libs
 Summary:	GPM libraries
-Summary(pl):	Biblioteki GPM
+Summary(pl.UTF-8):   Biblioteki GPM
 Group:		Libraries
 Obsoletes:	libgpm1
 Conflicts:	gpm < 1.19.3-7
@@ -121,16 +121,16 @@ Conflicts:	gpm < 1.19.3-7
 This package contains library files neccessary to run most of
 mouse-aware applications.
 
-%description libs -l pl
-Ten pakiet zawiera biblioteki potrzebne do uruchomienia wiЙkszo╤ci
-programСw ze wsparciem do obsЁugi myszki.
+%description libs -l pl.UTF-8
+Ten pakiet zawiera biblioteki potrzebne do uruchomienia wiд≥kszoе⌡ci
+programцЁw ze wsparciem do obsе┌ugi myszki.
 
 %package devel
 Summary:	Header files and documentation for writing mouse driven programs
-Summary(es):	Bibliotecas y archivos de inclusiСn para desarrollar programas que utilicen ratСn
-Summary(ja):	gpm╓нЁ╚х╞╔И╔╓╔ж╔И╔Й
-Summary(pl):	Pliki nagЁСwkowe i dokumentacja do gpm
-Summary(pt_BR):	Bibliotecas e arquivos de inclusЦo para desenvolver programas que utilizam mouse
+Summary(es.UTF-8):   Bibliotecas y archivos de inclusiцЁn para desarrollar programas que utilicen ratцЁn
+Summary(ja.UTF-8):   gpmЦ│╝И√▀Г≥╨Ц┐╘Ц┌╓Ц┐√Ц┐╘Ц┐╙
+Summary(pl.UTF-8):   Pliki nagе┌цЁwkowe i dokumentacja do gpm
+Summary(pt_BR.UTF-8):   Bibliotecas e arquivos de inclusцёo para desenvolver programas que utilizam mouse
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Obsoletes:	libgpm1-devel
@@ -139,79 +139,79 @@ Obsoletes:	libgpm1-devel
 This package allows you to develop your own text-mode programs that
 take advantage of the mouse.
 
-%description devel -l de
-Mit diesem Paket kЖnnen Sie Ihre eigenen text-orientierten Programme
-mit MausunterstЭtzung entwickeln.
+%description devel -l de.UTF-8
+Mit diesem Paket kц╤nnen Sie Ihre eigenen text-orientierten Programme
+mit Mausunterstц╪tzung entwickeln.
 
-%description devel -l es
+%description devel -l es.UTF-8
 Este paquete permite el desarrollo de programas en modo texto que usan
-ratСn.
+ratцЁn.
 
-%description devel -l fr
-Ce paquetage permet de dИvelopper des programmes en mode texte tirant
+%description devel -l fr.UTF-8
+Ce paquetage permet de dц╘velopper des programmes en mode texte tirant
 avantage de la souris.
 
-%description devel -l ja
-gpm-devel╓оgpm╓РмЬмя╓╥╓©╔╒╔в╔Й╔╠║╪╔╥╔Г╔СЁ╚х╞╓ки╛мв╓й╔И╔╓╔ж╔И╔Й╓Д╔ь╔ц╔ю╔у╔║╔╓╔К
-╓Р╔я╔ц╔╠║╪╔╦╔С╔╟╓╥╓©╓Б╓н║ё
+%description devel -l ja.UTF-8
+gpm-develЦ│╞gpmЦ┌▓Е┬╘Г■╗Ц│≈Ц│÷Ц┌╒Ц┐≈Ц┐╙Ц┌╠Ц┐╪Ц┌╥Ц┐╖Ц┐ЁИ√▀Г≥╨Ц│╚Е©┘Х╕│Ц│╙Ц┐╘Ц┌╓Ц┐√Ц┐╘Ц┐╙Ц┌└Ц┐≤Ц┐┐Ц┐─Ц┐∙Ц┌║Ц┌╓Ц┐╚
+Ц┌▓Ц┐▒Ц┐┐Ц┌╠Ц┐╪Ц┌╦Ц┐ЁЦ┌╟Ц│≈Ц│÷Ц┌┌Ц│╝Ц─┌
 
-%description devel -l pl
-Pliki nagЁСwkowe i dokumentacja dla gpm. DziЙki nim bЙdziesz mСgЁ
-pisaФ wЁasne programy z wykorzystaniem myszki.
+%description devel -l pl.UTF-8
+Pliki nagе┌цЁwkowe i dokumentacja dla gpm. Dziд≥ki nim bд≥dziesz mцЁgе┌
+pisaд┤ wе┌asne programy z wykorzystaniem myszki.
 
-%description devel -l pt_BR
+%description devel -l pt_BR.UTF-8
 Este pacote permite o desenvolvimento de programas em modo texto que
 usam mouse.
 
-%description devel -l ru
-GPM обеспечивает поддержку мыши в текстовых приложениях Linux, таких
-как emacs, Midnight Commander и других. Также обеспечивает операции
-вырезки и вставки на консоли с использованием мыши. Включает
-программу, позволяющую вызывать всплывающие меню по нажатию кнопки
-мыши.
+%description devel -l ru.UTF-8
+GPM п╬п╠п╣я│п©п╣я┤п╦п╡п╟п╣я┌ п©п╬п╢п╢п╣я─п╤п╨я┐ п╪я▀я┬п╦ п╡ я┌п╣п╨я│я┌п╬п╡я▀я┘ п©я─п╦п╩п╬п╤п╣п╫п╦я▐я┘ Linux, я┌п╟п╨п╦я┘
+п╨п╟п╨ emacs, Midnight Commander п╦ п╢я─я┐пЁп╦я┘. п╒п╟п╨п╤п╣ п╬п╠п╣я│п©п╣я┤п╦п╡п╟п╣я┌ п╬п©п╣я─п╟я├п╦п╦
+п╡я▀я─п╣п╥п╨п╦ п╦ п╡я│я┌п╟п╡п╨п╦ п╫п╟ п╨п╬п╫я│п╬п╩п╦ я│ п╦я│п©п╬п╩я▄п╥п╬п╡п╟п╫п╦п╣п╪ п╪я▀я┬п╦. п▓п╨п╩я▌я┤п╟п╣я┌
+п©я─п╬пЁя─п╟п╪п╪я┐, п©п╬п╥п╡п╬п╩я▐я▌я┴я┐я▌ п╡я▀п╥я▀п╡п╟я┌я▄ п╡я│п©п╩я▀п╡п╟я▌я┴п╦п╣ п╪п╣п╫я▌ п©п╬ п╫п╟п╤п╟я┌п╦я▌ п╨п╫п╬п©п╨п╦
+п╪я▀я┬п╦.
 
-%description devel -l tr
-Bu paket, fare kullanan yazЩlЩmlar geliЧtirmenizi saПlayan dosyalarЩ
-iГerir.
+%description devel -l tr.UTF-8
+Bu paket, fare kullanan yazд╠lд╠mlar geliе÷tirmenizi saд÷layan dosyalarд╠
+iц╖erir.
 
-%description devel -l uk
-GPM забезпечу╓ п╕дтримку миш╕ в текстових програмах Linux, таких як
-emacs, Midnight Commander та ╕нших. Також забезпечу╓ операц╕╖ вир╕зки
-та вставки на консол╕ з використанням миш╕. М╕стить програму, що
-дозволя╓ викликати спливаюч╕ меню натискаючи кнопку миш╕.
+%description devel -l uk.UTF-8
+GPM п╥п╟п╠п╣п╥п©п╣я┤я┐я■ п©я√п╢я┌я─п╦п╪п╨я┐ п╪п╦я┬я√ п╡ я┌п╣п╨я│я┌п╬п╡п╦я┘ п©я─п╬пЁя─п╟п╪п╟я┘ Linux, я┌п╟п╨п╦я┘ я▐п╨
+emacs, Midnight Commander я┌п╟ я√п╫я┬п╦я┘. п╒п╟п╨п╬п╤ п╥п╟п╠п╣п╥п©п╣я┤я┐я■ п╬п©п╣я─п╟я├я√я≈ п╡п╦я─я√п╥п╨п╦
+я┌п╟ п╡я│я┌п╟п╡п╨п╦ п╫п╟ п╨п╬п╫я│п╬п╩я√ п╥ п╡п╦п╨п╬я─п╦я│я┌п╟п╫п╫я▐п╪ п╪п╦я┬я√. п°я√я│я┌п╦я┌я▄ п©я─п╬пЁя─п╟п╪я┐, я┴п╬
+п╢п╬п╥п╡п╬п╩я▐я■ п╡п╦п╨п╩п╦п╨п╟я┌п╦ я│п©п╩п╦п╡п╟я▌я┤я√ п╪п╣п╫я▌ п╫п╟я┌п╦я│п╨п╟я▌я┤п╦ п╨п╫п╬п©п╨я┐ п╪п╦я┬я√.
 
 %package static
 Summary:	Static gpm library
-Summary(es):	Static library for developing mouse driven programs
-Summary(pl):	Biblioteki statyczne gpm
-Summary(pt_BR):	Biblioteca de desenvolvimento estАtica do gpm
-Summary(ru):	Статическая библиотека для разработки программ, использующих мышь Статическая
-Summary(uk):	Статична б╕бл╕отека для розробки програм, що використовують мишу
+Summary(es.UTF-8):   Static library for developing mouse driven programs
+Summary(pl.UTF-8):   Biblioteki statyczne gpm
+Summary(pt_BR.UTF-8):   Biblioteca de desenvolvimento estц║tica do gpm
+Summary(ru.UTF-8):   п║я┌п╟я┌п╦я┤п╣я│п╨п╟я▐ п╠п╦п╠п╩п╦п╬я┌п╣п╨п╟ п╢п╩я▐ я─п╟п╥я─п╟п╠п╬я┌п╨п╦ п©я─п╬пЁя─п╟п╪п╪, п╦я│п©п╬п╩я▄п╥я┐я▌я┴п╦я┘ п╪я▀я┬я▄ п║я┌п╟я┌п╦я┤п╣я│п╨п╟я▐
+Summary(uk.UTF-8):   п║я┌п╟я┌п╦я┤п╫п╟ п╠я√п╠п╩я√п╬я┌п╣п╨п╟ п╢п╩я▐ я─п╬п╥я─п╬п╠п╨п╦ п©я─п╬пЁя─п╟п╪, я┴п╬ п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐я▌я┌я▄ п╪п╦я┬я┐
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
 %description static
 Static gpm library.
 
-%description static -l es
+%description static -l es.UTF-8
 Este paquete permite el desarrollo de programas en modo texto que usan
-ratСn.
+ratцЁn.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteki statyczne gpm.
 
-%description static -l pt_BR
-Este pacote contИm uma biblioteca estАtica para ser usada no
+%description static -l pt_BR.UTF-8
+Este pacote contц╘m uma biblioteca estц║tica para ser usada no
 desenvolvimento de programas modo texto que usem o mouse e que desejam
 linkar a biblioteca gpm estaticamente.
 
-%description static -l ru
-Этот пакет позволяет разрабатывать текстовые приложения, использующие
-мышь.
+%description static -l ru.UTF-8
+п╜я┌п╬я┌ п©п╟п╨п╣я┌ п©п╬п╥п╡п╬п╩я▐п╣я┌ я─п╟п╥я─п╟п╠п╟я┌я▀п╡п╟я┌я▄ я┌п╣п╨я│я┌п╬п╡я▀п╣ п©я─п╦п╩п╬п╤п╣п╫п╦я▐, п╦я│п©п╬п╩я▄п╥я┐я▌я┴п╦п╣
+п╪я▀я┬я▄.
 
-%description static -l uk
-Цей пакет дозволя╓ розробляти текстов╕ програми, що використовують
-мишу.
+%description static -l uk.UTF-8
+п╕п╣п╧ п©п╟п╨п╣я┌ п╢п╬п╥п╡п╬п╩я▐я■ я─п╬п╥я─п╬п╠п╩я▐я┌п╦ я┌п╣п╨я│я┌п╬п╡я√ п©я─п╬пЁя─п╟п╪п╦, я┴п╬ п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐я▌я┌я▄
+п╪п╦я┬я┐.
 
 %prep
 %setup -q
