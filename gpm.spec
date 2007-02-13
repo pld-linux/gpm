@@ -1,15 +1,15 @@
 # TODO:
 # - make modprobe of kernel mouse modules for 2.5
 Summary:	General Purpose Mouse support for Linux
-Summary(de.UTF-8):   Allgemeine Mausunterstützung für Linux
-Summary(es.UTF-8):   Soporte para ratón en terminales modo texto
-Summary(fr.UTF-8):   Gestion générale de la souris pour Linux
-Summary(ja.UTF-8):   Linuxコンソールのためのマウス・サーバ。
-Summary(pl.UTF-8):   Wsparcie dla myszki w systemie Linux
-Summary(pt_BR.UTF-8):   Suporte para mouse em terminais modo texto
-Summary(ru.UTF-8):   Сервер работы с мышью для консоли Linux
-Summary(tr.UTF-8):   Genel amaçlı fare desteği
-Summary(uk.UTF-8):   Сервер роботи з мишою для консолі Linux
+Summary(de.UTF-8):	Allgemeine Mausunterstützung für Linux
+Summary(es.UTF-8):	Soporte para ratón en terminales modo texto
+Summary(fr.UTF-8):	Gestion générale de la souris pour Linux
+Summary(ja.UTF-8):	Linuxコンソールのためのマウス・サーバ。
+Summary(pl.UTF-8):	Wsparcie dla myszki w systemie Linux
+Summary(pt_BR.UTF-8):	Suporte para mouse em terminais modo texto
+Summary(ru.UTF-8):	Сервер работы с мышью для консоли Linux
+Summary(tr.UTF-8):	Genel amaçlı fare desteği
+Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
 Version:	1.20.1
 Release:	9
@@ -112,7 +112,7 @@ emacs, Midnight Commander та інших. Також забезпечує оп�
 
 %package libs
 Summary:	GPM libraries
-Summary(pl.UTF-8):   Biblioteki GPM
+Summary(pl.UTF-8):	Biblioteki GPM
 Group:		Libraries
 Obsoletes:	libgpm1
 Conflicts:	gpm < 1.19.3-7
@@ -127,10 +127,10 @@ programów ze wsparciem do obsługi myszki.
 
 %package devel
 Summary:	Header files and documentation for writing mouse driven programs
-Summary(es.UTF-8):   Bibliotecas y archivos de inclusión para desarrollar programas que utilicen ratón
-Summary(ja.UTF-8):   gpmの開発ライブラリ
-Summary(pl.UTF-8):   Pliki nagłówkowe i dokumentacja do gpm
-Summary(pt_BR.UTF-8):   Bibliotecas e arquivos de inclusão para desenvolver programas que utilizam mouse
+Summary(es.UTF-8):	Bibliotecas y archivos de inclusión para desarrollar programas que utilicen ratón
+Summary(ja.UTF-8):	gpmの開発ライブラリ
+Summary(pl.UTF-8):	Pliki nagłówkowe i dokumentacja do gpm
+Summary(pt_BR.UTF-8):	Bibliotecas e arquivos de inclusão para desenvolver programas que utilizam mouse
 Group:		Development/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Obsoletes:	libgpm1-devel
@@ -182,11 +182,11 @@ emacs, Midnight Commander та інших. Також забезпечує оп�
 
 %package static
 Summary:	Static gpm library
-Summary(es.UTF-8):   Static library for developing mouse driven programs
-Summary(pl.UTF-8):   Biblioteki statyczne gpm
-Summary(pt_BR.UTF-8):   Biblioteca de desenvolvimento estática do gpm
-Summary(ru.UTF-8):   Статическая библиотека для разработки программ, использующих мышь Статическая
-Summary(uk.UTF-8):   Статична бібліотека для розробки програм, що використовують мишу
+Summary(es.UTF-8):	Static library for developing mouse driven programs
+Summary(pl.UTF-8):	Biblioteki statyczne gpm
+Summary(pt_BR.UTF-8):	Biblioteca de desenvolvimento estática do gpm
+Summary(ru.UTF-8):	Статическая библиотека для разработки программ, использующих мышь Статическая
+Summary(uk.UTF-8):	Статична бібліотека для розробки програм, що використовують мишу
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 
