@@ -12,7 +12,7 @@ Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
 Version:	1.20.1
-Release:	9
+Release:	10
 Epoch:		1
 License:	GPL
 Group:		Daemons
@@ -253,6 +253,9 @@ install src/prog/mouse-test src/prog/hltest $RPM_BUILD_ROOT%{_bindir}
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
 bzip2 -dc %{SOURCE3} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
+
+# for rpm autodeps
+chmod +x $RPM_BUILD_ROOT%{_libdir}/libgpm.so.*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
