@@ -12,7 +12,7 @@ Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
 Version:	1.20.1
-Release:	10
+Release:	11
 Epoch:		1
 License:	GPL
 Group:		Daemons
