@@ -1,0 +1,6 @@
+- release 4,
+- fix: added passing LDFLAGS="-s" to ./configure environment (cause stripping
+  some binaries in main package),
+- added --strip-unneeded to stippng shared libraries.
+  [1.17.8-1]
+- now package is FHS 2.0 compliant.
