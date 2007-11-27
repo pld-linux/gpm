@@ -1,52 +1,25 @@
---- gpm-1.19.5/src/special.c.wiget	Mon Jan 17 22:34:00 2000
-+++ gpm-1.19.5/src/special.c	Tue Oct 31 15:40:27 2000
-@@ -34,6 +34,7 @@
- #include <signal.h>
- #include <time.h>
- #include <errno.h>
-+#include <linux/limits.h>   /* OPEN_MAX */
- #include <sys/param.h>
- 
- #include "gpmInt.h"
-diff -Nur gpm-1.20.1-orig/src/prog/gpm-root.y gpm-1.20.1/src/prog/gpm-root.y
---- gpm-1.20.1-orig/src/prog/gpm-root.y	2007-11-24 15:24:56.000000000 +0100
-+++ gpm-1.20.1/src/prog/gpm-root.y	2007-11-24 15:27:14.000000000 +0100
-@@ -44,7 +44,7 @@
- #include <sys/stat.h>       /* fstat() */
- #include <sys/utsname.h>    /* uname() */
- #include <termios.h>        /* winsize */
--#include <linux/limits.h>   /* OPEN_MAX */
-+#include <linux/limits.h>   /* NR_OPEN */
- #include <linux/vt.h>       /* VT_ACTIVATE */
- #include <linux/keyboard.h> /* K_SHIFT */
- #include <utmp.h>         
-@@ -526,7 +526,7 @@
+--- a/src/prog/gpm-root.y
++++ b/src/prog/gpm-root.y
+@@ -526,7 +526,9 @@ int f_bgcmd(int mode, DrawItem *self, int uid)
  	            open("/dev/null",O_RDONLY); /* stdin  */
  	            open(consolename,O_WRONLY); /* stdout */
  	            dup(1);                     /* stderr */  
 -	            for (i=3;i<OPEN_MAX; i++) close(i);
-+	            for (i=3;i<NR_OPEN; i++) close(i);
++		    int open_max = sysconf(_SC_OPEN_MAX);
++		    if (open_max == -1) open_max = 1024;
++	            for (i=3;i<open_max; i++) close(i);
  	            execl("/bin/sh","sh","-c",self->arg,(char *)NULL);
  	            exit(1); /* shouldn't happen */
  	         default: return 0;
-diff -Nur gpm-1.20.1-orig/src/special.c gpm-1.20.1/src/special.c
---- gpm-1.20.1-orig/src/special.c	2007-11-24 15:24:56.000000000 +0100
-+++ gpm-1.20.1/src/special.c	2007-11-24 15:27:05.000000000 +0100
-@@ -25,7 +25,7 @@
- 
- /* This file is compiled conditionally, see the Makefile */
- 
--#include <linux/limits.h> /* for OPEN_MAX */
-+#include <linux/limits.h> /* for NR_OPEN */
- #include <stdio.h>
- #include <stdlib.h>
- #include <string.h>
-@@ -156,7 +156,7 @@
+--- a/src/special.c
++++ b/src/special.c
+@@ -156,7 +156,9 @@ int processSpecial(Gpm_Event *event)
        open(GPM_NULL_DEV,O_RDONLY); /* stdin  */
-       open(option.consolename,O_WRONLY); /* stdout */
+       open(console.device, O_WRONLY); /* stdout */
        dup(1);                     /* stderr */
 -      for (i=3;i<OPEN_MAX; i++) close(i);
-+      for (i=3;i<NR_OPEN; i++) close(i);
++      int open_max = sysconf(_SC_OPEN_MAX);
++      if (open_max == -1) open_max = 1024;
++      for (i=3;i<open_max; i++) close(i);
        execl("/bin/sh","sh","-c",command,(char *)NULL);
        exit(1); /* shouldn't happen */
-       
