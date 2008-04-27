@@ -6,13 +6,13 @@
 #		the Midnight Commander. Is also allows mouse-based console \
 #		cut-and-paste operations, and includes support for pop-up \
 #		menus on the console.
-# description(es): GPM añade soporte al ratón para aplicaciones Linux \
-#		consola como el Midnight Commander.  También permite \
-#		operaciones con el ratón de cortar y pegar e incluye soporte \
-#		para menús pop-up en la consola.
-# description(pt_BR): O GPM adiciona suporte a mouse para aplicações Linux \
-#		console como o Midnight Commander. Também permite \
-#		operações com o mouse de cortar-e-colar e inclui suporte \
+# description(es.UTF-8): GPM aÃ±ade soporte al ratÃ³n para aplicaciones Linux \
+#		consola como el Midnight Commander.  TambiÃ©n permite \
+#		operaciones con el ratÃ³n de cortar y pegar e incluye soporte \
+#		para menÃºs pop-up en la consola.
+# description(pt_BR.UTF-8): O GPM adiciona suporte a mouse para aplicaÃ§Ãµes Linux \
+#		console como o Midnight Commander. TambÃ©m permite \
+#		operaÃ§Ãµes com o mouse de cortar-e-colar e inclui suporte \
 #		a menus pop-up no console.
 #
 # processname:	gpm
