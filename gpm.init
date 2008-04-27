@@ -53,7 +53,7 @@ start() {
 		if [ -n "$REPEATER" ] && [ "$REPEATER" != "no" ]; then
 			OPTIONS="$OPTIONS -R"
 		fi
-		daemon gpm $OPTIONS $GPM_OPTIONS < /dev/null
+		daemon /usr/sbin/gpm $OPTIONS $GPM_OPTIONS < /dev/null
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/gpm
 	else
