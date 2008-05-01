@@ -16,7 +16,7 @@ Release:	11
 Epoch:		1
 License:	GPL
 Group:		Daemons
-Source0:	ftp://arcana.linux.it/pub/gpm/%{name}-%{version}.tar.bz2
+Source0:	http://linux.schottelius.org/gpm/archives/%{name}-%{version}.tar.bz2
 # Source0-md5:	2c63e827d755527950d9d13fe3d87692
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
