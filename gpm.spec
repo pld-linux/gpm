@@ -238,7 +238,8 @@ sed -i -e 's#/usr##' doc/manpager
 	--disable-debug \
 	--with-curses
 %{__make} \
-	LDFLAGS="%{rpmcflags} %{rpmldflags}"
+	LDFLAGS="%{rpmcflags} %{rpmldflags}" \
+	DEFS="-DHAVE_CONFIG_H -D_GNU_SOURCE"
 
 %install
 rm -rf $RPM_BUILD_ROOT
