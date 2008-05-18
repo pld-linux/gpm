@@ -11,13 +11,13 @@ Summary(ru.UTF-8):	Сервер работы с мышью для консоли
 Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
-Version:	1.20.3
-Release:	1
+Version:	1.20.1
+Release:	11
 Epoch:		1
 License:	GPL
 Group:		Daemons
 Source0:	http://linux.schottelius.org/gpm/archives/%{name}-%{version}.tar.bz2
-# Source0-md5:	dd6054c488fc36fec327acc5b1f3e7d6
+# Source0-md5:	2c63e827d755527950d9d13fe3d87692
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Source3:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
