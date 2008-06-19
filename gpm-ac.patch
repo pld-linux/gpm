@@ -1,0 +1,10 @@
+--- gpm-1.20.5.orig/configure.ac	2008-06-19 11:05:56.789605315 +0200
++++ gpm-1.20.5/configure.ac	2008-06-19 12:20:34.316240946 +0200
+@@ -142,7 +142,6 @@
+ AC_SUBST(CURSES_OBJS)
+ AC_SUBST(SHARED_LIBS)
+ AC_SUBST(lispdir)
+-AC_SUBST(AC_PACKAGE_VERSION)
+ AC_SUBST(release)
+ AC_SUBST(release_date)
+ 
