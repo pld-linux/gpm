@@ -1,15 +1,12 @@
 diff -Nru gpm-1.19.6/doc/doc.gpm gpm-1.17.9.new/doc/doc.gpm
 --- gpm-1.19.6/doc/doc.gpm.in	Fri Aug  6 07:35:33 1999
 +++ gpm-1.19.6.new/doc/doc.gpm.in	Wed Sep  1 04:36:32 1999
-@@ -34,9 +34,9 @@
+@@ -34,7 +34,7 @@
  
  @ifinfo
  @format
 -@dircategory Miscellaneous
 +@dircategory Miscellaneous:
  @direntry
--* Gpm: (gpm).   A server wich hands mouse events to non-X programs.
-+* Gpm: (gpm).				Text-mode mouse library and srv daemon
+ * Gpm: (gpm).   Text-mode (non-X) mouse library and server daemon.
  @end direntry
- @end format
- @end ifinfo

@@ -8,7 +8,8 @@
 +	$(srcdir)/mktxt $< > $@
  
  # MAN (-)
- $(MANPAGES): doc.gpm $(srcdir)/manpager
+ $(MANPAGES): gpm.man
+ gpm.man: doc.gpm $(srcdir)/manpager
 -	$(AWK) -f $(srcdir)/manpager doc.gpm
 +	$(srcdir)/manpager doc.gpm
  	for i in gpm-root.1 gpm-types.7 gpm.8 mev.1 mouse-test.1; do \
