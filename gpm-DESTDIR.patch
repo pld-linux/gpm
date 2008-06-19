@@ -7,7 +7,7 @@
 -      echo "WARNING: We installed a lib, you should now call ldconfig" 						; 	\
 -      echo "f.i.: ldconfig -n -l $(libdir)/libgpm.so.@abi_full@" 								;	\
 -      echo "Or to update everything just type ldconfig"											;	\
-+		cd $(libdir) && $(LN_S) -f libgsm.so.@abi_full@ libgsm.so ; \
++		cd $(libdir) && $(LN_S) -f libgpm.so.@abi_full@ libgpm.so ; \
  	fi
  #			The unversioned files seems to be not needed -> correct me, if I am wrong.
  #			&& $(LN_S) -f libgpm.so.@abi_lev@  libgpm.so 											;	\
