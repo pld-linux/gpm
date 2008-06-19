@@ -11,30 +11,23 @@ Summary(ru.UTF-8):	Сервер работы с мышью для консоли
 Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
-Version:	1.20.1
-Release:	11
+Version:	1.20.5
+Release:	0.1
 Epoch:		1
 License:	GPL
 Group:		Daemons
 Source0:	http://linux.schottelius.org/gpm/archives/%{name}-%{version}.tar.bz2
-# Source0-md5:	2c63e827d755527950d9d13fe3d87692
+# Source0-md5:	e55473932e4052f3b74c730dfefe0d15
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Source3:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
 # Source3-md5:	893cf1468604523c6e9f9257a5671688
 Patch0:		%{name}-info.patch
-Patch1:		%{name}-OPEN_MAX.patch
-Patch2:		%{name}-DESTDIR.patch
-Patch3:		%{name}-root.patch
-Patch4:		%{name}-serialconsole.patch
-Patch5:		%{name}-gawk.patch
-Patch6:		%{name}-mawk.patch
-Patch7:		%{name}-nodebug.patch
-Patch8:		%{name}-dont_display_stupid_error_messages.patch
-Patch9:		%{name}-link.patch
-Patch10:	%{name}-lib-segv.patch
-Patch11:	%{name}-pmake.patch
-Patch12:	%{name}-wheel.patch
+Patch1:		%{name}-DESTDIR.patch
+Patch2:		%{name}-gawk.patch
+Patch3:		%{name}-nodebug.patch
+Patch4:		%{name}-dont_display_stupid_error_messages.patch
+Patch5:		%{name}-ac.patch
 URL:		http://linux.schottelius.org/gpm/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -213,21 +206,26 @@ linkar a biblioteca gpm estaticamente.
 Цей пакет дозволяє розробляти текстові програми, що використовують
 мишу.
 
+%package emacs
+Summary:	Emacs mode for GPM
+Summary(pl.UTF-8):	Tryb GPM dla Emacsa
+Group:		Development/Tools
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description emacs
+Emacs mode files for GPM.
+
+%description emacs -l pl.UTF-8
+Pliki trybu GPM dla Emacsa.
+
 %prep
 %setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
+%{!?debug:%patch3 -p1}
 %patch4 -p1
 %patch5 -p1
-#%patch6 -p1
-%{!?debug:%patch7 -p1}
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
 
 sed -i -e 's#/usr##' doc/manpager
 
@@ -281,7 +279,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc BUGS Changelog Changes README TODO doc/FAQ doc/README* conf/*.conf
+%doc BUGS Changes README TODO doc/FAQ doc/README* conf/*.conf
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gpm-root.conf
 %attr(754,root,root) /etc/rc.d/init.d/gpm
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/mouse
@@ -307,3 +305,7 @@ fi
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
+
+%files emacs
+%defattr(644,root,root,755)
+%{_datadir}/emacs/site-lisp/*.el*
