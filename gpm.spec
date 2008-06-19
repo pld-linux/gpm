@@ -1,5 +1,9 @@
+#
 # TODO:
 # - make modprobe of kernel mouse modules for 2.5
+# - soname changed (in 1.20.4), but ABI didn't - perhaps think about 
+#   reverting the soname change (or provide libgpm.so.1 symlink)
+#
 Summary:	General Purpose Mouse support for Linux
 Summary(de.UTF-8):	Allgemeine Mausunterstützung für Linux
 Summary(es.UTF-8):	Soporte para ratón en terminales modo texto
