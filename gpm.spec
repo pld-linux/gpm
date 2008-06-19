@@ -233,8 +233,8 @@ sed -i -e 's#/usr##' doc/manpager
 %{__aclocal}
 %{__autoconf}
 %configure \
-	--disable-debug \
 	--with-curses
+
 %{__make} \
 	LDFLAGS="%{rpmcflags} %{rpmldflags}" \
 	DEFS="-DHAVE_CONFIG_H -D_GNU_SOURCE"
