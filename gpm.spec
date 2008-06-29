@@ -257,6 +257,9 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
 bzip2 -dc %{SOURCE3} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
+install -d $RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp
+install contrib/emacs/*.el $RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp
+
 # for rpm autodeps
 chmod +x $RPM_BUILD_ROOT%{_libdir}/libgpm.so.*
 
