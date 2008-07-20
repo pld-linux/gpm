@@ -1,12 +1,14 @@
-diff -Nru gpm-1.19.6/doc/doc.gpm gpm-1.17.9.new/doc/doc.gpm
---- gpm-1.19.6/doc/doc.gpm.in	Fri Aug  6 07:35:33 1999
-+++ gpm-1.19.6.new/doc/doc.gpm.in	Wed Sep  1 04:36:32 1999
-@@ -34,7 +34,7 @@
+--- gpm-1.20.5/doc/doc.gpm.in.orig	2008-06-12 11:01:59.000000000 +0200
++++ gpm-1.20.5/doc/doc.gpm.in	2008-07-20 19:48:58.934042250 +0200
+@@ -37,9 +37,9 @@
  
  @ifinfo
  @format
 -@dircategory Miscellaneous
 +@dircategory Miscellaneous:
  @direntry
- * Gpm: (gpm).   Text-mode (non-X) mouse library and server daemon.
+-* Gpm: (gpm).   Text-mode (non-X) mouse library and server daemon.
++* Gpm: (gpm).				Text-mode (non-X) mouse library and server daemon
  @end direntry
+ @end format
+ @end ifinfo
