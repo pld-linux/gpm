@@ -1,8 +1,6 @@
 #
 # TODO:
 # - make modprobe of kernel mouse modules for 2.5
-# - soname changed (in 1.20.4), but ABI didn't - perhaps think about 
-#   reverting the soname change (or provide libgpm.so.1 symlink)
 #
 Summary:	General Purpose Mouse support for Linux
 Summary(de.UTF-8):	Allgemeine Mausunterstützung für Linux
@@ -18,7 +16,7 @@ Name:		gpm
 Version:	1.20.5
 Release:	0.1
 Epoch:		1
-License:	GPL
+License:	GPL v2+
 Group:		Daemons
 Source0:	http://linux.schottelius.org/gpm/archives/%{name}-%{version}.tar.bz2
 # Source0-md5:	e55473932e4052f3b74c730dfefe0d15
@@ -43,6 +41,11 @@ BuildRequires:	texinfo
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	rc-scripts >= 0.2.0
+%ifarch %{x8664} ia64 ppc64 s390x sparc64
+Provides:	libgpm.so.1()(64bit)
+%else
+Provides:	libgpm.so.1
+%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -263,6 +266,11 @@ install contrib/emacs/*.el $RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp
 # for rpm autodeps
 chmod +x $RPM_BUILD_ROOT%{_libdir}/libgpm.so.*
 
+# SONAME was bumped because of incompatibility with Debian libgpm.so.1
+# (which in turn was incompatible with libgpm.so.1 from the rest of the world)
+# We can leave compatibility symlink as we didn't have ABI break recently
+ln -s libgpm.so.2 $RPM_BUILD_ROOT%{_libdir}/libgpm.so.1
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -278,7 +286,7 @@ if [ "$1" = "0" ]; then
 	/sbin/chkconfig --del gpm
 fi
 
-%postun	-p	/sbin/postshell
+%postun	-p /sbin/postshell
 -/usr/sbin/fix-info-dir -c %{_infodir}
 
 %post	libs -p /sbin/ldconfig
@@ -291,27 +299,40 @@ fi
 %attr(754,root,root) /etc/rc.d/init.d/gpm
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/mouse
 
-%attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_sbindir}/*
+%attr(755,root,root) %{_bindir}/display-buttons
+%attr(755,root,root) %{_bindir}/display-coords
+%attr(755,root,root) %{_bindir}/disable-paste
+%attr(755,root,root) %{_bindir}/get-versions
+%attr(755,root,root) %{_bindir}/gpm-root
+%attr(755,root,root) %{_bindir}/hltest
+%attr(755,root,root) %{_bindir}/mev
+%attr(755,root,root) %{_bindir}/mouse-test
+%attr(755,root,root) %{_sbindir}/gpm
 
 %{_infodir}/gpm.info*
-%{_mandir}/man[178]/*
+%{_mandir}/man1/gpm-root.1*
+%{_mandir}/man1/mev.1*
+%{_mandir}/man1/mouse-test.1*
+%{_mandir}/man7/gpm-types.7*
+%{_mandir}/man8/gpm.8*
 %lang(es) %{_mandir}/es/man[178]/*
 %lang(hu) %{_mandir}/hu/man[178]/*
 %lang(pl) %{_mandir}/pl/man[178]/*
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/libgpm.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libgpm.so.2
+%attr(755,root,root) %{_libdir}/libgpm.so.1
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_includedir}/*
+%attr(755,root,root) %{_libdir}/libgpm.so
+%{_includedir}/gpm.h
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libgpm.a
 
 %files emacs
 %defattr(644,root,root,755)
