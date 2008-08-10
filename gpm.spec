@@ -14,7 +14,7 @@ Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
 Version:	1.20.5
-Release:	0.1
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		Daemons
@@ -41,11 +41,6 @@ BuildRequires:	texinfo
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	rc-scripts >= 0.2.0
-%ifarch %{x8664} ia64 ppc64 s390x sparc64
-Provides:	libgpm.so.1()(64bit)
-%else
-Provides:	libgpm.so.1
-%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -116,6 +111,11 @@ Summary(pl.UTF-8):	Biblioteki GPM
 Group:		Libraries
 Obsoletes:	libgpm1
 Conflicts:	gpm < 1.19.3-7
+%ifarch %{x8664} ia64 ppc64 s390x sparc64
+Provides:	libgpm.so.1()(64bit)
+%else
+Provides:	libgpm.so.1
+%endif
 
 %description libs
 This package contains library files neccessary to run most of
