@@ -323,7 +323,7 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgpm.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgpm.so.2
-%attr(755,root,root) %ghost %{_libdir}/libgpm.so.1
+%attr(755,root,root) %{_libdir}/libgpm.so.1
 
 %files devel
 %defattr(644,root,root,755)
