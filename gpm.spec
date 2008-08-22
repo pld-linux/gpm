@@ -14,7 +14,7 @@ Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
 Version:	1.20.5
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL v2+
 Group:		Daemons
@@ -269,7 +269,7 @@ chmod +x $RPM_BUILD_ROOT%{_libdir}/libgpm.so.*
 # SONAME was bumped because of incompatibility with Debian libgpm.so.1
 # (which in turn was incompatible with libgpm.so.1 from the rest of the world)
 # We can leave compatibility symlink as we didn't have ABI break recently
-ln -s libgpm.so.2 $RPM_BUILD_ROOT%{_libdir}/libgpm.so.1
+ln -s $(basename $RPM_BUILD_ROOT%{_libdir}/libgpm.so.2.*.*) $RPM_BUILD_ROOT%{_libdir}/libgpm.so.1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
