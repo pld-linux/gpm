@@ -14,7 +14,7 @@ Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
 Version:	1.20.5
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL v2+
 Group:		Daemons
@@ -111,11 +111,6 @@ Summary(pl.UTF-8):	Biblioteki GPM
 Group:		Libraries
 Obsoletes:	libgpm1
 Conflicts:	gpm < 1.19.3-7
-%ifarch %{x8664} ia64 ppc64 s390x sparc64
-Provides:	libgpm.so.1()(64bit)
-%else
-Provides:	libgpm.so.1
-%endif
 
 %description libs
 This package contains library files neccessary to run most of
@@ -266,11 +261,6 @@ install contrib/emacs/*.el $RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp
 # for rpm autodeps
 chmod +x $RPM_BUILD_ROOT%{_libdir}/libgpm.so.*
 
-# SONAME was bumped because of incompatibility with Debian libgpm.so.1
-# (which in turn was incompatible with libgpm.so.1 from the rest of the world)
-# We can leave compatibility symlink as we didn't have ABI break recently
-ln -s $(basename $RPM_BUILD_ROOT%{_libdir}/libgpm.so.2.*.*) $RPM_BUILD_ROOT%{_libdir}/libgpm.so.1
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -323,7 +313,6 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libgpm.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libgpm.so.2
-%attr(755,root,root) %{_libdir}/libgpm.so.1
 
 %files devel
 %defattr(644,root,root,755)
