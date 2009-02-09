@@ -13,13 +13,13 @@ Summary(ru.UTF-8):	Сервер работы с мышью для консоли
 Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
-Version:	1.20.5
-Release:	3
+Version:	1.20.6
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		Daemons
 Source0:	http://linux.schottelius.org/gpm/archives/%{name}-%{version}.tar.bz2
-# Source0-md5:	e55473932e4052f3b74c730dfefe0d15
+# Source0-md5:	6b534da16dc1b28ba828dea89e520f6f
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Source3:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
@@ -29,7 +29,6 @@ Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-gawk.patch
 Patch3:		%{name}-nodebug.patch
 Patch4:		%{name}-dont_display_stupid_error_messages.patch
-Patch5:		%{name}-ac.patch
 URL:		http://linux.schottelius.org/gpm/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -227,7 +226,6 @@ Pliki trybu GPM dla Emacsa.
 %patch2 -p1
 %{!?debug:%patch3 -p1}
 %patch4 -p1
-%patch5 -p1
 
 sed -i -e 's#/usr##' doc/manpager
 
