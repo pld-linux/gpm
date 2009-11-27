@@ -237,7 +237,8 @@ sed -i -e 's#/usr##' doc/manpager
 %build
 %{__aclocal}
 %{__autoconf}
-%configure %{?with_ncursesw:CPPFLAGS="%{rpmcppflags} -I/usr/include/ncursesw"} \
+%configure \
+	CPPFLAGS="%{rpmcppflags} %{?with_ncursesw:-I/usr/include/ncursesw} -I headers" \
 	--with-curses
 
 %{__make} \
