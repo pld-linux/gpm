@@ -2,7 +2,6 @@
 # TODO:
 # - make modprobe of kernel mouse modules for 2.5
 #
-%bcond_with	ncursesw # for mc-4.7.0
 Summary:	General Purpose Mouse support for Linux
 Summary(de.UTF-8):	Allgemeine Mausunterstützung für Linux
 Summary(es.UTF-8):	Soporte para ratón en terminales modo texto
@@ -15,7 +14,7 @@ Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
 Version:	1.20.6
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL v2+
 Group:		Daemons
@@ -228,9 +227,7 @@ Pliki trybu GPM dla Emacsa.
 %patch2 -p1
 %{!?debug:%patch3 -p1}
 %patch4 -p1
-%if %{with ncursesw}
 %patch5 -p1
-%endif
 
 sed -i -e 's#/usr##' doc/manpager
 
@@ -238,7 +235,7 @@ sed -i -e 's#/usr##' doc/manpager
 %{__aclocal}
 %{__autoconf}
 %configure \
-	CPPFLAGS="%{rpmcppflags} %{?with_ncursesw:-I/usr/include/ncursesw} -I headers" \
+	CPPFLAGS="%{rpmcppflags} -I/usr/include/ncursesw -I headers" \
 	--with-curses
 
 %{__make} \
