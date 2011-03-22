@@ -14,7 +14,7 @@ Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
 Version:	1.20.6
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL v2+
 Group:		Daemons
@@ -249,15 +249,15 @@ install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,/etc/sysconfig}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install conf/gpm-root.conf $RPM_BUILD_ROOT%{_sysconfdir}
-install src/prog/mouse-test src/prog/hltest $RPM_BUILD_ROOT%{_bindir}
+install -p conf/gpm-root.conf $RPM_BUILD_ROOT%{_sysconfdir}
+install -p src/prog/mouse-test src/prog/hltest $RPM_BUILD_ROOT%{_sbindir}
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
+install -p %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
+install -p %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
 bzip2 -dc %{SOURCE3} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
 install -d $RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp
-install contrib/emacs/*.el $RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp
+install -p contrib/emacs/*.el $RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp
 
 # for rpm autodeps
 chmod +x $RPM_BUILD_ROOT%{_libdir}/libgpm.so.*
@@ -297,7 +297,7 @@ fi
 %attr(755,root,root) %{_bindir}/gpm-root
 %attr(755,root,root) %{_bindir}/hltest
 %attr(755,root,root) %{_bindir}/mev
-%attr(755,root,root) %{_bindir}/mouse-test
+%attr(755,root,root) %{_sbindir}/mouse-test
 %attr(755,root,root) %{_sbindir}/gpm
 
 %{_infodir}/gpm.info*
