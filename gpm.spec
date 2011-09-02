@@ -14,7 +14,7 @@ Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
 Version:	1.20.6
-Release:	5
+Release:	6
 Epoch:		1
 License:	GPL v2+
 Group:		Daemons
@@ -23,6 +23,7 @@ Source0:	http://linux.schottelius.org/gpm/archives/%{name}-%{version}.tar.bz2
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Source3:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
+Source4:	%{name}.upstart
 # Source3-md5:	893cf1468604523c6e9f9257a5671688
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-DESTDIR.patch
@@ -244,7 +245,7 @@ sed -i -e 's#/usr##' doc/manpager
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/etc/rc.d/init.d,/etc/sysconfig}
+install -d $RPM_BUILD_ROOT{/etc/{rc.d/init.d,sysconfig,init}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -254,6 +255,7 @@ install -p src/prog/mouse-test src/prog/hltest $RPM_BUILD_ROOT%{_sbindir}
 
 install -p %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
 install -p %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
+cp -p %{SOURCE4} $RPM_BUILD_ROOT/etc/init/gpm.conf
 bzip2 -dc %{SOURCE3} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
 install -d $RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp
@@ -289,6 +291,7 @@ fi
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gpm-root.conf
 %attr(754,root,root) /etc/rc.d/init.d/gpm
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/mouse
+%config(noreplace) %verify(not md5 mtime size) /etc/init/gpm.conf
 
 %attr(755,root,root) %{_bindir}/display-buttons
 %attr(755,root,root) %{_bindir}/display-coords

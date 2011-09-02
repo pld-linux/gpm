@@ -1,0 +1,50 @@
+description	"GPM adds mouse to console"
+
+start on pld.sysinit-done
+stop on pld.shutdown-started
+
+console output
+respawn
+expect fork
+
+pre-start script
+	# config is required
+	[ -f /etc/sysconfig/mouse ]
+end script
+
+script
+	. /etc/sysconfig/mouse
+
+	nls() {
+		. /etc/rc.d/init.d/functions
+		nls "$@"
+		exit 1
+	}
+
+	[ -z "$DEVICE" ] && nls "Please set %s in /etc/sysconfig/mouse" "DEVICE"
+	[ -z "$MOUSETYPE" ] && nls "Please set %s in /etc/sysconfig/mouse" "MOUSETYPE"
+
+	OPTIONS=""
+	[ -n "$DEVICE" ] && OPTIONS="-m $DEVICE"
+	[ -n "$MOUSETYPE" ] && OPTIONS="$OPTIONS -t $MOUSETYPE"
+	[ -n "$BAUD_RATE" ] && OPTIONS="$OPTIONS -b $BAUD_RATE"
+	[ -n "$CLEAR_LINES" ] && OPTIONS="$OPTIONS -o $CLEAR_LINES"
+	[ -n "$BUTTON_SEQ" ] && OPTIONS="$OPTIONS -B $BUTTON_SEQ"
+	[ -n "$TAP_BUTTON" ] && OPTIONS="$OPTIONS -g $TAP_BUTTON"
+	[ -n "$ACCEL" ] && OPTIONS="$OPTIONS -a $ACCEL"
+	[ -n "$DELTA" ] && OPTIONS="$OPTIONS -d $DELTA"
+	[ -n "$INTERVAL" ] && OPTIONS="$OPTIONS -i $INTERVAL"
+	[ -n "$RESP" ] && OPTIONS="$OPTIONS -r $RESP"
+	[ -n "$SAMPLE_RATE" ] && OPTIONS="$OPTIONS -s $SAMPLE_RATE"
+	[ -n "$CHARSET" ] && OPTIONS="$OPTIONS -l \"$CHARSET\""
+	[ "$BUTTON_COUNT" = "2" ] && OPTIONS="$OPTIONS -2"
+	[ "$BUTTON_COUNT" = "3" ] && OPTIONS="$OPTIONS -3"
+	if [ -n "$POINTER_VIS" ] && [ "$POINTER_VIS" != "no" ]; then
+		OPTIONS="$OPTIONS -p"
+	fi
+	if [ -n "$REPEATER" ] && [ "$REPEATER" != "no" ]; then
+		OPTIONS="$OPTIONS -R"
+	fi
+
+	exec /usr/sbin/gpm $OPTIONS $GPM_OPTIONS < /dev/null
+end script
