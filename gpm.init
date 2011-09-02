@@ -29,58 +29,61 @@ upstart_controlled
 
 start() {
 	# Check if the service is already running?
-	if [ ! -f /var/lock/subsys/gpm ]; then
-		[ -z "$DEVICE" ] && nls "Please set %s in /etc/sysconfig/mouse" "DEVICE"
-		[ -z "$MOUSETYPE" ] && nls "Please set %s in /etc/sysconfig/mouse" "MOUSETYPE"
-
-		msg_starting "Gpm"
-		OPTIONS=""
-		[ -n "$DEVICE" ] && OPTIONS="-m $DEVICE"
-		[ -n "$MOUSETYPE" ] && OPTIONS="$OPTIONS -t $MOUSETYPE"
-		[ -n "$BAUD_RATE" ] && OPTIONS="$OPTIONS -b $BAUD_RATE"
-		[ -n "$CLEAR_LINES" ] && OPTIONS="$OPTIONS -o $CLEAR_LINES"
-		[ -n "$BUTTON_SEQ" ] && OPTIONS="$OPTIONS -B $BUTTON_SEQ"
-		[ -n "$TAP_BUTTON" ] && OPTIONS="$OPTIONS -g $TAP_BUTTON"
-		[ -n "$ACCEL" ] && OPTIONS="$OPTIONS -a $ACCEL"
-		[ -n "$DELTA" ] && OPTIONS="$OPTIONS -d $DELTA"
-		[ -n "$INTERVAL" ] && OPTIONS="$OPTIONS -i $INTERVAL"
-		[ -n "$RESP" ] && OPTIONS="$OPTIONS -r $RESP"
-		[ -n "$SAMPLE_RATE" ] && OPTIONS="$OPTIONS -s $SAMPLE_RATE"
-		[ -n "$CHARSET" ] && OPTIONS="$OPTIONS -l \"$CHARSET\""
-		[ "$BUTTON_COUNT" = "2" ] && OPTIONS="$OPTIONS -2"
-		[ "$BUTTON_COUNT" = "3" ] && OPTIONS="$OPTIONS -3"
-		if [ -n "$POINTER_VIS" ] && [ "$POINTER_VIS" != "no" ]; then
-			OPTIONS="$OPTIONS -p"
-		fi
-		if [ -n "$REPEATER" ] && [ "$REPEATER" != "no" ]; then
-			OPTIONS="$OPTIONS -R"
-		fi
-		daemon /usr/sbin/gpm $OPTIONS $GPM_OPTIONS < /dev/null
-		RETVAL=$?
-		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/gpm
-	else
+	if [ -f /var/lock/subsys/gpm ]; then
 		msg_already_running "Gpm"
+		return
 	fi
+
+	[ -z "$DEVICE" ] && nls "Please set %s in /etc/sysconfig/mouse" "DEVICE"
+	[ -z "$MOUSETYPE" ] && nls "Please set %s in /etc/sysconfig/mouse" "MOUSETYPE"
+
+	msg_starting "Gpm"
+	OPTIONS=""
+	[ -n "$DEVICE" ] && OPTIONS="-m $DEVICE"
+	[ -n "$MOUSETYPE" ] && OPTIONS="$OPTIONS -t $MOUSETYPE"
+	[ -n "$BAUD_RATE" ] && OPTIONS="$OPTIONS -b $BAUD_RATE"
+	[ -n "$CLEAR_LINES" ] && OPTIONS="$OPTIONS -o $CLEAR_LINES"
+	[ -n "$BUTTON_SEQ" ] && OPTIONS="$OPTIONS -B $BUTTON_SEQ"
+	[ -n "$TAP_BUTTON" ] && OPTIONS="$OPTIONS -g $TAP_BUTTON"
+	[ -n "$ACCEL" ] && OPTIONS="$OPTIONS -a $ACCEL"
+	[ -n "$DELTA" ] && OPTIONS="$OPTIONS -d $DELTA"
+	[ -n "$INTERVAL" ] && OPTIONS="$OPTIONS -i $INTERVAL"
+	[ -n "$RESP" ] && OPTIONS="$OPTIONS -r $RESP"
+	[ -n "$SAMPLE_RATE" ] && OPTIONS="$OPTIONS -s $SAMPLE_RATE"
+	[ -n "$CHARSET" ] && OPTIONS="$OPTIONS -l \"$CHARSET\""
+	[ "$BUTTON_COUNT" = "2" ] && OPTIONS="$OPTIONS -2"
+	[ "$BUTTON_COUNT" = "3" ] && OPTIONS="$OPTIONS -3"
+	if [ -n "$POINTER_VIS" ] && [ "$POINTER_VIS" != "no" ]; then
+		OPTIONS="$OPTIONS -p"
+	fi
+	if [ -n "$REPEATER" ] && [ "$REPEATER" != "no" ]; then
+		OPTIONS="$OPTIONS -R"
+	fi
+	daemon /usr/sbin/gpm $OPTIONS $GPM_OPTIONS < /dev/null
+	RETVAL=$?
+	[ $RETVAL -eq 0 ] && touch /var/lock/subsys/gpm
 }
 
 stop() {
-	if [ -f /var/lock/subsys/gpm ]; then
-		msg_stopping "Gpm"
-		killproc gpm
-		rm -f /var/lock/subsys/gpm >/dev/null 2>&1
-	else
+	if [ ! -f /var/lock/subsys/gpm ]; then
 		msg_not_running "Gpm"
+		return
 	fi
+
+	msg_stopping "Gpm"
+	killproc gpm
+	rm -f /var/lock/subsys/gpm >/dev/null 2>&1
 }
 
 condrestart() {
-	if [ -f /var/lock/subsys/gpm ]; then
-		stop
-		start
-	else
+	if [ ! -f /var/lock/subsys/gpm ]; then
 		msg_not_running "Gpm"
 		RETVAL=$1
+		return
 	fi
+
+	stop
+	start
 }
 
 RETVAL=0
