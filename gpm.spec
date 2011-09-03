@@ -14,7 +14,7 @@ Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
 Version:	1.20.6
-Release:	7
+Release:	8
 Epoch:		1
 License:	GPL v2+
 Group:		Daemons
@@ -245,7 +245,7 @@ sed -i -e 's#/usr##' doc/manpager
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/etc/{rc.d/init.d,sysconfig,init}}
+install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig,init}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
