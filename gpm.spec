@@ -41,7 +41,7 @@ BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	texinfo
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	rc-scripts >= 0.2.0
+Requires:	rc-scripts >= 0.4.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
