@@ -16,7 +16,7 @@
 #		a menus pop-up no console.
 #
 # processname:	gpm
-# pidfile:	/var/run/gpmpid
+# pidfile:	/var/run/gpm.pid
 # config:	/etc/sysconfig/mouse
 
 # Source function library
