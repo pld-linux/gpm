@@ -5,7 +5,7 @@
      SAVELIBS=$LIBS
      LIBS=
 -    for i in tinfo ncurses termcap termlib; do
-+    for i in tinfow ncursesw termcap termlib; do
++    for i in ncursesw termcap termlib; do
          if test x$LIBS = x; then
              AC_CHECK_LIB($i, tputs)
          else :; fi
