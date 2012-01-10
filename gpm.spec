@@ -30,7 +30,6 @@ Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-gawk.patch
 Patch3:		%{name}-nodebug.patch
 Patch4:		%{name}-dont_display_stupid_error_messages.patch
-Patch5:		%{name}-ncursesw.patch
 URL:		http://linux.schottelius.org/gpm/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -228,7 +227,6 @@ Pliki trybu GPM dla Emacsa.
 %patch2 -p1
 %{!?debug:%patch3 -p1}
 %patch4 -p1
-%patch5 -p1
 
 sed -i -e 's#/usr##' doc/manpager
 
