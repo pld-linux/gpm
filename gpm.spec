@@ -14,7 +14,7 @@ Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
 Version:	1.20.6
-Release:	10
+Release:	11
 Epoch:		1
 License:	GPL v2+
 Group:		Daemons
@@ -24,6 +24,7 @@ Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Source3:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
 Source4:	%{name}.upstart
+Source5:	%{name}.service
 # Source3-md5:	893cf1468604523c6e9f9257a5671688
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-DESTDIR.patch
@@ -37,11 +38,12 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	gawk
 BuildRequires:	ncurses-devel >= 5.0
-BuildRequires:	rpmbuild(macros) >= 1.268
+BuildRequires:	rpmbuild(macros) >= 1.626
 BuildRequires:	texinfo
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	rc-scripts >= 0.4.3.0
+Requires:	systemd-units >= 37-0.10
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -221,6 +223,19 @@ Emacs mode files for GPM.
 %description emacs -l pl.UTF-8
 Pliki trybu GPM dla Emacsa.
 
+%package upstart
+Summary:	Upstart job description for gpm
+Summary(pl.UTF-8):	Opis zadania Upstart dla gpm
+Group:		Daemons
+Requires:	%{name} = %{version}-%{release}
+Requires:	upstart >= 0.6
+
+%description upstart
+Upstart job description for gpm.
+
+%description upstart -l pl.UTF-8
+Opis zadania Upstart dla gpm.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -245,7 +260,7 @@ sed -i -e 's#/usr##' doc/manpager
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,sysconfig,init}
+install -d $RPM_BUILD_ROOT{/etc/{rc.d/init.d,sysconfig,init},%{systemdunitdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -256,6 +271,8 @@ install -p src/prog/mouse-test src/prog/hltest $RPM_BUILD_ROOT%{_sbindir}
 install -p %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
 install -p %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
 cp -p %{SOURCE4} $RPM_BUILD_ROOT/etc/init/gpm.conf
+cp -a %{SOURCE5} $RPM_BUILD_ROOT%{systemdunitdir}/gpm.service
+
 bzip2 -dc %{SOURCE3} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 
 install -d $RPM_BUILD_ROOT%{_datadir}/emacs/site-lisp
@@ -272,18 +289,67 @@ rm -rf $RPM_BUILD_ROOT
 
 /sbin/chkconfig --add gpm
 %service gpm restart "gpm daemon"
+%systemd_post gpm.service
 
 %preun
 if [ "$1" = "0" ]; then
 	%service gpm stop
 	/sbin/chkconfig --del gpm
 fi
+%systemd_preun gpm.service
 
-%postun	-p /sbin/postshell
--/usr/sbin/fix-info-dir -c %{_infodir}
+%postun
+[ ! -x /usr/sbin/fix-info-dir ] || /usr/sbin/fix-info-dir -c %{_infodir} >/dev/null 2>&1
+%systemd_reload
+
+%triggerpostun -- %{name} < 1:1.20.6-11
+if [ -f /etc/sysconfig/mouse ]; then
+	. /etc/sysconfig/mouse
+	OPTIONS=""
+	if [ -n "$DEVICE" ]; then
+		OPTIONS="-m $DEVICE"
+	else
+		OPTIONS="-m /dev/input/mice"
+	fi
+	if [ -n "$MOUSETYPE" ]; then
+		OPTIONS="$OPTIONS -t $MOUSETYPE"
+	else
+		OPTIONS="$OPTIONS -t imps2"
+	fi
+	[ -n "$BAUD_RATE" ] && OPTIONS="$OPTIONS -b $BAUD_RATE"
+	[ -n "$CLEAR_LINES" ] && OPTIONS="$OPTIONS -o $CLEAR_LINES"
+	[ -n "$BUTTON_SEQ" ] && OPTIONS="$OPTIONS -B $BUTTON_SEQ"
+	[ -n "$TAP_BUTTON" ] && OPTIONS="$OPTIONS -g $TAP_BUTTON"
+	[ -n "$ACCEL" ] && OPTIONS="$OPTIONS -a $ACCEL"
+	[ -n "$DELTA" ] && OPTIONS="$OPTIONS -d $DELTA"
+	[ -n "$INTERVAL" ] && OPTIONS="$OPTIONS -i $INTERVAL"
+	[ -n "$RESP" ] && OPTIONS="$OPTIONS -r $RESP"
+	[ -n "$SAMPLE_RATE" ] && OPTIONS="$OPTIONS -s $SAMPLE_RATE"
+	[ -n "$CHARSET" ] && OPTIONS="$OPTIONS -l \\\"$CHARSET\\\""
+	[ "$BUTTON_COUNT" = "2" ] && OPTIONS="$OPTIONS -2"
+	[ "$BUTTON_COUNT" = "3" ] && OPTIONS="$OPTIONS -3"
+	if [ -n "$POINTER_VIS" ] && [ "$POINTER_VIS" != "no" ]; then
+		OPTIONS="$OPTIONS -p"
+	fi
+	if [ -n "$REPEATER" ] && [ "$REPEATER" != "no" ]; then
+		OPTIONS="$OPTIONS -R"
+	fi
+	%{__cp} -f /etc/sysconfig/mouse{,.rpmsave}
+	[ -f /etc/sysconfig/mouse.rpmnew ] && %{__cp} -f /etc/sysconfig/mouse{.rpmnew,}
+	echo >>/etc/sysconfig/mouse
+	echo "# Added by rpm trigger" >>/etc/sysconfig/mouse
+	echo "GPM_OPTIONS=\"$OPTIONS\"" >>/etc/sysconfig/mouse
+fi
+%systemd_trigger gpm.service
 
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
+
+%post upstart
+%upstart_post gpm
+
+%postun upstart
+%upstart_postun gpm
 
 %files
 %defattr(644,root,root,755)
@@ -291,7 +357,7 @@ fi
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gpm-root.conf
 %attr(754,root,root) /etc/rc.d/init.d/gpm
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/mouse
-%config(noreplace) %verify(not md5 mtime size) /etc/init/gpm.conf
+%{systemdunitdir}/gpm.service
 
 %attr(755,root,root) %{_bindir}/display-buttons
 %attr(755,root,root) %{_bindir}/display-coords
@@ -330,3 +396,7 @@ fi
 %files emacs
 %defattr(644,root,root,755)
 %{_datadir}/emacs/site-lisp/*.el*
+
+%files upstart
+%defattr(644,root,root,755)
+%config(noreplace) %verify(not md5 mtime size) /etc/init/gpm.conf

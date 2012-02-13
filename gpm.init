@@ -34,9 +34,6 @@ start() {
 		return
 	fi
 
-	[ -z "$DEVICE" ] && nls "Please set %s in /etc/sysconfig/mouse" "DEVICE"
-	[ -z "$MOUSETYPE" ] && nls "Please set %s in /etc/sysconfig/mouse" "MOUSETYPE"
-
 	msg_starting "Gpm"
 	OPTIONS=""
 	[ -n "$DEVICE" ] && OPTIONS="-m $DEVICE"

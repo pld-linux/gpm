@@ -1,0 +1,13 @@
+[Unit]
+Description=Console Mouse manager
+After=syslog.target
+
+[Service]
+StandardOutput=syslog
+Type=forking
+EnvironmentFile=/etc/sysconfig/mouse
+ExecStart=/usr/sbin/gpm $GPM_OPTIONS
+PIDFile=/var/run/gpm.pid
+
+[Install]
+WantedBy=multi-user.target
