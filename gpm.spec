@@ -14,7 +14,7 @@ Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
 Version:	1.20.6
-Release:	11
+Release:	12
 Epoch:		1
 License:	GPL v2+
 Group:		Daemons
@@ -227,7 +227,7 @@ Pliki trybu GPM dla Emacsa.
 Summary:	Upstart job description for gpm
 Summary(pl.UTF-8):	Opis zadania Upstart dla gpm
 Group:		Daemons
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	upstart >= 0.6
 
 %description upstart
