@@ -14,7 +14,7 @@ Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
 Version:	1.20.6
-Release:	12
+Release:	13
 Epoch:		1
 License:	GPL v2+
 Group:		Daemons
@@ -325,7 +325,7 @@ if [ -f /etc/sysconfig/mouse ]; then
 	[ -n "$INTERVAL" ] && OPTIONS="$OPTIONS -i $INTERVAL"
 	[ -n "$RESP" ] && OPTIONS="$OPTIONS -r $RESP"
 	[ -n "$SAMPLE_RATE" ] && OPTIONS="$OPTIONS -s $SAMPLE_RATE"
-	[ -n "$CHARSET" ] && OPTIONS="$OPTIONS -l \\\"$CHARSET\\\""
+	[ -n "$CHARSET" ] && OPTIONS="$OPTIONS -l \\\"$(echo "$CHARSET" | sed -e 's,",\\",g')\\\""
 	[ "$BUTTON_COUNT" = "2" ] && OPTIONS="$OPTIONS -2"
 	[ "$BUTTON_COUNT" = "3" ] && OPTIONS="$OPTIONS -3"
 	if [ -n "$POINTER_VIS" ] && [ "$POINTER_VIS" != "no" ]; then
