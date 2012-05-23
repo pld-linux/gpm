@@ -42,6 +42,7 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	gawk
 BuildRequires:	ncurses-devel >= 5.0
+BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	rpmbuild(macros) >= 1.626
 BuildRequires:	texinfo
 Requires(post,preun):	/sbin/chkconfig
@@ -405,6 +406,8 @@ fi
 %defattr(644,root,root,755)
 %{_datadir}/emacs/site-lisp/*.el*
 
+%if "%{pld_release}" == "th"
 %files upstart
 %defattr(644,root,root,755)
 %config(noreplace) %verify(not md5 mtime size) /etc/init/gpm.conf
+%endif
