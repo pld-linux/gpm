@@ -17,7 +17,7 @@ Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
 Version:	1.20.6
-Release:	15
+Release:	16
 Epoch:		1
 License:	GPL v2+
 Group:		Daemons
@@ -36,6 +36,7 @@ Patch3:		%{name}-nodebug.patch
 Patch4:		%{name}-dont_display_stupid_error_messages.patch
 Patch5:		%{name}-ncursesw.patch
 Patch6:		close-fds.patch
+Patch7:		format-string.patch
 URL:		http://linux.schottelius.org/gpm/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -251,6 +252,7 @@ Opis zadania Upstart dla gpm.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 sed -i -e 's#/usr##' doc/manpager
 
