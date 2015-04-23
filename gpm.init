@@ -22,8 +22,6 @@
 # Source function library
 . /etc/rc.d/init.d/functions
 
-upstart_controlled
-
 # Get service config
 [ -f /etc/sysconfig/mouse ] && . /etc/sysconfig/mouse
 

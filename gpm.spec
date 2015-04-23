@@ -17,7 +17,7 @@ Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
 Version:	1.20.6
-Release:	17
+Release:	18
 Epoch:		1
 License:	GPL v2+
 Group:		Daemons
@@ -26,8 +26,7 @@ Source0:	http://linux.schottelius.org/gpm/archives/%{name}-%{version}.tar.bz2
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Source3:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
-Source4:	%{name}.upstart
-Source5:	%{name}.service
+Source4:	%{name}.service
 # Source3-md5:	893cf1468604523c6e9f9257a5671688
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-DESTDIR.patch
@@ -230,19 +229,6 @@ Emacs mode files for GPM.
 %description emacs -l pl.UTF-8
 Pliki trybu GPM dla Emacsa.
 
-%package upstart
-Summary:	Upstart job description for gpm
-Summary(pl.UTF-8):	Opis zadania Upstart dla gpm
-Group:		Daemons
-Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	upstart >= 0.6
-
-%description upstart
-Upstart job description for gpm.
-
-%description upstart -l pl.UTF-8
-Opis zadania Upstart dla gpm.
-
 %prep
 %setup -q
 %patch0 -p1
@@ -269,7 +255,7 @@ sed -i -e 's#/usr##' doc/manpager
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/etc/{rc.d/init.d,sysconfig,init},%{systemdunitdir}}
+install -d $RPM_BUILD_ROOT{/etc/{rc.d/init.d,sysconfig},%{systemdunitdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -279,8 +265,7 @@ install -p src/prog/mouse-test src/prog/hltest $RPM_BUILD_ROOT%{_sbindir}
 
 install -p %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
 install -p %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
-cp -p %{SOURCE4} $RPM_BUILD_ROOT/etc/init/gpm.conf
-cp -a %{SOURCE5} $RPM_BUILD_ROOT%{systemdunitdir}/gpm.service
+cp -a %{SOURCE4} $RPM_BUILD_ROOT%{systemdunitdir}/gpm.service
 
 bzip2 -dc %{SOURCE3} | tar xf - -C $RPM_BUILD_ROOT%{_mandir}
 %{__rm} $RPM_BUILD_ROOT%{_mandir}/README.gpm-non-english-man-pages
@@ -356,12 +341,6 @@ fi
 %post	libs -p /sbin/ldconfig
 %postun	libs -p /sbin/ldconfig
 
-%post upstart
-%upstart_post gpm
-
-%postun upstart
-%upstart_postun gpm
-
 %files
 %defattr(644,root,root,755)
 %doc BUGS Changes README TODO doc/FAQ doc/README* conf/*.conf
@@ -407,9 +386,3 @@ fi
 %files emacs
 %defattr(644,root,root,755)
 %{_datadir}/emacs/site-lisp/*.el*
-
-%if "%{pld_release}" == "th"
-%files upstart
-%defattr(644,root,root,755)
-%config(noreplace) %verify(not md5 mtime size) /etc/init/gpm.conf
-%endif
