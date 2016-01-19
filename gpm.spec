@@ -1,9 +1,6 @@
 #
 # TODO:
-# - make modprobe of kernel mouse modules for 2.5
-# - unpackaged:
-#   /usr/bin/mouse-test
-#   /usr/sbin/hltest
+# - make modprobe of kernel mouse modules for 2.5 (TODO: revise it)
 #
 Summary:	General Purpose Mouse support for Linux
 Summary(de.UTF-8):	Allgemeine Mausunterstützung für Linux
@@ -16,18 +13,18 @@ Summary(ru.UTF-8):	Сервер работы с мышью для консоли
 Summary(tr.UTF-8):	Genel amaçlı fare desteği
 Summary(uk.UTF-8):	Сервер роботи з мишою для консолі Linux
 Name:		gpm
-Version:	1.20.6
-Release:	18
+Version:	1.20.7
+Release:	1
 Epoch:		1
 License:	GPL v2+
 Group:		Daemons
-Source0:	http://linux.schottelius.org/gpm/archives/%{name}-%{version}.tar.bz2
-# Source0-md5:	6b534da16dc1b28ba828dea89e520f6f
+Source0:	http://www.nico.schottelius.org/software/gpm/archives/%{name}-%{version}.tar.lzma
+# Source0-md5:	fa8a6fe09826896625ca557ac5e42ed7
 Source1:	%{name}.init
 Source2:	%{name}.sysconfig
 Source3:	http://www.mif.pg.gda.pl/homepages/ankry/man-PLD/%{name}-non-english-man-pages.tar.bz2
-Source4:	%{name}.service
 # Source3-md5:	893cf1468604523c6e9f9257a5671688
+Source4:	%{name}.service
 Patch0:		%{name}-info.patch
 Patch1:		%{name}-DESTDIR.patch
 Patch2:		%{name}-gawk.patch
@@ -36,15 +33,19 @@ Patch4:		%{name}-dont_display_stupid_error_messages.patch
 Patch5:		%{name}-ncursesw.patch
 Patch6:		close-fds.patch
 Patch7:		format-string.patch
-URL:		http://linux.schottelius.org/gpm/
-BuildRequires:	autoconf
+URL:		http://www.nico.schottelius.org/software/gpm/
+BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	gawk
+BuildRequires:	libtool
 BuildRequires:	ncurses-devel >= 5.0
 BuildRequires:	rpm >= 4.4.9-56
 BuildRequires:	rpmbuild(macros) >= 1.626
+BuildRequires:	sed >= 4.0
+BuildRequires:	tar >= 1:1.22
 BuildRequires:	texinfo
+BuildRequires:	xz
 Requires(post,preun):	/sbin/chkconfig
 Requires(post,preun,postun):	systemd-units >= 38
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -240,11 +241,17 @@ Pliki trybu GPM dla Emacsa.
 %patch6 -p1
 %patch7 -p1
 
-sed -i -e 's#/usr##' doc/manpager
+%{__sed} -i -e '1s#/usr/bin/awk#/bin/awk#' doc/manpager
+
+# generate configure.ac, but we want to autotoolize ourselves
+%{__sed} -i -e '/ACLOCAL/iexit 0' autogen.sh
+./autogen.sh
 
 %build
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
+%{__autoheader}
 %configure \
 	CPPFLAGS="%{rpmcppflags} -I/usr/include/ncursesw -I headers" \
 	--with-curses
@@ -261,7 +268,9 @@ install -d $RPM_BUILD_ROOT{/etc/{rc.d/init.d,sysconfig},%{systemdunitdir}}
 	DESTDIR=$RPM_BUILD_ROOT
 
 install -p conf/gpm-root.conf $RPM_BUILD_ROOT%{_sysconfdir}
-install -p src/prog/mouse-test src/prog/hltest $RPM_BUILD_ROOT%{_sbindir}
+
+# demo program, not really useful
+%{__rm} $RPM_BUILD_ROOT%{_bindir}/hltest
 
 install -p %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gpm
 install -p %{SOURCE2} $RPM_BUILD_ROOT/etc/sysconfig/mouse
@@ -343,7 +352,7 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc BUGS Changes README TODO doc/FAQ doc/README* conf/*.conf
+%doc README README.gpm2 TODO doc/FAQ doc/README* doc/changelog conf/*.conf
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gpm-root.conf
 %attr(754,root,root) /etc/rc.d/init.d/gpm
 %config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/mouse
@@ -354,9 +363,8 @@ fi
 %attr(755,root,root) %{_bindir}/disable-paste
 %attr(755,root,root) %{_bindir}/get-versions
 %attr(755,root,root) %{_bindir}/gpm-root
-%attr(755,root,root) %{_bindir}/hltest
 %attr(755,root,root) %{_bindir}/mev
-%attr(755,root,root) %{_sbindir}/mouse-test
+%attr(755,root,root) %{_bindir}/mouse-test
 %attr(755,root,root) %{_sbindir}/gpm
 
 %{_infodir}/gpm.info*
