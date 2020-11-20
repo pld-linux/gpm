@@ -34,6 +34,7 @@ Patch5:		%{name}-ncursesw.patch
 Patch6:		close-fds.patch
 Patch7:		format-string.patch
 Patch8:		glibc.patch
+Patch9:		gcc10.patch
 URL:		http://www.nico.schottelius.org/software/gpm/
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
@@ -242,6 +243,7 @@ Pliki trybu GPM dla Emacsa.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 %{__sed} -i -e '1s#/usr/bin/awk#/bin/awk#' doc/manpager
 
