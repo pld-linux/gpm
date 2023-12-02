@@ -1,6 +1,7 @@
---- ./doc/Makefile.in.orgnl	Mon Mar 11 23:57:59 2002
-+++ ./doc/Makefile.in	Tue Mar 12 00:23:14 2002
-@@ -52,11 +52,11 @@
+diff -urNp -x '*.orig' gpm-1.20.7.org/doc/Makefile.in gpm-1.20.7/doc/Makefile.in
+--- gpm-1.20.7.org/doc/Makefile.in	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7/doc/Makefile.in	2023-12-02 17:20:44.433452706 +0100
+@@ -54,12 +54,12 @@ all: $(srcdir)/gpm.info gpm.man
  
  # TXT (-)
  %.txt: %.info

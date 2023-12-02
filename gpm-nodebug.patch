@@ -1,6 +1,7 @@
---- gpm-1.20.1/src/lib/report-lib.c.orig	Sat Feb 23 16:42:23 2002
-+++ gpm-1.20.1/src/lib/report-lib.c	Fri May  3 20:16:02 2002
-@@ -36,13 +36,13 @@
+diff -urNp -x '*.orig' gpm-1.20.7.org/src/lib/report-lib.c gpm-1.20.7/src/lib/report-lib.c
+--- gpm-1.20.7.org/src/lib/report-lib.c	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7/src/lib/report-lib.c	2023-12-02 17:21:05.021705751 +0100
+@@ -36,13 +36,13 @@ void gpm_report(int line, char *file, in
  
     switch(stat) {
        case GPM_STAT_INFO : string = GPM_TEXT_INFO ;
@@ -16,13 +17,14 @@
        case GPM_STAT_OOPS : string = GPM_TEXT_OOPS;
                             log_level = LOG_CRIT; break;
     }
---- gpm-1.20.0/src/report.c.orig	Sat Feb 23 16:42:23 2002
-+++ gpm-1.20.0/src/report.c	Fri May  3 20:12:51 2002
-@@ -130,6 +130,7 @@
+diff -urNp -x '*.orig' gpm-1.20.7.org/src/report.c gpm-1.20.7/src/report.c
+--- gpm-1.20.7.org/src/report.c	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7/src/report.c	2023-12-02 17:21:05.021705751 +0100
+@@ -138,6 +138,7 @@ void gpm_report(int line, char *file, in
        case GPM_RUN_DAEMON:
           switch(stat) {
              case GPM_STAT_INFO:
 +	       break;
  #ifdef HAVE_VSYSLOG
                 syslog(LOG_INFO | LOG_USER, GPM_STRING_INFO);
-                vsyslog(LOG_INFO | LOG_USER, text, ap);
+                vsyslog(LOG_INFO | LOG_USER, text, ap2);

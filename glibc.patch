@@ -10,12 +10,14 @@ found.
  src/daemon/open_console.c | 4 ++++
  1 file changed, 4 insertions(+)
 
-diff --git a/src/daemon/open_console.c b/src/daemon/open_console.c
-index 4d6c0af..6dd43e6 100644
---- a/src/daemon/open_console.c
-+++ b/src/daemon/open_console.c
-@@ -24,6 +24,10 @@
- #include <sys/types.h>              /* major()           */
+diff -urNp -x '*.orig' gpm-1.20.7.org/src/daemon/open_console.c gpm-1.20.7/src/daemon/open_console.c
+--- gpm-1.20.7.org/src/daemon/open_console.c	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7/src/daemon/open_console.c	2023-12-02 17:21:16.152842561 +0100
+@@ -21,8 +21,13 @@
+ 
+ #include <fcntl.h>                  /* open and co.      */
+ #include <sys/stat.h>               /* stat()            */
++#include <sys/types.h>              /* major()           */
  #include <sys/ioctl.h>              /* ioctl             */
  
 +#ifdef HAVE_SYS_SYSMACROS_H
@@ -25,34 +27,9 @@ index 4d6c0af..6dd43e6 100644
  /* Linux specific (to be outsourced in gpm2 */
  #include <linux/serial.h>           /* for serial console check */
  #include <asm/ioctls.h>            /* for serial console check */
-From d88fb1de5803c366ab62f7de9ee5d83207fb2afe Mon Sep 17 00:00:00 2001
-From: Dima Krasner <dima@dimakrasner.com>
-Date: Wed, 12 Nov 2014 23:06:46 +0200
-Subject: [PATCH] Added musl support to libgpm and the daemon.
-
----
- src/daemon/open_console.c  | 1 +
- src/prog/display-buttons.c | 1 +
- src/prog/display-coords.c  | 1 +
- src/prog/gpm-root.y        | 4 ++--
- 4 files changed, 5 insertions(+), 2 deletions(-)
-
-diff --git a/src/daemon/open_console.c b/src/daemon/open_console.c
-index 98297c9..4d6c0af 100644
---- a/src/daemon/open_console.c
-+++ b/src/daemon/open_console.c
-@@ -21,6 +21,7 @@
- 
- #include <fcntl.h>                  /* open and co.      */
- #include <sys/stat.h>               /* stat()            */
-+#include <sys/types.h>              /* major()           */
- #include <sys/ioctl.h>              /* ioctl             */
- 
- /* Linux specific (to be outsourced in gpm2 */
-diff --git a/src/prog/display-buttons.c b/src/prog/display-buttons.c
-index de8e5b2..38d2f11 100644
---- a/src/prog/display-buttons.c
-+++ b/src/prog/display-buttons.c
+diff -urNp -x '*.orig' gpm-1.20.7.org/src/prog/display-buttons.c gpm-1.20.7/src/prog/display-buttons.c
+--- gpm-1.20.7.org/src/prog/display-buttons.c	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7/src/prog/display-buttons.c	2023-12-02 17:21:16.152842561 +0100
 @@ -36,6 +36,7 @@
  #include <stdio.h>            /* printf()             */
  #include <time.h>             /* time()               */
@@ -61,11 +38,10 @@ index de8e5b2..38d2f11 100644
  #include <gpm.h>              /* gpm information      */
  
  /* display resulting data */
-diff --git a/src/prog/display-coords.c b/src/prog/display-coords.c
-index 1fb810f..82afd12 100644
---- a/src/prog/display-coords.c
-+++ b/src/prog/display-coords.c
-@@ -38,6 +38,7 @@
+diff -urNp -x '*.orig' gpm-1.20.7.org/src/prog/display-coords.c gpm-1.20.7/src/prog/display-coords.c
+--- gpm-1.20.7.org/src/prog/display-coords.c	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7/src/prog/display-coords.c	2023-12-02 17:21:16.152842561 +0100
+@@ -37,6 +37,7 @@
  #include <stdio.h>            /* printf()             */
  #include <time.h>             /* time()               */
  #include <errno.h>            /* errno                */
@@ -73,48 +49,21 @@ index 1fb810f..82afd12 100644
  #include <gpm.h>              /* gpm information      */
  
  /* display resulting data */
-diff --git a/src/prog/gpm-root.y b/src/prog/gpm-root.y
-index 069d801..188ae35 100644
---- a/src/prog/gpm-root.y
-+++ b/src/prog/gpm-root.y
-@@ -1199,9 +1199,9 @@ int main(int argc, char **argv)
- #if defined(__GLIBC__)
-    __sigemptyset(&childaction.sa_mask);
- #else /* __GLIBC__ */
--   childaction.sa_mask=0;
-+   sigemptyset(&childaction.sa_mask);
- #endif /* __GLIBC__ */
--   childaction.sa_flags=SA_INTERRUPT; /* need to break the select() call */
-+   childaction.sa_flags=0;
-    sigaction(SIGCHLD,&childaction,NULL);
- 
-    /*....................................... Connect and get your buffer */
-From fdc42770596e25749f7e2ce0ea97882177397167 Mon Sep 17 00:00:00 2001
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 25 Jun 2017 07:25:33 -0700
-Subject: [PATCH] Use sigemptyset API instead of __sigemptyset
-
-__sigemptyset has been removed from glibc public
-API headers in upcoming (2.26) release onwards
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- src/prog/gpm-root.y | 4 ----
- 1 file changed, 4 deletions(-)
-
-diff --git a/src/prog/gpm-root.y b/src/prog/gpm-root.y
-index 5126c65..76c896c 100644
---- a/src/prog/gpm-root.y
-+++ b/src/prog/gpm-root.y
-@@ -1196,11 +1196,7 @@ int main(int argc, char **argv)
+diff -urNp -x '*.orig' gpm-1.20.7.org/src/prog/gpm-root.y gpm-1.20.7/src/prog/gpm-root.y
+--- gpm-1.20.7.org/src/prog/gpm-root.y	2012-10-26 23:21:38.000000000 +0200
++++ gpm-1.20.7/src/prog/gpm-root.y	2023-12-02 17:21:16.153842574 +0100
+@@ -1196,12 +1196,8 @@ int main(int argc, char **argv)
                                                          LOG_DAEMON : LOG_USER);
     /* reap your zombies */
     childaction.sa_handler=reap_children;
 -#if defined(__GLIBC__)
 -   __sigemptyset(&childaction.sa_mask);
 -#else /* __GLIBC__ */
-    sigemptyset(&childaction.sa_mask);
+-   childaction.sa_mask=0;
 -#endif /* __GLIBC__ */
-    childaction.sa_flags=0;
+-   childaction.sa_flags=SA_INTERRUPT; /* need to break the select() call */
++   sigemptyset(&childaction.sa_mask);
++   childaction.sa_flags=0;
     sigaction(SIGCHLD,&childaction,NULL);
  
+    /*....................................... Connect and get your buffer */
